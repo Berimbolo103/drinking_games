@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top Drinking Games</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #e8b84b;
+    --gold-dim: #c49a2e;
+    --dark: #0d0d0d;
+    --dark2: #161616;
+    --dark3: #1f1f1f;
+    --dark4: #2a2a2a;
+    --text: #f0ece0;
+    --text-muted: #8a8070;
+    --red: #c0392b;
+    --red-light: #e74c3c;
+    --card-bg: #1a1a1a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── PAGE SYSTEM ── */
+  .page { display: none; min-height: 100vh; }
+  .page.active { display: block; }
+
+  /* ── HOMEPAGE ── */
+  #home {
+    background: var(--dark);
+    padding-bottom: 4rem;
+  }
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 5rem 1.5rem 3rem;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(232,184,75,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.1s forwards;
+  }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 12vw, 100px);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    margin-bottom: 1.25rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.25s forwards;
+  }
+  .hero-title span { color: var(--gold); }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--text-muted);
+    max-width: 420px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.6;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.4s forwards;
+  }
+  .divider {
+    width: 60px; height: 2px;
+    background: var(--gold);
+    margin: 0 auto 3rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.5s forwards;
+  }
+
+  /* games grid */
+  .games-section { padding: 0 1.25rem; max-width: 700px; margin: 0 auto; }
+  .section-label {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-muted); font-weight: 600; margin-bottom: 1.25rem;
+    opacity: 0; animation: fadeUp 0.6s 0.55s forwards;
+  }
+  .games-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.65s forwards;
+  }
+  .game-card {
+    background: var(--dark3);
+    border: 0.5px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 1.1rem 1.25rem;
+    display: flex; align-items: center; gap: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    position: relative; overflow: hidden;
+    text-decoration: none; color: inherit;
+  }
+  .game-card:hover {
+    background: var(--dark4);
+    border-color: rgba(232,184,75,0.3);
+    transform: translateY(-2px);
+  }
+  .game-card:active { transform: scale(0.99); }
+  .game-card.featured {
+    background: var(--dark3);
+    border-color: rgba(232,184,75,0.45);
+  }
+  .game-card.featured::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(232,184,75,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .game-card.locked { cursor: default; opacity: 0.5; }
+  .game-card.locked:hover { transform: none; border-color: rgba(255,255,255,0.07); background: var(--dark3); }
+  .game-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px; color: var(--text-muted);
+    min-width: 32px; text-align: center; line-height: 1;
+  }
+  .game-card.featured .game-number { color: var(--gold); }
+  .game-info { flex: 1; }
+  .game-name {
+    font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 2px;
+  }
+  .game-tag {
+    font-size: 11px; color: var(--text-muted); font-weight: 400;
+  }
+  .game-badge {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
+    padding: 3px 10px; border-radius: 20px; text-transform: uppercase;
+  }
+  .badge-play {
+    background: var(--gold); color: #1a1200;
+  }
+  .badge-soon {
+    background: rgba(255,255,255,0.07); color: var(--text-muted);
+  }
+  .game-arrow {
+    font-size: 16px; color: var(--gold); opacity: 0.7;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .game-card:hover .game-arrow { opacity: 1; transform: translateX(3px); }
+
+  /* footer note */
+  .home-footer {
+    text-align: center; margin-top: 3rem; padding: 0 1.5rem;
+    font-size: 11px; color: var(--text-muted); line-height: 1.6;
+    opacity: 0; animation: fadeUp 0.6s 0.8s forwards;
+  }
+
+  /* ── RING OF FIRE PAGE ── */
+  #rof { background: var(--dark); }
+  .rof-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 1.25rem 0;
+  }
+  .back-btn {
+    font-size: 13px; color: var(--text-muted); cursor: pointer;
+    display: flex; align-items: center; gap: 6px;
+    background: none; border: none; font-family: 'Outfit', sans-serif;
+    transition: color 0.2s;
+  }
+  .back-btn:hover { color: var(--gold); }
+  .rof-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px; color: var(--gold); letter-spacing: 0.06em;
+    line-height: 1; text-shadow: 0 0 24px rgba(232,184,75,0.35);
+  }
+  .king-tracker {
+    display: flex; gap: 5px; align-items: center;
+  }
+  .king-pip {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--dark4); border: 1px solid rgba(255,255,255,0.15);
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .king-pip.filled { background: var(--gold); border-color: var(--gold); }
+  .king-pip.filled.last { background: var(--red-light); border-color: var(--red-light); }
+
+  /* play area */
+  .play-area {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 1rem 1rem 2rem;
+    gap: 1rem;
+  }
+  .cards-row {
+    display: flex; gap: 3vw; align-items: flex-end;
+    justify-content: center; width: 100%;
+  }
+  .card-slot { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1; max-width: 48vw; }
+  .slot-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+
+  /* deck button — same size as card, fluid */
+  #deckBtn {
+    width: 100%; aspect-ratio: 5/7;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #1c1c2e 0%, #12122a 60%, #0a0a1e 100%);
+    border: 1.5px solid rgba(232,184,75,0.25);
+    cursor: pointer; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 8px;
+    transition: transform 0.15s, border-color 0.2s, box-shadow 0.2s;
+    font-family: 'Outfit', sans-serif;
+    position: relative; overflow: hidden;
+  }
+  #deckBtn::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 40% 30%, rgba(232,184,75,0.1), transparent 60%);
+    pointer-events: none;
+  }
+  #deckBtn:hover { border-color: rgba(232,184,75,0.6); box-shadow: 0 12px 36px rgba(0,0,0,0.5); }
+  #deckBtn:active { transform: scale(0.97); }
+  .deck-icon { font-size: clamp(28px, 8vw, 42px); }
+  .deck-label { font-size: clamp(11px, 3vw, 14px); color: rgba(255,255,255,0.65); font-weight: 500; }
+  #deckCount { font-size: clamp(10px, 2.5vw, 12px); color: rgba(255,255,255,0.3); }
+
+  /* current card — SVG poker card, fluid */
+  #currentCard {
+    width: 100%; aspect-ratio: 5/7;
+    filter: drop-shadow(0 6px 20px rgba(0,0,0,0.55));
+    transition: filter 0.25s;
+    cursor: default;
+  }
+  #currentCard svg { width: 100%; height: 100%; display: block; }
+  .card-placeholder { font-size: 12px; color: #999; text-align: center; line-height: 1.5; }
+
+  /* rule panel */
+  #rulePanel {
+    width: 100%; max-width: 500px;
+    background: var(--dark3);
+    border: 0.5px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    text-align: center;
+    min-height: 80px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    transition: border-color 0.3s;
+  }
+  #rulePanel.highlight { border-color: rgba(232,184,75,0.4); }
+  #ruleName {
+    font-size: clamp(13px, 3.5vw, 15px); font-weight: 600; color: var(--gold);
+    font-family: 'Outfit', sans-serif; letter-spacing: 0.02em;
+  }
+  #ruleDesc {
+    font-size: clamp(12px, 3vw, 14px); color: var(--text-muted); line-height: 1.55; font-weight: 300;
+  }
+
+  /* drawn pile */
+  .drawn-label {
+    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-muted); align-self: flex-start; width: 100%; max-width: 500px;
+  }
+  #drawnPile {
+    display: flex; flex-wrap: wrap; gap: 5px;
+    width: 100%; max-width: 500px;
+    min-height: 20px;
+  }
+  .mini {
+    width: clamp(28px, 7vw, 36px); height: clamp(38px, 9.5vw, 48px);
+    border-radius: 5px; font-size: clamp(9px, 2.5vw, 12px); font-weight: 600;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: var(--dark3); border: 0.5px solid rgba(255,255,255,0.08);
+    line-height: 1.2; gap: 1px;
+  }
+  .mini.r { color: var(--red-light); }
+  .mini.b { color: var(--text); }
+
+  /* buttons row */
+  .btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; width: 100%; max-width: 500px; }
+  #newGameBtn, #shuffleBtn {
+    flex: 1; min-width: 120px; padding: 12px 16px; border-radius: 30px;
+    background: none; font-size: clamp(12px, 3vw, 14px); font-weight: 500;
+    cursor: pointer; font-family: 'Outfit', sans-serif; letter-spacing: 0.04em;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  #newGameBtn { border: 1px solid rgba(232,184,75,0.4); color: var(--gold); }
+  #newGameBtn:hover { background: rgba(232,184,75,0.1); border-color: var(--gold); }
+  #shuffleBtn { border: 1px solid rgba(255,255,255,0.15); color: var(--text-muted); }
+  #shuffleBtn:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.3); color: var(--text); }
+
+  /* confirmation modal */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 100;
+    background: rgba(0,0,0,0.72);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--dark3); border: 0.5px solid rgba(255,255,255,0.12);
+    border-radius: 18px; padding: 2rem 1.75rem;
+    max-width: 300px; width: 88%; text-align: center;
+    animation: fadeUp 0.2s forwards;
+  }
+  .modal-icon { font-size: 36px; margin-bottom: 0.75rem; }
+  .modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--text); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+  .modal-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.5rem; }
+  .modal-btns { display: flex; gap: 10px; }
+  .modal-cancel {
+    flex: 1; padding: 10px; border-radius: 30px; cursor: pointer;
+    background: none; border: 1px solid rgba(255,255,255,0.15);
+    color: var(--text-muted); font-size: 13px; font-family: 'Outfit', sans-serif;
+    transition: background 0.2s;
+  }
+  .modal-cancel:hover { background: rgba(255,255,255,0.06); }
+  .modal-confirm {
+    flex: 1; padding: 10px; border-radius: 30px; cursor: pointer;
+    background: var(--gold); border: none;
+    color: #1a1200; font-size: 13px; font-weight: 600; font-family: 'Outfit', sans-serif;
+    transition: opacity 0.2s;
+  }
+  .modal-confirm:hover { opacity: 0.88; }
+
+  /* rules quick ref */
+  .quick-ref {
+    width: 100%; max-width: 500px;
+    background: var(--dark3);
+    border: 0.5px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .qr-toggle {
+    width: 100%; padding: 12px 16px; background: none;
+    border: none; color: var(--text-muted); font-family: 'Outfit', sans-serif;
+    font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+    transition: color 0.2s;
+  }
+  .qr-toggle:hover { color: var(--text); }
+  .qr-toggle span { transition: transform 0.25s; display: inline-block; }
+  .qr-toggle.open span { transform: rotate(180deg); }
+  .qr-list { display: none; padding: 0 16px 14px; }
+  .qr-list.open { display: block; }
+  .qr-row {
+    display: flex; gap: 10px; align-items: baseline;
+    padding: 5px 0; border-bottom: 0.5px solid rgba(255,255,255,0.04);
+    font-size: 12px;
+  }
+  .qr-row:last-child { border-bottom: none; }
+  .qr-card { font-family: 'Bebas Neue', sans-serif; font-size: 17px; color: var(--gold); min-width: 28px; }
+  .qr-rule { color: var(--text-muted); line-height: 1.4; }
+  .qr-rule strong { color: var(--text); font-weight: 500; }
+
+  /* animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes cardPop {
+    0% { transform: scale(0.88) translateY(8px); opacity: 0; }
+    70% { transform: scale(1.04); }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+  }
+  .card-pop { animation: cardPop 0.3s ease forwards; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     HOME PAGE
+════════════════════════════════════════════ -->
+<div id="home" class="page active">
+  <div class="hero">
+    <div class="hero-eyebrow">The Ultimate Collection</div>
+    <div class="hero-title">Top<br><span>Drinking</span><br>Games</div>
+    <p class="hero-sub">Handpicked party classics to keep the night alive. Pick a game, gather your crew, and let the fun begin.</p>
+    <div class="divider"></div>
+  </div>
+
+  <div class="games-section">
+    <div class="section-label">Choose your game</div>
+    <div class="games-grid">
+
+      <div class="game-card featured" onclick="showROF()">
+        <div class="game-number">01</div>
+        <div class="game-info">
+          <div class="game-name">Kings / Ring of Fire</div>
+          <div class="game-tag">Cards · 3–10 players · All night</div>
+        </div>
+        <span class="game-badge badge-play">Play</span>
+        <span class="game-arrow">›</span>
+      </div>
+
+      <div class="game-card locked">
+        <div class="game-number">02</div>
+        <div class="game-info">
+          <div class="game-name">Never Have I Ever</div>
+          <div class="game-tag">Social · 4+ players · Ice breaker</div>
+        </div>
+        <span class="game-badge badge-soon">Soon</span>
+      </div>
+
+      <div class="game-card locked">
+        <div class="game-number">03</div>
+        <div class="game-info">
+          <div class="game-name">Most Likely To</div>
+          <div class="game-tag">Social · 4+ players · Chaos guaranteed</div>
+        </div>
+        <span class="game-badge badge-soon">Soon</span>
+      </div>
+
+      <div class="game-card locked">
+        <div class="game-number">04</div>
+        <div class="game-info">
+          <div class="game-name">Truth or Dare</div>
+          <div class="game-tag">Dares · 3+ players · High stakes</div>
+        </div>
+        <span class="game-badge badge-soon">Soon</span>
+      </div>
+
+      <div class="game-card locked">
+        <div class="game-number">05</div>
+        <div class="game-info">
+          <div class="game-name">Two Truths & a Lie</div>
+          <div class="game-tag">Bluffing · 4+ players · Get to know each other</div>
+        </div>
+        <span class="game-badge badge-soon">Soon</span>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="home-footer">
+    🍺 Please drink responsibly. For players aged 18+.
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     RING OF FIRE PAGE
+════════════════════════════════════════════ -->
+<div id="rof" class="page">
+  <div class="rof-header">
+    <button class="back-btn" onclick="showHome()">&#8592; Games</button>
+    <div class="rof-logo">Ring of Fire</div>
+    <div class="king-tracker">
+      <div class="king-pip" id="kp1"></div>
+      <div class="king-pip" id="kp2"></div>
+      <div class="king-pip" id="kp3"></div>
+      <div class="king-pip" id="kp4"></div>
+    </div>
+  </div>
+
+  <div class="play-area">
+    <div class="cards-row">
+      <div class="card-slot">
+        <div id="deckBtn" onclick="drawCard()">
+          <div class="deck-icon">🂠</div>
+          <div class="deck-label">Draw a card</div>
+          <div id="deckCount">52 remaining</div>
+        </div>
+        <div class="slot-label">Deck</div>
+      </div>
+      <div class="card-slot">
+        <div id="currentCard">
+          <div class="card-placeholder">Draw a card<br>to begin</div>
+        </div>
+        <div class="slot-label">Current card</div>
+      </div>
+    </div>
+
+    <div id="rulePanel">
+      <div id="ruleName">—</div>
+      <div id="ruleDesc">Draw a card to see the rule</div>
+    </div>
+
+    <div class="drawn-label">Cards played</div>
+    <div id="drawnPile"></div>
+
+    <div class="btn-row">
+      <button id="newGameBtn" onclick="confirmNewGame()">New game</button>
+      <button id="shuffleBtn" onclick="shuffleDeck()">Shuffle deck</button>
+    </div>
+
+    <!-- Confirmation modal -->
+    <div class="modal-overlay" id="confirmModal">
+      <div class="modal-box">
+        <div class="modal-icon">🃏</div>
+        <div class="modal-title">New Game?</div>
+        <div class="modal-desc">This will reset the deck and clear all progress. Are you sure?</div>
+        <div class="modal-btns">
+          <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+          <button class="modal-confirm" onclick="confirmReset()">Yes, restart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick reference accordion -->
+    <div class="quick-ref">
+      <button class="qr-toggle" id="qrToggle" onclick="toggleQR()">
+        Quick rules reference <span>&#8964;</span>
+      </button>
+      <div class="qr-list" id="qrList">
+        <div class="qr-row"><span class="qr-card">A</span><span class="qr-rule"><strong>Waterfall</strong> — everyone drinks in sequence until the drawer stops</span></div>
+        <div class="qr-row"><span class="qr-card">2</span><span class="qr-rule"><strong>You</strong> — pick someone to drink</span></div>
+        <div class="qr-row"><span class="qr-card">3</span><span class="qr-rule"><strong>Me</strong> — you drink</span></div>
+        <div class="qr-row"><span class="qr-card">4</span><span class="qr-rule"><strong>Floor</strong> — last to touch the floor drinks</span></div>
+        <div class="qr-row"><span class="qr-card">5</span><span class="qr-rule"><strong>Guys</strong> — all guys drink</span></div>
+        <div class="qr-row"><span class="qr-card">6</span><span class="qr-rule"><strong>Chicks</strong> — all girls drink</span></div>
+        <div class="qr-row"><span class="qr-card">7</span><span class="qr-rule"><strong>Heaven</strong> — last to raise hand drinks</span></div>
+        <div class="qr-row"><span class="qr-card">8</span><span class="qr-rule"><strong>Mate</strong> — pick a drinking buddy until next 8</span></div>
+        <div class="qr-row"><span class="qr-card">9</span><span class="qr-rule"><strong>Rhyme</strong> — say a word, go round rhyming. First to fail drinks</span></div>
+        <div class="qr-row"><span class="qr-card">10</span><span class="qr-rule"><strong>Categories</strong> — pick a category, go round. First to fail drinks</span></div>
+        <div class="qr-row"><span class="qr-card">J</span><span class="qr-rule"><strong>Make a rule</strong> — invent a rule for the rest of the game</span></div>
+        <div class="qr-row"><span class="qr-card">Q</span><span class="qr-rule"><strong>Questions</strong> — answer only in questions. First to answer directly drinks</span></div>
+        <div class="qr-row"><span class="qr-card">K</span><span class="qr-rule"><strong>King's Cup</strong> — pour into centre cup. 4th King chugs it all</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Page navigation ──
+  function showROF() {
+    document.getElementById('home').classList.remove('active');
+    document.getElementById('rof').classList.add('active');
+    resetGame();
+  }
+  function showHome() {
+    document.getElementById('rof').classList.remove('active');
+    document.getElementById('home').classList.add('active');
+  }
+  function toggleQR() {
+    const btn = document.getElementById('qrToggle');
+    const list = document.getElementById('qrList');
+    btn.classList.toggle('open');
+    list.classList.toggle('open');
+  }
+
+  // ── Ring of Fire game logic ──
+  const RULES = {
+    'A':  { name: 'Ace — Waterfall 🌊',       desc: 'Everyone starts drinking. No one can stop until the person to their right stops. The card drawer starts and stops first.' },
+    '2':  { name: '2 — You',                  desc: 'Point at someone. That person drinks.' },
+    '3':  { name: '3 — Me',                   desc: 'Tough luck — you drew this one. You drink.' },
+    '4':  { name: '4 — Floor 👇',             desc: 'Last person to touch the floor has to drink.' },
+    '5':  { name: '5 — Guys 🙋',              desc: 'All guys/men at the table drink.' },
+    '6':  { name: '6 — Chicks 🙋‍♀️',          desc: 'All girls/women at the table drink.' },
+    '7':  { name: '7 — Heaven ✋',            desc: 'Everyone points to the sky. Last one to raise their hand drinks.' },
+    '8':  { name: '8 — Mate 🤝',             desc: 'Choose a drinking buddy. Whenever you drink they drink too (and vice versa) — lasts until another 8 is drawn.' },
+    '9':  { name: '9 — Rhyme 🎤',            desc: 'Say a word. Go around the circle rhyming. First person to hesitate, repeat, or fail to rhyme must drink.' },
+    '10': { name: '10 — Categories 🏷️',       desc: 'Name a category (e.g. football clubs, cocktails). Go round — first to fail or repeat drinks.' },
+    'J':  { name: 'Jack — Make a Rule 📜',    desc: 'Invent any rule you like. It applies for the rest of the game. Break it and you drink.' },
+    'Q':  { name: 'Queen — Questions ❓',     desc: 'Ask someone a question. They must answer with another question. First to answer directly or hesitate drinks.' },
+    'K':  { name: "King — King's Cup 👑",     desc: "Pour some of your drink into the centre cup. The player who draws the 4th King must chug the entire cup." }
+  };
+  const SUITS = ['♠','♣','♥','♦'];
+  const VALS  = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+  const RED   = ['♥','♦'];
+  let deck = [], drawn = [], kings = 0;
+
+  // ── SVG Card Builder ──
+  function buildCardSVG(val, suit) {
+    const W = 160, H = 224;
+    const isRed = ['♥','♦'].includes(suit);
+    const C = isRed ? '#cc2200' : '#1a1a1a';
+    const S = suit;
+
+    // Each pip is drawn in its own 24×24 box centered at (x,y)
+    // The suit shape fits within -10 to +10 in both axes
+    const PS = 12; // pip half-size: pip occupies ±PS around center
+
+    function suitShape() {
+      if (S==='♥') return `<path d="M0,-6 C-1,-11 -${PS},-11 -${PS},-5 C-${PS},0 0,8 0,${PS} C0,8 ${PS},0 ${PS},-5 C${PS},-11 1,-11 0,-6 Z" fill="${C}"/>`;
+      if (S==='♦') return `<path d="M0,-${PS} L${PS},0 L0,${PS} L-${PS},0 Z" fill="${C}"/>`;
+      if (S==='♠') return `<path d="M0,-${PS} C0,-${PS} -${PS},-4 -${PS},1 C-${PS},6 -4,7 0,4 C-1,7 -3,9 -5,${PS} L5,${PS} C3,9 1,7 0,4 C4,7 ${PS},6 ${PS},1 C${PS},-4 0,-${PS} 0,-${PS} Z" fill="${C}"/>`;
+      // clubs
+      return `<circle cx="-5" cy="2" r="5" fill="${C}"/><circle cx="5" cy="2" r="5" fill="${C}"/><circle cx="0" cy="-4" r="5" fill="${C}"/><rect x="-3" y="3" width="6" height="8" fill="${C}"/><rect x="-5" y="${PS-1}" width="10" height="2" fill="${C}"/>`;
+    }
+
+    function pip(cx, cy, flip=false) {
+      const rot = flip ? `rotate(180,${cx},${cy})` : '';
+      return `<g transform="${rot}"><g transform="translate(${cx},${cy})">${suitShape()}</g></g>`;
+    }
+
+    // Corner pip (smaller, 8px half-size)
+    function cornerPip(cx, cy) {
+      const cs = 7;
+      let p;
+      if (S==='♥') p=`<path d="M0,-5 C-1,-9 -${cs},-9 -${cs},-4 C-${cs},0 0,6 0,${cs} C0,6 ${cs},0 ${cs},-4 C${cs},-9 1,-9 0,-5 Z" fill="${C}"/>`;
+      else if (S==='♦') p=`<path d="M0,-${cs} L${cs},0 L0,${cs} L-${cs},0 Z" fill="${C}"/>`;
+      else if (S==='♠') p=`<path d="M0,-${cs} C0,-${cs} -${cs},-2 -${cs},2 C-${cs},5 -3,6 0,3 C-1,5 -2,7 -4,${cs} L4,${cs} C2,7 1,5 0,3 C3,6 ${cs},5 ${cs},2 C${cs},-2 0,-${cs} 0,-${cs} Z" fill="${C}"/>`;
+      else p=`<circle cx="-3" cy="1" r="3.5" fill="${C}"/><circle cx="3" cy="1" r="3.5" fill="${C}"/><circle cx="0" cy="-3" r="3.5" fill="${C}"/><rect x="-2" y="2" width="4" height="5" fill="${C}"/><rect x="-4" y="${cs-1}" width="8" height="2" fill="${C}"/>`;
+      return `<g transform="translate(${cx},${cy})">${p}</g>`;
+    }
+
+    // Corner: value at top, suit pip below with clear gap
+    // Number baseline at y=20, suit pip centered at y=40
+    const corners = `
+      <text x="14" y="20" font-size="18" font-family="Georgia,serif" font-weight="bold" fill="${C}" text-anchor="middle" dominant-baseline="central">${val}</text>
+      ${cornerPip(14, 40)}
+      <g transform="rotate(180,${W/2},${H/2})">
+        <text x="14" y="20" font-size="18" font-family="Georgia,serif" font-weight="bold" fill="${C}" text-anchor="middle" dominant-baseline="central">${val}</text>
+        ${cornerPip(14, 40)}
+      </g>
+    `;
+
+    // ── Pip grid ──
+    // Card content area: x from 14 to 146, y from 54 to 196 (below top corner block)
+    // Left col x=44, center x=80, right x=116
+    // For cards 2-8: 2 rows (top+bottom) with optional middle
+    // For 9-10: 4 rows needed — tighter spacing
+    const L=44, M=80, R=116;
+
+    // Standard 6 rows for 2-8
+    const T=60, MT=88, MID=112, MB=136, B=164;
+    // Tighter rows for 9-10 (5 rows needed)
+    const T9=58, R2_9=82, R3_9=106, R4_9=130, B9=154;
+
+    let body = '';
+
+    if (val==='A') {
+      body = pip(M, MID+4);
+
+    } else if (val==='2') {
+      body = pip(M,T) + pip(M,B,true);
+
+    } else if (val==='3') {
+      body = pip(M,T) + pip(M,MID) + pip(M,B,true);
+
+    } else if (val==='4') {
+      body = pip(L,T) + pip(R,T) + pip(L,B,true) + pip(R,B,true);
+
+    } else if (val==='5') {
+      body = pip(L,T) + pip(R,T) + pip(M,MID) + pip(L,B,true) + pip(R,B,true);
+
+    } else if (val==='6') {
+      body = pip(L,T) + pip(R,T) + pip(L,MID) + pip(R,MID) + pip(L,B,true) + pip(R,B,true);
+
+    } else if (val==='7') {
+      body = pip(L,T) + pip(R,T) + pip(M,MT) + pip(L,MID) + pip(R,MID) + pip(L,B,true) + pip(R,B,true);
+
+    } else if (val==='8') {
+      body = pip(L,T) + pip(R,T) + pip(M,MT) + pip(L,MID) + pip(R,MID) + pip(M,MB,true) + pip(L,B,true) + pip(R,B,true);
+
+    } else if (val==='9') {
+      body = pip(L,T9) + pip(R,T9) +
+             pip(L,R2_9) + pip(R,R2_9) +
+             pip(M,MID) +
+             pip(L,R4_9,true) + pip(R,R4_9,true) +
+             pip(L,B9,true) + pip(R,B9,true);
+
+    } else if (val==='10') {
+      body = pip(L,T9) + pip(R,T9) +
+             pip(M,R2_9) +
+             pip(L,R2_9+18) + pip(R,R2_9+18) +
+             pip(L,R4_9,true) + pip(R,R4_9,true) +
+             pip(M,R4_9-18,true) +
+             pip(L,B9,true) + pip(R,B9,true);
+
+    } else if (val==='J' || val==='Q' || val==='K') {
+      body += faceHalf(W, H, C, isRed, S, val);
+      body += `<g transform="rotate(180,${W/2},${H/2})">${faceHalf(W, H, C, isRed, S, val)}</g>`;
+      body += `<line x1="20" y1="${H/2}" x2="${W-20}" y2="${H/2}" stroke="${C}" stroke-width="0.5" opacity="0.2"/>`;
+    }
+
+    const border = `
+      <rect x="1" y="1" width="${W-2}" height="${H-2}" rx="12" ry="12" fill="#faf9f6" stroke="#bbb8b0" stroke-width="1.2"/>
+      <rect x="5" y="5" width="${W-10}" height="${H-10}" rx="9" ry="9" fill="none" stroke="${C}" stroke-width="0.5" opacity="0.15"/>
+    `;
+
+    return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
+      ${border}
+      ${body}
+      ${corners}
+    </svg>`;
+  }
+
+  // ── Face card half-figure (top half only) ──
+  function faceHalf(W, H, C, isRed, suit, rank) {
+    const bg = isRed ? '#fff0f0' : '#f0f0ff';
+    const accentFill = isRed ? '#e8b84b' : '#c8b89a';
+    const x0=28, y0=44, pw=W-56, ph=H/2-50;
+
+    let fig = `<rect x="${x0}" y="${y0}" width="${pw}" height="${ph}" rx="5" fill="${bg}" stroke="${C}" stroke-width="0.8" opacity="0.7"/>`;
+
+    if (rank === 'K') {
+      fig += `
+        <polygon points="${W/2-14},${y0+8} ${W/2-10},${y0+2} ${W/2},${y0+6} ${W/2+10},${y0+2} ${W/2+14},${y0+8} ${W/2+14},${y0+14} ${W/2-14},${y0+14}" fill="${C}" opacity="0.9"/>
+        <circle cx="${W/2-10}" cy="${y0+2}" r="2.5" fill="${accentFill}"/>
+        <circle cx="${W/2}" cy="${y0+5}" r="2.5" fill="${accentFill}"/>
+        <circle cx="${W/2+10}" cy="${y0+2}" r="2.5" fill="${accentFill}"/>
+        <ellipse cx="${W/2}" cy="${y0+22}" rx="12" ry="14" fill="${C}" opacity="0.15" stroke="${C}" stroke-width="0.8"/>
+        <circle cx="${W/2}" cy="${y0+20}" r="8" fill="${C}" opacity="0.2"/>
+        <ellipse cx="${W/2}" cy="${y0+20}" rx="6" ry="7" fill="${bg}" stroke="${C}" stroke-width="0.7" opacity="0.8"/>
+        <ellipse cx="${W/2}" cy="${y0+19}" rx="4" ry="4.5" fill="${C}" opacity="0.25"/>
+        <rect x="${W/2-11}" y="${y0+34}" width="22" height="22" rx="2" fill="${C}" opacity="0.12" stroke="${C}" stroke-width="0.6"/>
+        <line x1="${W/2}" y1="${y0+34}" x2="${W/2}" y2="${y0+56}" stroke="${C}" stroke-width="0.8" opacity="0.5"/>
+        <line x1="${W/2-11}" y1="${y0+45}" x2="${W/2+11}" y2="${y0+45}" stroke="${C}" stroke-width="0.8" opacity="0.5"/>
+        <line x1="${W/2-6}" y1="${y0+56}" x2="${W/2+6}" y2="${y0+70}" stroke="${C}" stroke-width="1.5" opacity="0.7" stroke-linecap="round"/>
+        <text x="${W/2-17}" y="${y0+ph-6}" font-size="9" fill="${C}" font-family="Georgia,serif" text-anchor="middle" opacity="0.55">${suit}</text>
+      `;
+    } else if (rank === 'Q') {
+      fig += `
+        <polygon points="${W/2-12},${y0+9} ${W/2-9},${y0+3} ${W/2},${y0+7} ${W/2+9},${y0+3} ${W/2+12},${y0+9} ${W/2+12},${y0+14} ${W/2-12},${y0+14}" fill="${C}" opacity="0.85"/>
+        <circle cx="${W/2-9}" cy="${y0+3}" r="2" fill="${accentFill}"/>
+        <circle cx="${W/2}" cy="${y0+6}" r="2.2" fill="${accentFill}"/>
+        <circle cx="${W/2+9}" cy="${y0+3}" r="2" fill="${accentFill}"/>
+        <ellipse cx="${W/2}" cy="${y0+22}" rx="10" ry="12" fill="${C}" opacity="0.12" stroke="${C}" stroke-width="0.7"/>
+        <ellipse cx="${W/2}" cy="${y0+21}" rx="6" ry="6.5" fill="${bg}" stroke="${C}" stroke-width="0.7" opacity="0.85"/>
+        <ellipse cx="${W/2}" cy="${y0+20}" rx="3.5" ry="4" fill="${C}" opacity="0.2"/>
+        <rect x="${W/2-10}" y="${y0+33}" width="20" height="20" rx="3" fill="${C}" opacity="0.1" stroke="${C}" stroke-width="0.6"/>
+        <circle cx="${W/2+10}" cy="${y0+42}" r="5" fill="none" stroke="${C}" stroke-width="0.8" opacity="0.6"/>
+        <circle cx="${W/2+10}" cy="${y0+42}" r="2.5" fill="${C}" opacity="0.3"/>
+        <line x1="${W/2+10}" y1="${y0+47}" x2="${W/2+10}" y2="${y0+58}" stroke="${C}" stroke-width="1" opacity="0.5"/>
+        <text x="${W/2+17}" y="${y0+ph-6}" font-size="9" fill="${C}" font-family="Georgia,serif" text-anchor="middle" opacity="0.55">${suit}</text>
+      `;
+    } else {
+      fig += `
+        <path d="M${W/2-8},${y0+4} Q${W/2},${y0} ${W/2+8},${y0+4} L${W/2+10},${y0+14} L${W/2-10},${y0+14} Z" fill="${C}" opacity="0.8"/>
+        <path d="M${W/2+6},${y0+1} Q${W/2+14},${y0-3} ${W/2+18},${y0+7}" fill="none" stroke="${C}" stroke-width="1.5" opacity="0.7" stroke-linecap="round"/>
+        <ellipse cx="${W/2}" cy="${y0+22}" rx="9" ry="11" fill="${C}" opacity="0.12" stroke="${C}" stroke-width="0.7"/>
+        <ellipse cx="${W/2}" cy="${y0+21}" rx="6" ry="6.5" fill="${bg}" stroke="${C}" stroke-width="0.7" opacity="0.85"/>
+        <ellipse cx="${W/2}" cy="${y0+20}" rx="3.5" ry="4" fill="${C}" opacity="0.18"/>
+        <rect x="${W/2-10}" y="${y0+33}" width="20" height="22" rx="2" fill="${C}" opacity="0.1" stroke="${C}" stroke-width="0.6"/>
+        <line x1="${W/2-5}" y1="${y0+55}" x2="${W/2+5}" y2="${y0+68}" stroke="${C}" stroke-width="1.8" opacity="0.65" stroke-linecap="round"/>
+        <circle cx="${W/2-5}" cy="${y0+55}" r="3" fill="${C}" opacity="0.4"/>
+        <text x="${W/2-17}" y="${y0+ph-6}" font-size="9" fill="${C}" font-family="Georgia,serif" text-anchor="middle" opacity="0.55">${suit}</text>
+      `;
+    }
+    return fig;
+  }
+
+  function buildDeck() {
+    deck = [];
+    for (const s of SUITS) for (const v of VALS) deck.push({v, s});
+    deck.sort(() => Math.random() - 0.5);
+    drawn = []; kings = 0;
+  }
+
+  function drawCard() {
+    if (!deck.length) {
+      document.getElementById('ruleName').textContent = 'Deck exhausted!';
+      document.getElementById('ruleDesc').textContent = 'Tap "New game" to reshuffle.';
+      return;
+    }
+    const card = deck.pop();
+    drawn.push(card);
+    const isRed = RED.includes(card.s);
+
+    // render card — SVG poker card with proper pip layout
+    const cc = document.getElementById('currentCard');
+    cc.innerHTML = buildCardSVG(card.v, card.s);
+    cc.className = isRed ? 'red' : 'black';
+    cc.classList.add('card-pop');
+    cc.addEventListener('animationend', () => cc.classList.remove('card-pop'), {once: true});
+
+    // rule
+    let rule = {...RULES[card.v]};
+    if (card.v === 'K') {
+      kings++;
+      updateKingPips();
+      if (kings === 4) {
+        rule.name = "4th King — Chug the Cup! 🍺";
+        rule.desc = "The moment has arrived. You must drink the entire King's Cup. Down it!";
+      } else {
+        rule.name = `King #${kings} — Pour the Cup 👑`;
+        rule.desc = `Pour some of your drink into the centre cup. ${4-kings} King${4-kings>1?'s':''} left before someone chugs it all.`;
+      }
+    }
+    document.getElementById('ruleName').textContent = rule.name;
+    document.getElementById('ruleDesc').textContent = rule.desc;
+    const panel = document.getElementById('rulePanel');
+    panel.classList.add('highlight');
+    setTimeout(() => panel.classList.remove('highlight'), 1200);
+
+    document.getElementById('deckCount').textContent = `${deck.length} remaining`;
+    renderPile();
+  }
+
+  function updateKingPips() {
+    for (let i = 1; i <= 4; i++) {
+      const pip = document.getElementById('kp' + i);
+      if (i <= kings) {
+        pip.classList.add('filled');
+        if (i === 4) pip.classList.add('last');
+      }
+    }
+  }
+
+  function renderPile() {
+    const pile = document.getElementById('drawnPile');
+    pile.innerHTML = '';
+    for (const c of drawn) {
+      const m = document.createElement('div');
+      m.className = 'mini ' + (RED.includes(c.s) ? 'r' : 'b');
+      m.innerHTML = `<span>${c.v}</span><span>${c.s}</span>`;
+      pile.appendChild(m);
+    }
+  }
+
+  function shuffleDeck() {
+    deck.sort(() => Math.random() - 0.5);
+    const btn = document.getElementById('shuffleBtn');
+    btn.textContent = 'Shuffled! ✓';
+    btn.style.color = 'var(--gold)';
+    setTimeout(() => { btn.textContent = 'Shuffle deck'; btn.style.color = ''; }, 1200);
+  }
+
+  function confirmNewGame() {
+    document.getElementById('confirmModal').classList.add('open');
+  }
+  function closeModal() {
+    document.getElementById('confirmModal').classList.remove('open');
+  }
+  function confirmReset() {
+    closeModal();
+    resetGame();
+  }
+
+  function resetGame() {
+    buildDeck();
+    const cc = document.getElementById('currentCard');
+    cc.innerHTML = `<svg viewBox="0 0 160 224" xmlns="http://www.w3.org/2000/svg">
+      <rect x="1" y="1" width="158" height="222" rx="12" ry="12" fill="#1a1a1a" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+      <rect x="6" y="6" width="148" height="212" rx="9" ry="9" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+      <text x="80" y="104" text-anchor="middle" font-size="13" fill="#555" font-family="Outfit,sans-serif">Draw a card</text>
+      <text x="80" y="122" text-anchor="middle" font-size="13" fill="#555" font-family="Outfit,sans-serif">to begin</text>
+    </svg>`;
+    cc.className = '';
+    document.getElementById('ruleName').textContent = '—';
+    document.getElementById('ruleDesc').textContent = 'Draw a card to see the rule';
+    document.getElementById('deckCount').textContent = '52 remaining';
+    document.getElementById('drawnPile').innerHTML = '';
+    for (let i = 1; i <= 4; i++) {
+      const pip = document.getElementById('kp' + i);
+      pip.classList.remove('filled', 'last');
+    }
+  }
+
+  buildDeck();
+</script>
+</body>
+</html>
