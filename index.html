@@ -434,6 +434,99 @@
     100% { transform: scale(1) translateY(0); opacity: 1; }
   }
   .card-pop { animation: cardPop 0.3s ease forwards; }
+
+  /* ── SHARED GAME PAGE STYLES ── */
+  .game-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 1.25rem 0; gap: 0.5rem;
+  }
+  .game-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(18px, 5vw, 26px); letter-spacing: 0.05em;
+    text-align: center; flex: 1; line-height: 1;
+  }
+  .card-counter { font-size: 12px; color: var(--text-muted); min-width: 48px; text-align: right; }
+
+  /* ── PROMPT CARD ── */
+  .pg-eyebrow {
+    text-align: center; font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--text-muted); font-weight: 600;
+    padding: 1.25rem 1.25rem 0.5rem;
+  }
+  .pg-card {
+    margin: 0 1.25rem;
+    background: var(--dark3);
+    border: 0.5px solid rgba(255,255,255,0.1);
+    border-radius: 22px;
+    padding: 2.5rem 1.75rem 2rem;
+    min-height: clamp(200px, 45vw, 280px);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 1rem;
+    cursor: pointer;
+    transition: transform 0.15s, border-color 0.25s;
+    position: relative;
+    text-align: center;
+  }
+  .pg-card:active { transform: scale(0.98); }
+  .pg-card.flash { animation: pgFlash 0.3s ease; }
+  @keyframes pgFlash {
+    0%  { opacity:1; transform:scale(1); }
+    35% { opacity:0; transform:scale(0.97) translateY(-4px); }
+    100%{ opacity:1; transform:scale(1); }
+  }
+  .pg-tag {
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-muted); font-weight: 600;
+  }
+  .pg-text {
+    font-size: clamp(18px, 5vw, 26px);
+    color: var(--text); line-height: 1.5; font-weight: 400;
+    font-family: 'Outfit', sans-serif;
+  }
+  .pg-drink-rule {
+    text-align: center; font-size: 13px; color: var(--text-muted);
+    padding: 0.85rem 1.5rem 0; line-height: 1.55;
+  }
+  .pg-drink-rule strong { color: var(--text); }
+  .pg-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.85rem 1.25rem 1.25rem;
+    gap: 10px;
+  }
+  .pg-progress {
+    font-size: 13px; color: var(--text-muted); text-align: center; flex: 1;
+    font-weight: 500;
+  }
+  .pg-btn {
+    padding: 12px 24px; border-radius: 30px;
+    font-size: 14px; font-weight: 600; cursor: pointer;
+    font-family: 'Outfit', sans-serif; letter-spacing: 0.03em;
+    transition: all 0.15s; flex-shrink: 0;
+  }
+  .pg-btn.gold { background: var(--gold); border: none; color: #1a1200; }
+  .pg-btn.gold:hover { opacity: 0.88; transform: translateY(-1px); }
+  .pg-btn.sec { background: none; border: 1px solid rgba(255,255,255,0.14); color: var(--text-muted); }
+  .pg-btn.sec:hover { border-color: rgba(255,255,255,0.3); color: var(--text); }
+  .pg-btn:disabled { opacity: 0.25; cursor: default; transform: none !important; }
+
+  /* ── TRUTH OR DARE mode bar ── */
+  .tod-mode-bar {
+    display: flex; margin: 1rem 1.25rem 0;
+    background: var(--dark3); border-radius: 14px; padding: 4px;
+    border: 0.5px solid rgba(255,255,255,0.1); gap: 4px;
+  }
+  .tod-mode-btn {
+    flex: 1; padding: 10px; border-radius: 11px; border: none;
+    font-size: 14px; font-weight: 600; cursor: pointer;
+    font-family: 'Outfit', sans-serif; transition: all 0.2s;
+    background: none; color: var(--text-muted);
+  }
+  .tod-mode-btn.truth-btn.active { background: #e06060; color: #fff; }
+  .tod-mode-btn.dare-btn.active  { background: var(--gold); color: #1a1200; }
+  #nhie-spinner, #mlt-spinner, #tod-spinner {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 0.75rem 0 1.25rem; gap: 0.6rem; width: 100%;
+  }
 </style>
 </head>
 <body>
@@ -463,31 +556,34 @@
         <span class="game-arrow">›</span>
       </div>
 
-      <div class="game-card locked">
+      <div class="game-card featured" onclick="showGame('nhie')">
         <div class="game-number">02</div>
         <div class="game-info">
           <div class="game-name">Never Have I Ever</div>
           <div class="game-tag">Social · 4+ players · Ice breaker</div>
         </div>
-        <span class="game-badge badge-soon">Soon</span>
+        <span class="game-badge badge-play">Play</span>
+        <span class="game-arrow">›</span>
       </div>
 
-      <div class="game-card locked">
+      <div class="game-card featured" onclick="showGame('mlt')">
         <div class="game-number">03</div>
         <div class="game-info">
           <div class="game-name">Most Likely To</div>
           <div class="game-tag">Social · 4+ players · Chaos guaranteed</div>
         </div>
-        <span class="game-badge badge-soon">Soon</span>
+        <span class="game-badge badge-play">Play</span>
+        <span class="game-arrow">›</span>
       </div>
 
-      <div class="game-card locked">
+      <div class="game-card featured" onclick="showGame('tod')">
         <div class="game-number">04</div>
         <div class="game-info">
           <div class="game-name">Truth or Dare</div>
           <div class="game-tag">Dares · 3+ players · High stakes</div>
         </div>
-        <span class="game-badge badge-soon">Soon</span>
+        <span class="game-badge badge-play">Play</span>
+        <span class="game-arrow">›</span>
       </div>
 
       <div class="game-card locked">
@@ -612,6 +708,116 @@
   </div><!-- end play-area -->
   </div><!-- end gameArea -->
 </div><!-- end rof -->
+
+<!-- ═══════════════════════════════════════════
+     NEVER HAVE I EVER
+════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════
+     NEVER HAVE I EVER
+════════════════════════════════════════════ -->
+<div id="nhie" class="page">
+  <div class="game-header">
+    <button class="back-btn" onclick="showHome()">&#8592; Games</button>
+    <div class="game-logo" style="color:#60a8e0;">Never Have I Ever</div>
+    <div class="card-counter" id="nhie-counter"></div>
+  </div>
+  <div id="nhie-spinner">
+    <div class="spinner-intro">
+      <div class="spinner-eyebrow">Before you begin</div>
+      <div class="spinner-title">Who goes first?</div>
+      <div class="spinner-sub">Tap the arrow to spin</div>
+    </div>
+    <div class="spin-area"><canvas id="nhie-canvas" onclick="spinGame('nhie')"></canvas><div class="spin-hint" id="nhie-hint">Tap to spin</div></div>
+    <div id="nhie-spin-result" class="spin-result"></div>
+    <button class="start-game-btn" id="nhie-start-btn" onclick="startGamePlay('nhie')" style="display:none">Start game ›</button>
+    <button class="skip-spinner-btn" onclick="startGamePlay('nhie')">Skip — go straight to game</button>
+  </div>
+  <div id="nhie-play" style="display:none">
+    <div class="pg-eyebrow">Never Have I Ever…</div>
+    <div class="pg-card" id="nhie-card" onclick="nhieNext()">
+      <div class="pg-tag">tap to draw</div>
+      <div class="pg-text" id="nhie-text">Tap the card to reveal</div>
+    </div>
+    <div class="pg-drink-rule">Everyone who <strong>HAS</strong> done it drinks 🍺</div>
+    <div class="pg-nav">
+      <button class="pg-btn sec" onclick="nhiePrev()">&#8592; Back</button>
+      <div class="pg-progress" id="nhie-progress">1 / 100</div>
+      <button class="pg-btn gold" id="nhie-next-btn" onclick="nhieNext()">Next &#8594;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MOST LIKELY TO
+════════════════════════════════════════════ -->
+<div id="mlt" class="page">
+  <div class="game-header">
+    <button class="back-btn" onclick="showHome()">&#8592; Games</button>
+    <div class="game-logo" style="color:#80d080;">Most Likely To</div>
+    <div class="card-counter" id="mlt-counter"></div>
+  </div>
+  <div id="mlt-spinner">
+    <div class="spinner-intro">
+      <div class="spinner-eyebrow">Before you begin</div>
+      <div class="spinner-title">Who goes first?</div>
+      <div class="spinner-sub">Tap the arrow to spin</div>
+    </div>
+    <div class="spin-area"><canvas id="mlt-canvas" onclick="spinGame('mlt')"></canvas><div class="spin-hint" id="mlt-hint">Tap to spin</div></div>
+    <div id="mlt-spin-result" class="spin-result"></div>
+    <button class="start-game-btn" id="mlt-start-btn" onclick="startGamePlay('mlt')" style="display:none">Start game ›</button>
+    <button class="skip-spinner-btn" onclick="startGamePlay('mlt')">Skip — go straight to game</button>
+  </div>
+  <div id="mlt-play" style="display:none">
+    <div class="pg-eyebrow">Most Likely To…</div>
+    <div class="pg-card" id="mlt-card" onclick="mltNext()">
+      <div class="pg-tag">tap to draw</div>
+      <div class="pg-text" id="mlt-text">Tap the card to reveal</div>
+    </div>
+    <div class="pg-drink-rule">Everyone points at the most likely person — they drink once per finger 🍺</div>
+    <div class="pg-nav">
+      <button class="pg-btn sec" onclick="mltPrev()">&#8592; Back</button>
+      <div class="pg-progress" id="mlt-progress">1 / 100</div>
+      <button class="pg-btn gold" id="mlt-next-btn" onclick="mltNext()">Next &#8594;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     TRUTH OR DARE
+════════════════════════════════════════════ -->
+<div id="tod" class="page">
+  <div class="game-header">
+    <button class="back-btn" onclick="showHome()">&#8592; Games</button>
+    <div class="game-logo" style="color:#e06060;">Truth or Dare</div>
+    <div class="card-counter" id="tod-counter"></div>
+  </div>
+  <div id="tod-spinner">
+    <div class="spinner-intro">
+      <div class="spinner-eyebrow">Before you begin</div>
+      <div class="spinner-title">Who goes first?</div>
+      <div class="spinner-sub">Tap the arrow to spin</div>
+    </div>
+    <div class="spin-area"><canvas id="tod-canvas" onclick="spinGame('tod')"></canvas><div class="spin-hint" id="tod-hint">Tap to spin</div></div>
+    <div id="tod-spin-result" class="spin-result"></div>
+    <button class="start-game-btn" id="tod-start-btn" onclick="startGamePlay('tod')" style="display:none">Start game ›</button>
+    <button class="skip-spinner-btn" onclick="startGamePlay('tod')">Skip — go straight to game</button>
+  </div>
+  <div id="tod-play" style="display:none">
+    <div class="tod-mode-bar">
+      <button class="tod-mode-btn truth-btn active" id="tod-truth-tab" onclick="todSetMode('truth')">Truth</button>
+      <button class="tod-mode-btn dare-btn" id="tod-dare-tab" onclick="todSetMode('dare')">Dare</button>
+    </div>
+    <div class="pg-card tod-card" id="tod-card" onclick="todNext()">
+      <div class="pg-tag" id="tod-eyebrow">Truth</div>
+      <div class="pg-text" id="tod-text">Tap the card to reveal</div>
+    </div>
+    <div class="pg-drink-rule">Refuse a truth or dare? Take 3 sips 🍺</div>
+    <div class="pg-nav">
+      <div></div>
+      <button class="pg-btn gold" onclick="todNext()">Next &#8594;</button>
+    </div>
+  </div>
+</div>
 
 <script>
   // ── Spinner state ──
@@ -767,7 +973,7 @@
 
   // ── Page navigation ──
   function showROF() {
-    document.getElementById('home').classList.remove('active');
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('rof').classList.add('active');
     document.getElementById('spinnerScreen').style.display = 'flex';
     document.getElementById('gameArea').style.display = 'none';
@@ -778,13 +984,19 @@
     document.getElementById('spinHint').style.opacity = '1';
     currentAngle = 0;
     spinning = false;
-    // Wait for layout, then size canvas to its CSS width and draw
     requestAnimationFrame(() => { resizeCanvas(); drawSpinner(0); });
     resetGame();
   }
   function showHome() {
-    document.getElementById('rof').classList.remove('active');
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('home').classList.add('active');
+  }
+  function showGame(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    if (id === 'nhie') nhieInit();
+    if (id === 'mlt')  mltInit();
+    if (id === 'tod')  todInit();
   }
   function toggleQR() {
     const btn = document.getElementById('qrToggle');
@@ -971,8 +1183,507 @@
   }
 
   buildDeck();
-  // Draw initial spinner after DOM ready
   setTimeout(() => { resizeCanvas(); drawSpinner(0); }, 100);
+
+  // ══════════════════════════════════════════
+  // SHARED MINI-SPINNER FOR GAMES 2/3/4
+  // ══════════════════════════════════════════
+  const gameSpinners = {};
+
+  function initGameSpinner(id) {
+    const canvas = document.getElementById(id + '-canvas');
+    if (!canvas) return;
+    gameSpinners[id] = { angle: 0, spinning: false };
+    resizeGameCanvas(id);
+    drawGameSpinner(id, 0);
+  }
+
+  function resizeGameCanvas(id) {
+    const canvas = document.getElementById(id + '-canvas');
+    if (!canvas) return;
+    const size = canvas.offsetWidth;
+    if (size > 0) { canvas.width = size; canvas.height = size; }
+  }
+
+  function drawGameSpinner(id, angle) {
+    const canvas = document.getElementById(id + '-canvas');
+    if (!canvas) return;
+    resizeGameCanvas(id);
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    if (!W || !H) return;
+    const cx = W/2, cy = H/2;
+    const R = Math.min(W,H)/2 - 20;
+    ctx.clearRect(0, 0, W, H);
+
+    const arrowLen = R;
+    const tailLen = arrowLen * 0.28;
+    const shaftW = Math.max(8, arrowLen * 0.055);
+    const headLen = Math.max(28, arrowLen * 0.22);
+    const spread = 0.46;
+
+    const tipX  = cx + Math.cos(angle) * arrowLen;
+    const tipY  = cy + Math.sin(angle) * arrowLen;
+    const tailX = cx - Math.cos(angle) * tailLen;
+    const tailY = cy - Math.sin(angle) * tailLen;
+
+    ctx.shadowColor = 'rgba(232,184,75,0.5)';
+    ctx.shadowBlur = 14;
+
+    ctx.beginPath();
+    ctx.moveTo(tailX, tailY);
+    ctx.lineTo(tipX, tipY);
+    ctx.strokeStyle = '#e8b84b';
+    ctx.lineWidth = shaftW;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(tipX, tipY);
+    ctx.lineTo(tipX - headLen*Math.cos(angle - spread), tipY - headLen*Math.sin(angle - spread));
+    ctx.lineTo(tipX - headLen*Math.cos(angle + spread), tipY - headLen*Math.sin(angle + spread));
+    ctx.closePath();
+    ctx.fillStyle = '#e8b84b';
+    ctx.fill();
+    ctx.shadowBlur = 0;
+
+    const hubR = shaftW * 2.2;
+    ctx.beginPath(); ctx.arc(cx, cy, hubR+4, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(232,184,75,0.2)'; ctx.fill();
+    ctx.beginPath(); ctx.arc(cx, cy, hubR, 0, Math.PI*2);
+    ctx.fillStyle = '#e8b84b'; ctx.fill();
+    ctx.beginPath(); ctx.arc(cx, cy, hubR*0.55, 0, Math.PI*2);
+    ctx.fillStyle = '#0d0d0d'; ctx.fill();
+  }
+
+  function spinGame(id) {
+    const s = gameSpinners[id];
+    if (!s || s.spinning) return;
+    s.spinning = true;
+    document.getElementById(id + '-spin-result').classList.remove('show');
+    document.getElementById(id + '-start-btn').style.display = 'none';
+    document.getElementById(id + '-hint').style.opacity = '0';
+
+    const extraSpins = 8 + Math.random() * 6;
+    const endAngle = s.angle + extraSpins * Math.PI * 2;
+    const startAngle = s.angle;
+    const duration = 6000 + Math.random() * 2000;
+    const startTime = performance.now();
+
+    function ease(t) { return 1 - Math.pow(1 - t, 6); }
+    function animate(now) {
+      const t = Math.min((now - startTime) / duration, 1);
+      s.angle = startAngle + (endAngle - startAngle) * ease(t);
+      drawGameSpinner(id, s.angle);
+      if (t < 1) { requestAnimationFrame(animate); }
+      else {
+        s.spinning = false;
+        const res = document.getElementById(id + '-spin-result');
+        res.textContent = 'You go first!';
+        res.classList.add('show');
+        document.getElementById(id + '-start-btn').style.display = 'block';
+        document.getElementById(id + '-hint').style.opacity = '1';
+        document.getElementById(id + '-hint').textContent = 'Tap to spin again';
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+
+  function startGamePlay(id) {
+    document.getElementById(id + '-spinner').style.display = 'none';
+    document.getElementById(id + '-play').style.display = 'block';
+  }
+
+  // ══════════════════════════════════════════
+  // NEVER HAVE I EVER — 100 prompts
+  // ══════════════════════════════════════════
+  const NHIE = [
+    "gone skinny dipping","sent a text to the wrong person","pulled an all-nighter","lied about my age",
+    "stalked an ex on social media","sung karaoke sober","eaten food off the floor","cried at a movie",
+    "ghosted someone","pretended to be sick to skip work or school","woken up not knowing where I was",
+    "kissed a stranger","cheated on a test","been kicked out of a bar or club","peed in a pool",
+    "forgotten someone's name mid-conversation","drunk-texted an ex","fallen asleep on public transport and missed my stop",
+    "spent more than $100 on a single night out","lied about being busy to avoid plans","gone on a blind date",
+    "been in a fist fight","stolen something","driven while tipsy","thrown up in public",
+    "matched with someone I know on a dating app","cried in public","been caught snooping on someone's phone",
+    "lied on my CV or dating profile","called someone the wrong name during a date",
+    "spent the whole day in bed doing nothing","eaten an entire pizza by myself","started a rumour",
+    "broken a bone","had a crush on a friend's partner","said I love you and not meant it",
+    "been on TV or in a newspaper","slid into someone's DMs and got ignored",
+    "worn someone else's clothes without asking","photobombed a stranger's photo","been catfished online",
+    "laughed so hard I cried","given a fake number","talked to myself out loud in public",
+    "binged an entire TV season in one day","been banned from somewhere","gone a full week without showering",
+    "re-downloaded a dating app I deleted","sent a risky photo to the wrong person","been caught lying to my parents",
+    "skipped a friend's important event for no good reason","made up an excuse to leave a party early",
+    "accidentally liked a very old photo while stalking someone","cried on a first date",
+    "eaten something off the ground using the 5-second rule","stayed in a relationship way too long",
+    "flirted with someone to get something free","told a secret I was asked to keep",
+    "pretended to know a song and faked the words","snuck into somewhere I wasn't supposed to be",
+    "gone through someone else's phone without permission","kissed someone in my friend group",
+    "been on a date with two different people in the same day","worn the same underwear two days in a row",
+    "lied about watching a movie to seem cultured","faked a phone call to escape an awkward situation",
+    "woken up still drunk from the night before","spent money on something I immediately regretted",
+    "pretended to laugh at a joke I didn't get","blocked someone and then unblocked them the same day",
+    "accidentally walked into the wrong bathroom","fallen asleep during sex","cheated at a board game",
+    "forgotten a close friend's birthday","ordered food to eat in secret","talked badly about someone at their own party",
+    "walked out of a movie because it was so bad","paid for something entirely in coins",
+    "pretended to be on the phone to avoid talking to someone","danced on a table",
+    "accidentally called my teacher mum or dad","worn sunglasses indoors to hide that I'd been crying",
+    "been rejected when going in for a kiss","told someone their partner was cheating",
+    "taken a sick day when I was perfectly fine","convinced someone of something completely false",
+    "sent a message and immediately wished I could take it back","googled someone before meeting them",
+    "bailed on plans because my pet needed me","regretted a haircut the moment I got it",
+    "had a crush on a teacher or boss","drunk-called someone at 3am","eaten dessert before the main course",
+    "paid someone to do my homework or assignment","been in a car that got pulled over",
+    "snuck food into a cinema","cried listening to a song alone in my room"
+  ];
+  let nhieIdx = 0, nhieOrder = [];
+
+  function nhieInit() {
+    nhieOrder = [...Array(NHIE.length).keys()].sort(() => Math.random() - 0.5);
+    nhieIdx = 0;
+    document.getElementById('nhie-spinner').style.display = 'flex';
+    document.getElementById('nhie-play').style.display = 'none';
+    document.getElementById('nhie-spin-result').classList.remove('show');
+    document.getElementById('nhie-start-btn').style.display = 'none';
+    document.getElementById('nhie-hint').textContent = 'Tap to spin';
+    document.getElementById('nhie-hint').style.opacity = '1';
+    document.getElementById('nhie-text').textContent = 'Tap the card to reveal';
+    document.getElementById('nhie-progress').textContent = `1 / ${NHIE.length}`;
+    requestAnimationFrame(() => { initGameSpinner('nhie'); });
+  }
+  function nhieNext() {
+    if (nhieIdx >= NHIE.length) return;
+    const card = document.getElementById('nhie-card');
+    card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');
+    document.getElementById('nhie-text').textContent = NHIE[nhieOrder[nhieIdx]];
+    nhieIdx++;
+    document.getElementById('nhie-progress').textContent = `${nhieIdx} / ${NHIE.length}`;
+    document.getElementById('nhie-next-btn').disabled = nhieIdx >= NHIE.length;
+  }
+  function nhiePrev() {
+    if (nhieIdx <= 1) return;
+    nhieIdx -= 2; nhieNext();
+  }
+
+  // ══════════════════════════════════════════
+  // MOST LIKELY TO — 100 prompts
+  // ══════════════════════════════════════════
+  const MLT = [
+    "end up famous","marry someone they just met","forget where they parked","start a cult",
+    "be the last one standing at a party","accidentally send a risky text to their mum",
+    "cry at a wedding they weren't invited to","eat the most at a buffet","become a millionaire",
+    "get lost in a city they've lived in for years","talk their way out of a speeding ticket",
+    "date someone they met online","still be partying at 50","go on a reality TV show",
+    "move to another country on a whim","forget their own birthday","accidentally start a viral moment",
+    "spend all their money on food","ghost someone after one date","be the mum or dad of the group",
+    "have the most embarrassing photo from tonight","post a thirst trap","own too many plants",
+    "bring home a stray animal","narrate their own life in their head","still be awake at 4am",
+    "turn a 10-minute story into an hour","cry if they lost their phone","be found talking to a dog like a person",
+    "break something expensive tonight","get a tattoo they regret","become a social media influencer",
+    "be the first to leave the party","have the worst hangover tomorrow","make a horrible impulse purchase",
+    "drunk-order food they won't eat","re-download a dating app they deleted",
+    "wear the same outfit two weekends in a row","fall asleep in an Uber","drunkenly call their parents",
+    "accuse someone of cheating at a board game","start a fight over nothing",
+    "be the glue that holds the group together","run into an ex at the worst possible time",
+    "get a parking ticket tonight","still be friends with everyone in this room in 10 years",
+    "win a dance-off","accidentally like a photo from years ago while stalking someone",
+    "end up on the news","go home alone tonight","trip over their own feet tonight",
+    "accidentally reply-all to an email","get too emotional at a pub quiz",
+    "spend 3 hours choosing what to watch and then fall asleep","be the first to get married",
+    "have the most unread notifications right now","be caught singing to themselves in public",
+    "forget someone's name in this room within a year","get a standing ovation for something ridiculous",
+    "text their ex tonight","win an argument using made-up statistics","steal a shopping trolley as a joke",
+    "own the most useless gadgets","be on a first-name basis with their takeaway delivery driver",
+    "take the most bathroom selfies tonight","cry watching a commercial",
+    "show up to the wrong venue for an event","create an elaborate lie to avoid going somewhere",
+    "accidentally send a voice note instead of a text","be mistaken for staff at a restaurant",
+    "get into an argument with a self-checkout machine","be too generous and regret it",
+    "give unsolicited life advice","still use an old meme in conversation unironically",
+    "have a secret talent nobody knows about","fall in love on holiday",
+    "survive the longest without checking their phone","order something at a restaurant they can't pronounce",
+    "have the weirdest Google search history right now","forget the words in the middle of a toast",
+    "be the most overdressed tonight","be the most underdressed tonight",
+    "accidentally walk into a glass door","make a stranger laugh today",
+    "be the last to know about a piece of gossip","take the longest to get ready",
+    "have the most food in their bag right now","cancel plans the most",
+    "bring snacks to share without being asked","spend money on something completely pointless this week",
+    "be the most competitive about something trivial","sing the wrong lyrics confidently",
+    "quote a movie incorrectly and stand by it","be the most likely to adopt a wild animal",
+    "have the longest shower in the group","be the most likely to start a business and fail",
+    "fall asleep first tonight","be the most likely to become a teacher",
+    "have the most screen time today","make a dramatic exit from a bad date"
+  ];
+  let mltIdx = 0, mltOrder = [];
+
+  function mltInit() {
+    mltOrder = [...Array(MLT.length).keys()].sort(() => Math.random() - 0.5);
+    mltIdx = 0;
+    document.getElementById('mlt-spinner').style.display = 'flex';
+    document.getElementById('mlt-play').style.display = 'none';
+    document.getElementById('mlt-spin-result').classList.remove('show');
+    document.getElementById('mlt-start-btn').style.display = 'none';
+    document.getElementById('mlt-hint').textContent = 'Tap to spin';
+    document.getElementById('mlt-hint').style.opacity = '1';
+    document.getElementById('mlt-text').textContent = 'Tap the card to reveal';
+    document.getElementById('mlt-progress').textContent = `1 / ${MLT.length}`;
+    requestAnimationFrame(() => { initGameSpinner('mlt'); });
+  }
+  function mltNext() {
+    if (mltIdx >= MLT.length) return;
+    const card = document.getElementById('mlt-card');
+    card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');
+    document.getElementById('mlt-text').textContent = MLT[mltOrder[mltIdx]];
+    mltIdx++;
+    document.getElementById('mlt-progress').textContent = `${mltIdx} / ${MLT.length}`;
+    document.getElementById('mlt-next-btn').disabled = mltIdx >= MLT.length;
+  }
+  function mltPrev() {
+    if (mltIdx <= 1) return;
+    mltIdx -= 2; mltNext();
+  }
+
+  // ══════════════════════════════════════════
+  // TRUTH OR DARE — 100 truths + 100 dares
+  // ══════════════════════════════════════════
+  const TOD_TRUTH = [
+    "What's the most embarrassing thing you've done in public?",
+    "What's a secret you've never told anyone in this room?",
+    "Who here would you most want to kiss?",
+    "What's the biggest lie you've ever told?",
+    "Have you ever faked being sick to get out of something?",
+    "What's the most childish thing you still do?",
+    "Who was your worst kiss and why?",
+    "What's your most irrational fear?",
+    "Have you ever cheated in a relationship?",
+    "What's the most embarrassing thing on your phone right now?",
+    "What's a bad habit you haven't told anyone about?",
+    "Who in this room would you least want to be stuck on a desert island with?",
+    "What's the strangest dream you've had about someone in this room?",
+    "Have you ever stolen something?",
+    "What's your most shameful guilty pleasure?",
+    "What's the rudest thing you've ever said and got away with?",
+    "Have you ever been rejected and pretended it didn't happen?",
+    "What's something you've done drunk that you deeply regret?",
+    "Who was the last person you cried over?",
+    "What's the pettiest reason you've ended a friendship?",
+    "Have you ever ghosted someone you actually liked?",
+    "What's the most embarrassing thing your parents caught you doing?",
+    "What's a rumour about yourself you never corrected?",
+    "What's the biggest thing you've lied about on social media?",
+    "Have you ever talked badly about someone in this room?",
+    "What's the worst date you've ever been on?",
+    "Have you ever had feelings for a friend's partner?",
+    "What's one thing you'd be mortified if your family found out?",
+    "What's the most money you've spent on something completely useless?",
+    "Have you ever pretended to be drunker than you were?",
+    "What's a lie you've told that you got totally away with?",
+    "Who in this room do you think is the most attractive?",
+    "What's the longest you've gone without showering?",
+    "Have you ever read someone's messages without them knowing?",
+    "What's the most embarrassing thing you've searched on Google?",
+    "Have you ever lied about your job or education to impress someone?",
+    "What's the worst thing you've ever done to get out of trouble?",
+    "Who was your most regrettable hookup?",
+    "What's a personality trait you're secretly insecure about?",
+    "Have you ever pretended to like a gift you hated?",
+    "What's something you've done that you'd never admit to your parents?",
+    "Have you ever told a friend what you really think of their partner?",
+    "What's the most dramatic thing you've done after a breakup?",
+    "Who in your contacts would cause the most chaos if they texted your group chat?",
+    "What's the most embarrassing thing you did as a teenager?",
+    "Have you ever faked an orgasm?",
+    "What's one opinion you hold that most people would disagree with?",
+    "What's the worst thing you've ever said to someone in anger?",
+    "Have you ever walked out of a job without notice?",
+    "What's a secret you've been keeping for more than a year?",
+    "Have you ever done something illegal you've never admitted to?",
+    "What's the most you've ever drunk in one night?",
+    "Who is the last person you'd want to read your text messages?",
+    "Have you ever had a crush on someone in this room?",
+    "What's the biggest mistake you made in your last relationship?",
+    "Have you ever sent a message to the wrong person with embarrassing consequences?",
+    "What's something you do alone that you'd never admit to in public?",
+    "Have you ever flirted with someone to get something for free?",
+    "What's the most childish argument you've ever had?",
+    "Have you ever lied to your best friend to avoid helping them?",
+    "What's the biggest misunderstanding that changed a relationship for you?",
+    "Have you ever pretended not to see someone you know in public?",
+    "What's the most awkward situation you've been in on a date?",
+    "Have you ever cheated at something and never been caught?",
+    "What's one thing you've never told your closest friend?",
+    "Have you ever secretly wanted to be with someone else while in a relationship?",
+    "What's the worst thing you've ever done while drunk?",
+    "Have you ever spread a rumour and regretted it?",
+    "What's something about yourself you're working on secretly?",
+    "Have you ever cried in a bathroom at a party?",
+    "What's the most embarrassing autocorrect fail you've had?",
+    "Have you ever lied about your body count?",
+    "What's one thing you judge people for that you also secretly do?",
+    "Have you ever faked being asleep to avoid a conversation?",
+    "What's the most unhinged thing you've done after a breakup?",
+    "Have you ever said something mean about someone and they found out?",
+    "What's the worst gift you've ever given someone?",
+    "Have you ever been in a situation where you should have spoken up but didn't?",
+    "What's the biggest white lie you tell regularly?",
+    "Have you ever had a near-miss with the law?",
+    "What's the most embarrassing reason you've ever cried?",
+    "Have you ever done something just for the Instagram photo?",
+    "What's the most unfair advantage you've ever taken of someone?",
+    "Have you ever pretended to agree with someone just to keep the peace?",
+    "What's the longest you've let a misunderstanding go on without correcting it?",
+    "Have you ever gone through someone's bag or wallet?",
+    "What's the most ridiculous thing you've done to impress someone?",
+    "Have you ever let someone take the blame for something you did?",
+    "What's something you've done in the last week that you're not proud of?",
+    "Have you ever kissed someone you really shouldn't have?",
+    "What's the worst thing you've ever lied about on a first date?",
+    "Have you ever told someone you'd call them back knowing you never would?",
+    "What's your worst habit in a relationship?",
+    "Have you ever been jealous of someone in this room?",
+    "What's the most embarrassing voicemail you've ever left?",
+    "Have you ever pretended to have watched or read something you haven't?",
+    "What's something about your life that's different from how you present it online?",
+    "Have you ever walked in on something you really wish you hadn't?",
+    "What's the biggest regret of your last year?"
+  ];
+  const TOD_DARE = [
+    "Text your most recent contact 'I have a confession…' and wait for the reply",
+    "Do your best impression of someone in the room — keep going until we guess who",
+    "Let the group go through your camera roll for 30 seconds",
+    "Send a voice note to your ex saying you miss them",
+    "Do 20 push-ups right now",
+    "Let someone in the group post anything they want to your Instagram story",
+    "Call a family member and tell them you have big news — then say never mind",
+    "Speak in a foreign accent for the next 3 rounds",
+    "Let the group write anything they want on your forehead in marker",
+    "Do your best catwalk across the room",
+    "Show the group the last 5 photos you took",
+    "Serenade the person on your left",
+    "Let the group go through your messages for 60 seconds",
+    "Do a 60-second stand-up comedy routine about the group",
+    "Eat a spoonful of the spiciest condiment available",
+    "Let the group change a contact name in your phone",
+    "Act out a scene from your favourite movie — no talking",
+    "Do your best twerk for 30 seconds",
+    "Text your mum or dad 'I'm engaged' and show the reply",
+    "Let the person to your right go through your Spotify liked songs for 30 seconds",
+    "Do a handstand or cartwheel",
+    "Let the group pick an embarrassing photo to set as your lock screen for the rest of the night",
+    "Speak only in questions for the next 2 rounds",
+    "Give a dramatic reading of your most recent search history",
+    "Call the 5th contact in your phone and sing them happy birthday",
+    "Let the group dictate a caption and post it to your Instagram story right now",
+    "Do an impression of the person sitting to your right until they tell you to stop",
+    "Send a kissy face emoji to your most recent contact",
+    "Swap phones with the person to your left for the next 3 minutes",
+    "Post the last photo you took to your main feed right now",
+    "Do your best robot dance for 30 seconds",
+    "Let the group give you a new hairstyle using whatever is available",
+    "Call someone random in your contacts and pretend you're a doctor's office with test results",
+    "Text your boss or teacher 'we need to talk' and wait for the reply",
+    "Eat something without using your hands",
+    "Let the group draw a tattoo on your arm in pen",
+    "Talk without closing your mouth for the rest of the round",
+    "Pretend to be a news anchor and deliver tonight's events as breaking news",
+    "Let the person to your left go through your most recent emails for 1 minute",
+    "Do 10 star jumps while narrating what you're doing",
+    "Let the group look through your DMs on any social platform for 45 seconds",
+    "Imitate a celebrity of the group's choice for 2 full minutes",
+    "Text someone from your past 'you've been on my mind lately'",
+    "Let the group change your phone wallpaper to anything they choose",
+    "Do a convincing infomercial for something in the room",
+    "Let someone apply makeup to your face however they want",
+    "Hold a plank for 60 seconds",
+    "Eat a raw slice of onion",
+    "Let the group dare you to say something to a stranger online",
+    "Text your family group chat a selfie with the caption 'missed u guys'",
+    "Do your best impression of an animal for 1 full minute",
+    "Let the group pick an embarrassing song and you must dance to it",
+    "Read your most recent text conversation aloud in a dramatic voice",
+    "Change your bio on any social media to whatever the group decides for 1 hour",
+    "Go outside and compliment the first stranger you see",
+    "Let the group ask your contacts yes-or-no questions via text for 2 minutes",
+    "Speak only in rhymes for the next 5 minutes",
+    "Do the worm on the floor right now",
+    "Let the group choose what you must post on your main story in the next 60 seconds",
+    "Call a pizza place and order a pizza, then immediately cancel",
+    "Let the group put 3 ice cubes down the back of your shirt",
+    "Do a dramatic lip sync to a song of the group's choice",
+    "Text a random contact a single eggplant emoji and see what happens",
+    "Let the group choose your next phone background for the entire night",
+    "Stand outside for 2 minutes and wave at every car that passes",
+    "Let someone in the group control your next 3 text replies",
+    "Try to lick your elbow for 30 seconds",
+    "Let the group compose and send a tweet or post from your account",
+    "Speak in slow motion for the next round",
+    "Do your best fake crying scene — make it dramatic",
+    "Let the group decide what you eat or drink next",
+    "Whisper everything you say for the next 3 rounds",
+    "Take a selfie making the ugliest face possible and send it to 3 contacts",
+    "Let someone go through your Amazon or Uber Eats order history",
+    "Do your best impression of a strict teacher for 2 minutes",
+    "Text your most used contact 'I need to tell you something important' and leave them on read",
+    "Let the group choose a GIF to send to your most recent contact",
+    "Do 15 burpees without stopping",
+    "Moonwalk across the entire room",
+    "Stare into the eyes of the person opposite you without blinking — first to blink loses",
+    "Let the group style your hair however they want using whatever is on the table",
+    "Put your tongue on your nose and hold it there while someone takes a photo",
+    "Try to juggle 3 items from the room — you have 3 attempts",
+    "Stand up and give a 60-second speech about why you're the best person in the room",
+    "Do the chicken dance without music until someone tells you to stop",
+    "Let the group give you a terrible nickname to use for the rest of the night",
+    "Send a 'wrong number' text to your dad and see how far you can take the conversation",
+    "Close your eyes and let the group feed you one mystery item from the kitchen",
+    "Do a convincing evil laugh for 30 full seconds",
+    "Pretend you're being interviewed on a chat show and answer 3 questions the group asks",
+    "Speak in third person for the next 3 rounds",
+    "Let the group choreograph a 30-second dance and perform it",
+    "Take a 10-second video of yourself yelling 'I am amazing' and send it to your family group chat",
+    "Text the person you have the most messages with the word 'pickle' and nothing else",
+    "Sit in complete silence and don't react no matter what the group does for 60 seconds",
+    "Let the person to your right type and send one message to anyone in your contacts",
+    "Recite the alphabet backwards — you have two attempts",
+    "Let the group draw a moustache on your face and keep it for 3 more rounds"
+  ];
+
+  let todMode = 'truth', todTruthIdx = 0, todDareIdx = 0, todTruthOrder = [], todDareOrder = [];
+
+  function todInit() {
+    todTruthOrder = [...Array(TOD_TRUTH.length).keys()].sort(() => Math.random() - 0.5);
+    todDareOrder  = [...Array(TOD_DARE.length).keys()].sort(() => Math.random() - 0.5);
+    todTruthIdx = 0; todDareIdx = 0; todMode = 'truth';
+    document.getElementById('tod-spinner').style.display = 'flex';
+    document.getElementById('tod-play').style.display = 'none';
+    document.getElementById('tod-spin-result').classList.remove('show');
+    document.getElementById('tod-start-btn').style.display = 'none';
+    document.getElementById('tod-hint').textContent = 'Tap to spin';
+    document.getElementById('tod-hint').style.opacity = '1';
+    document.getElementById('tod-text').textContent = 'Tap the card to reveal';
+    requestAnimationFrame(() => { initGameSpinner('tod'); });
+    todSetMode('truth');
+  }
+  function todSetMode(mode) {
+    todMode = mode;
+    document.getElementById('tod-truth-tab').className = 'tod-mode-btn truth-btn' + (mode==='truth'?' active':'');
+    document.getElementById('tod-dare-tab').className  = 'tod-mode-btn dare-btn'  + (mode==='dare' ?' active':'');
+    document.getElementById('tod-eyebrow').textContent = mode === 'truth' ? 'Truth' : 'Dare';
+    const card = document.getElementById('tod-card');
+    card.className = 'pg-card tod-card ' + (mode==='truth'?'truth-mode':'dare-mode');
+    document.getElementById('tod-text').textContent = 'Tap the card to reveal';
+  }
+  function todNext() {
+    const card = document.getElementById('tod-card');
+    card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');
+    if (todMode === 'truth') {
+      document.getElementById('tod-text').textContent = TOD_TRUTH[todTruthOrder[todTruthIdx % TOD_TRUTH.length]];
+      todTruthIdx++;
+    } else {
+      document.getElementById('tod-text').textContent = TOD_DARE[todDareOrder[todDareIdx % TOD_DARE.length]];
+      todDareIdx++;
+    }
+  }
 </script>
 </body>
 </html>
