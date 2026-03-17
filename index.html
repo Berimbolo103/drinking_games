@@ -151,12 +151,9 @@
     font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
     padding: 3px 10px; border-radius: 20px; text-transform: uppercase;
   }
-  .badge-play {
-    background: var(--gold); color: #1a1200;
-  }
-  .badge-soon {
-    background: rgba(255,255,255,0.07); color: var(--text-muted);
-  }
+  .badge-play { background: var(--gold); color: #1a1200; }
+  .badge-soon { background: rgba(255,255,255,0.07); color: var(--text-muted); }
+  .badge-ref  { background: rgba(96,168,224,0.2); color: #60a8e0; }
   .game-arrow {
     font-size: 16px; color: var(--gold); opacity: 0.7;
     transition: opacity 0.2s, transform 0.2s;
@@ -523,10 +520,244 @@
   }
   .tod-mode-btn.truth-btn.active { background: #e06060; color: #fff; }
   .tod-mode-btn.dare-btn.active  { background: var(--gold); color: #1a1200; }
-  #nhie-spinner, #mlt-spinner, #tod-spinner {
+  #nhie-spinner, #mlt-spinner, #tod-spinner,
+  #wyr-spinner, #uop-spinner, #quiz-spinner, #cat-spinner,
+  #jenga-spinner, #trivia-spinner, #dare-spinner,
+  #hotseat-spinner, #ttl-spinner, #noscreen-spinner {
     display: flex; flex-direction: column; align-items: center;
     padding: 0.75rem 0 1.25rem; gap: 0.6rem; width: 100%;
   }
+
+  /* Would You Rather */
+  .wyr-mode-bar {
+    display: flex; margin: 1rem 1.25rem 0; gap: 4px;
+    background: var(--dark3); border-radius: 14px; padding: 4px;
+    border: 0.5px solid rgba(255,255,255,0.1);
+  }
+  .wyr-tab {
+    flex: 1; padding: 10px 8px; border-radius: 11px; border: none;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    font-family: 'Outfit', sans-serif; transition: all 0.2s;
+    background: none; color: var(--text-muted);
+  }
+  .wyr-tab.active { background: #d080d0; color: #fff; }
+  .wyr-card { gap: 0.75rem !important; }
+  .wyr-option {
+    font-size: clamp(15px, 4vw, 20px); color: var(--text);
+    line-height: 1.45; font-family: 'Outfit', sans-serif; font-weight: 500;
+    background: rgba(255,255,255,0.05); border-radius: 12px;
+    padding: 0.75rem 1rem; width: 100%; text-align: center;
+  }
+  .wyr-vs {
+    font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-muted); font-weight: 600;
+  }
+
+  /* Categories */
+  .cat-card { gap: 0.5rem !important; }
+  .cat-title {
+    font-size: clamp(22px, 6vw, 32px); font-family: 'Bebas Neue', sans-serif;
+    color: var(--text); letter-spacing: 0.04em; text-align: center;
+  }
+  .cat-example {
+    font-size: 13px; color: var(--text-muted); font-style: italic;
+  }
+
+  /* Reflex */
+  .reflex-arena {
+    display: flex; align-items: stretch; justify-content: space-between;
+    gap: 0.5rem; padding: 1rem 1.25rem; flex-wrap: wrap;
+  }
+  .reflex-player {
+    flex: 1; min-width: 100px; display: flex; flex-direction: column;
+    align-items: center; gap: 0.75rem;
+    background: var(--dark3); border-radius: 16px; padding: 1rem 0.75rem;
+    border: 0.5px solid rgba(255,255,255,0.08);
+  }
+  .reflex-name { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+  .reflex-score-box {
+    font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: var(--gold);
+    line-height: 1;
+  }
+  .reflex-btns { display: flex; gap: 6px; }
+  .reflex-btn {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--dark4); border: 1px solid rgba(255,255,255,0.12);
+    color: var(--text); font-size: 16px; font-weight: 700;
+    cursor: pointer; font-family: 'Outfit', sans-serif;
+    transition: all 0.15s;
+  }
+  .reflex-btn:hover { background: var(--gold); color: #1a1200; border-color: var(--gold); }
+  .reflex-btn.selected { background: var(--gold); color: #1a1200; border-color: var(--gold); }
+  .reflex-vs-box {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 8px; padding: 0.5rem;
+    min-width: 80px;
+  }
+  #reflex-status { font-size: 11px; color: var(--text-muted); text-align: center; line-height: 1.4; }
+  #reflex-total { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--text); }
+  .reflex-guess-area { padding: 0 1.25rem 1rem; text-align: center; }
+  .reflex-guess-label { font-size: 12px; color: var(--text-muted); margin-bottom: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .reflex-guess-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .reflex-guess-btn {
+    padding: 14px 28px; border-radius: 14px; font-size: 20px; font-weight: 700;
+    background: var(--dark3); border: 1px solid rgba(255,255,255,0.12);
+    color: var(--text); cursor: pointer; font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.06em; transition: all 0.15s;
+  }
+  .reflex-guess-btn:hover { background: var(--gold); color: #1a1200; border-color: var(--gold); }
+  .reflex-guess-btn.correct { background: #3d8a3d; border-color: #3d8a3d; color: #fff; }
+  .reflex-guess-btn.wrong   { background: var(--red); border-color: var(--red); color: #fff; }
+
+  /* Drunk Jenga */
+  .jenga-block {
+    margin: 0 1.25rem;
+    background: linear-gradient(135deg, #2a1a0e 0%, #3d2510 100%);
+    border: 2px solid #c08060;
+    border-radius: 16px; padding: 2.5rem 1.75rem;
+    min-height: clamp(180px, 40vw, 260px);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 1rem;
+    cursor: pointer; text-align: center;
+    transition: transform 0.15s;
+  }
+  .jenga-block:active { transform: scale(0.98); }
+  .jenga-block.flash { animation: pgFlash 0.3s ease; }
+  .jenga-icon { font-size: 36px; }
+  .jenga-rule { font-size: clamp(16px, 4.5vw, 22px); color: #f0d0a0; line-height: 1.5; font-family: 'Outfit', sans-serif; }
+
+  /* Trivia */
+  .trivia-card {
+    margin: 0 1.25rem;
+    background: var(--dark3); border-radius: 20px;
+    padding: 1.5rem 1.25rem;
+    border: 0.5px solid rgba(255,255,255,0.1);
+  }
+  .trivia-q {
+    font-size: clamp(16px, 4.5vw, 21px); color: var(--text);
+    line-height: 1.5; margin-bottom: 1.25rem; text-align: center;
+    font-family: 'Outfit', sans-serif;
+  }
+  .trivia-options { display: flex; flex-direction: column; gap: 8px; }
+  .trivia-opt {
+    padding: 12px 16px; border-radius: 12px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text); font-size: 15px; cursor: pointer;
+    font-family: 'Outfit', sans-serif; text-align: left;
+    transition: all 0.15s;
+  }
+  .trivia-opt:hover { background: rgba(255,255,255,0.1); }
+  .trivia-opt.correct { background: rgba(61,138,61,0.35); border-color: #3d8a3d; color: #90ee90; }
+  .trivia-opt.wrong   { background: rgba(192,41,43,0.3);  border-color: var(--red); color: #ff8080; }
+  .trivia-opt.reveal  { background: rgba(61,138,61,0.2);  border-color: #3d8a3d; }
+  .trivia-opt:disabled { cursor: default; }
+  .trivia-feedback {
+    text-align: center; font-size: 14px; min-height: 24px;
+    padding: 0.5rem 1.25rem; color: var(--text-muted);
+    font-style: italic;
+  }
+  .trivia-feedback.correct { color: #90ee90; }
+  .trivia-feedback.wrong   { color: #ff8080; }
+
+  /* Dare Roulette */
+  .dare-glow { border-color: rgba(224,96,96,0.4) !important; }
+
+  /* Hot Seat */
+  .hotseat-timer-wrap {
+    text-align: center; padding: 1rem 1.25rem 0.5rem;
+  }
+  .hotseat-timer {
+    font-family: 'Bebas Neue', sans-serif; font-size: 72px;
+    color: var(--gold); line-height: 1; transition: color 0.3s;
+  }
+  .hotseat-timer.urgent { color: var(--red-light); }
+  .hotseat-timer-label { font-size: 11px; color: var(--text-muted); letter-spacing: 0.12em; text-transform: uppercase; }
+
+  /* Two Truths & a Lie */
+  .ttl-instructions { margin: 0.85rem 1.25rem 0; display: flex; flex-direction: column; gap: 8px; }
+
+  /* Higher or Lower */
+  .hol-card-display {
+    margin: 0 1.25rem;
+    min-height: clamp(180px,44vw,260px);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hol-card-display svg, .hol-card-display playing-card { width: clamp(120px,38vw,180px); height: auto; display: block; border-radius: 12px; }
+  .hol-guess-row { display: flex; gap: 12px; padding: 0.85rem 1.25rem 0; justify-content: center; }
+  .hol-btn {
+    flex: 1; max-width: 160px; padding: 14px; border-radius: 16px;
+    font-size: 16px; font-weight: 700; cursor: pointer;
+    font-family: 'Outfit', sans-serif; border: none; transition: all 0.15s;
+  }
+  .hol-btn.higher { background: #3d8a3d; color: #fff; }
+  .hol-btn.lower  { background: #c0292b; color: #fff; }
+  .hol-btn:hover  { opacity: 0.85; transform: translateY(-2px); }
+  .hol-btn:disabled { opacity: 0.3; cursor: default; transform: none; }
+  .hol-feedback { text-align: center; font-size: 15px; font-weight: 600; min-height: 28px; padding: 0.5rem 1.25rem; }
+  .hol-feedback.correct { color: #90ee90; }
+  .hol-feedback.wrong   { color: #ff8080; }
+  .hol-feedback.same    { color: var(--gold); }
+
+  /* Ride the Bus */
+  .rtb-phase-bar { display: flex; gap: 4px; padding: 0.75rem 1.25rem 0; overflow-x: auto; }
+  .rtb-phase {
+    flex: 1; min-width: 60px; text-align: center;
+    font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-muted); padding: 6px 4px;
+    background: var(--dark3); border-radius: 8px;
+    border: 1px solid transparent; white-space: nowrap; transition: all 0.2s;
+  }
+  .rtb-phase.active { border-color: var(--gold); color: var(--gold); background: rgba(232,184,75,0.1); }
+  .rtb-phase.done   { border-color: rgba(61,138,61,0.5); color: #90ee90; background: rgba(61,138,61,0.1); }
+  .rtb-cards-row { display: flex; gap: 10px; justify-content: center; padding: 0.75rem 1.25rem 0; flex-wrap: wrap; }
+  .rtb-cards-row svg, .rtb-cards-row playing-card { width: clamp(70px,22vw,110px); height: auto; border-radius: 10px; display: block; }
+  .rtb-feedback { text-align: center; font-size: 15px; font-weight: 600; min-height: 28px; padding: 0.5rem 1.25rem; }
+  .rtb-feedback.correct { color: #90ee90; }
+  .rtb-feedback.wrong   { color: #ff8080; }
+  .rtb-btn-row { display: flex; gap: 10px; justify-content: center; padding: 0.5rem 1.25rem 0; flex-wrap: wrap; }
+  .rtb-choice-btn {
+    padding: 12px 20px; border-radius: 14px; font-size: 15px; font-weight: 600;
+    cursor: pointer; font-family: 'Outfit', sans-serif;
+    border: 1px solid rgba(255,255,255,0.15); background: var(--dark3);
+    color: var(--text); transition: all 0.15s; flex: 1; max-width: 140px;
+  }
+  .rtb-choice-btn:hover { background: rgba(255,255,255,0.1); }
+  .rtb-choice-btn.sel-correct { background: #3d8a3d; border-color: #3d8a3d; color: #fff; }
+  .rtb-choice-btn.sel-wrong   { background: #c0292b; border-color: #c0292b; color: #fff; }
+  .rtb-choice-btn.reveal      { background: rgba(61,138,61,0.2); border-color: #3d8a3d; }
+  .ttl-step {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 13px; color: var(--text-muted); line-height: 1.5;
+  }
+  .ttl-num {
+    min-width: 24px; height: 24px; border-radius: 50%;
+    background: var(--dark4); border: 1px solid rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: var(--text-muted); flex-shrink: 0;
+  }
+
+  /* No Screen Needed */
+  .noscreen-list {
+    padding: 1rem 1.25rem 2rem;
+    display: flex; flex-direction: column; gap: 12px;
+    overflow-y: auto;
+  }
+  .ns-card {
+    background: var(--dark3); border-radius: 16px;
+    padding: 1.25rem; border: 0.5px solid rgba(255,255,255,0.08);
+  }
+  .ns-label {
+    font-size: 16px; font-weight: 600; color: var(--text);
+    font-family: 'Outfit', sans-serif; margin-bottom: 3px;
+  }
+  .ns-tag {
+    font-size: 11px; color: var(--text-muted); margin-bottom: 10px;
+    letter-spacing: 0.05em;
+  }
+  .ns-rule {
+    font-size: 14px; color: var(--text-muted); line-height: 1.6;
+  }
+  .ns-rule strong { color: var(--text); font-weight: 600; }
 </style>
 </head>
 <body>
@@ -549,8 +780,8 @@
       <div class="game-card featured" onclick="showROF()">
         <div class="game-number">01</div>
         <div class="game-info">
-          <div class="game-name">Kings / Ring of Fire</div>
-          <div class="game-tag">Cards · 3–10 players · All night</div>
+          <div class="game-name">Ring of Fire / Circle of Death</div>
+          <div class="game-tag">Cards · 3–10 players · All night long</div>
         </div>
         <span class="game-badge badge-play">Play</span>
         <span class="game-arrow">›</span>
@@ -586,13 +817,124 @@
         <span class="game-arrow">›</span>
       </div>
 
-      <div class="game-card locked">
+      <div class="game-card featured" onclick="showGame('wyr')">
         <div class="game-number">05</div>
         <div class="game-info">
-          <div class="game-name">Two Truths & a Lie</div>
-          <div class="game-tag">Bluffing · 4+ players · Get to know each other</div>
+          <div class="game-name">Would You Rather / This or That</div>
+          <div class="game-tag">Choices · 2+ players · No right answer</div>
         </div>
-        <span class="game-badge badge-soon">Soon</span>
+        <span class="game-badge badge-play">Play</span>
+        <span class="game-arrow">›</span>
+      </div>
+
+      <div class="game-card featured" onclick="showGame('uop')">
+        <div class="game-number">06</div>
+        <div class="game-info">
+          <div class="game-name">Unpopular Opinion</div>
+          <div class="game-tag">Hot takes · 3+ players · Debate ensues</div>
+        </div>
+        <span class="game-badge badge-play">Play</span>
+        <span class="game-arrow">›</span>
+      </div>
+
+      <div class="game-card featured" onclick="showGame('quiz')">
+        <div class="game-number">07</div>
+        <div class="game-info">
+          <div class="game-name">Friend / Couple Quiz</div>
+          <div class="game-tag">Questions · 4+ players · How well do you know them?</div>
+        </div>
+        <span class="game-badge badge-play">Play</span>
+        <span class="game-arrow">›</span>
+      </div>
+
+      <div class="game-card featured" onclick="showGame('cat')">
+        <div class="game-number">08</div>
+        <div class="game-info">
+          <div class="game-name">Categories</div>
+          <div class="game-tag">Word game · 3+ players · First to fail drinks</div>
+        </div>
+        <span class="game-badge badge-play">Play</span>
+        <span class="game-arrow">›</span>
+      </div>
+
+      <div class="game-card featured" onclick="showGame('jenga')">
+        <div class="game-number">09</div>
+        <div class="game-info">
+          <div class="game-name">Drunk Jenga Rules</div>
+          <div class="game-tag">Party · 2+ players · Pull a block, face a rule</div>
+        </div>
+        <span class="game-badge badge-play">Play</span>
+        <span class="game-arrow">›</span>
+      </div>
+
+      <div class="game-card featured" onclick="showGame('trivia')">
+        <div class="game-number">10</div>
+        <div class="game-info">
+          <div class="game-name">Trivia Shots</div>
+          <div class="game-tag">Knowledge · 2+ players · Wrong answer drinks</div>
+        </div>
+        <span class="game-badge badge-play">Play</span>
+        <span class="game-arrow">›</span>
+      </div>
+
+      <div class="game-card featured" onclick="showGame('dare')">
+        <div class="game-number">11</div>
+        <div class="game-info">
+          <div class="game-name">Dare Roulette</div>
+          <div class="game-tag">Dares only · 2+ players · No truths allowed</div>
+        </div>
+        <span class="game-badge badge-play">Play</span>
+        <span class="game-arrow">›</span>
+      </div>
+
+      <div class="game-card featured" onclick="showGame('hotseat')">
+        <div class="game-number">12</div>
+        <div class="game-info">
+          <div class="game-name">Hot Seat</div>
+          <div class="game-tag">Interrogation · 3+ players · 60-second grilling</div>
+        </div>
+        <span class="game-badge badge-play">Play</span>
+        <span class="game-arrow">›</span>
+      </div>
+
+      <div class="game-card featured" onclick="showGame('ttl')">
+        <div class="game-number">13</div>
+        <div class="game-info">
+          <div class="game-name">Two Truths & a Lie</div>
+          <div class="game-tag">Bluffing · 3+ players · Guess the lie</div>
+        </div>
+        <span class="game-badge badge-play">Play</span>
+        <span class="game-arrow">›</span>
+      </div>
+
+      <div class="game-card featured" onclick="showGame('hol')">
+        <div class="game-number">14</div>
+        <div class="game-info">
+          <div class="game-name">Higher or Lower</div>
+          <div class="game-tag">Cards · 2–6 players · Guess the next card</div>
+        </div>
+        <span class="game-badge badge-play">Play</span>
+        <span class="game-arrow">›</span>
+      </div>
+
+      <div class="game-card featured" onclick="showGame('rtb')">
+        <div class="game-number">15</div>
+        <div class="game-info">
+          <div class="game-name">Ride the Bus</div>
+          <div class="game-tag">Cards · 2–6 players · Survive 4 rounds</div>
+        </div>
+        <span class="game-badge badge-play">Play</span>
+        <span class="game-arrow">›</span>
+      </div>
+
+      <div class="game-card featured" onclick="showGame('noscreen')">
+        <div class="game-number">16</div>
+        <div class="game-info">
+          <div class="game-name">No Screen Needed 🎲</div>
+          <div class="game-tag">Rules only · Physical games · Just people & drinks</div>
+        </div>
+        <span class="game-badge badge-ref">Rules</span>
+        <span class="game-arrow">›</span>
       </div>
 
     </div>
@@ -607,7 +949,7 @@
 <div id="rof" class="page">
   <div class="rof-header">
     <button class="back-btn" onclick="showHome()">&#8592; Games</button>
-    <div class="rof-logo">Ring of Fire</div>
+    <div class="rof-logo">Ring of Fire / Circle of Death</div>
     <div class="king-tracker">
       <div class="king-pip" id="kp1"></div>
       <div class="king-pip" id="kp2"></div>
@@ -741,6 +1083,7 @@
     <div class="pg-drink-rule">Everyone who <strong>HAS</strong> done it drinks 🍺</div>
     <div class="pg-nav">
       <button class="pg-btn sec" onclick="nhiePrev()">&#8592; Back</button>
+      <button class="pg-btn sec" onclick="nhieShuffle()">🔀</button>
       <div class="pg-progress" id="nhie-progress">1 / 100</div>
       <button class="pg-btn gold" id="nhie-next-btn" onclick="nhieNext()">Next &#8594;</button>
     </div>
@@ -776,6 +1119,7 @@
     <div class="pg-drink-rule">Everyone points at the most likely person — they drink once per finger 🍺</div>
     <div class="pg-nav">
       <button class="pg-btn sec" onclick="mltPrev()">&#8592; Back</button>
+      <button class="pg-btn sec" onclick="mltShuffle()">🔀</button>
       <div class="pg-progress" id="mlt-progress">1 / 100</div>
       <button class="pg-btn gold" id="mlt-next-btn" onclick="mltNext()">Next &#8594;</button>
     </div>
@@ -813,8 +1157,460 @@
     </div>
     <div class="pg-drink-rule">Refuse a truth or dare? Take 3 sips 🍺</div>
     <div class="pg-nav">
-      <div></div>
+      <button class="pg-btn sec" onclick="todShuffle()">🔀 Shuffle</button>
       <button class="pg-btn gold" onclick="todNext()">Next &#8594;</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ 05 WOULD YOU RATHER / THIS OR THAT ═══ -->
+<div id="wyr" class="page">
+  <div class="game-header">
+    <button class="back-btn" onclick="showHome()">&#8592; Games</button>
+    <div class="game-logo" style="color:#d080d0;">Would You Rather</div>
+    <div class="card-counter" id="wyr-counter"></div>
+  </div>
+  <div id="wyr-spinner">
+    <div class="spinner-intro">
+      <div class="spinner-eyebrow">Before you begin</div>
+      <div class="spinner-title">Who goes first?</div>
+      <div class="spinner-sub">Tap the arrow to spin</div>
+    </div>
+    <div class="spin-area"><canvas id="wyr-canvas" onclick="spinGame('wyr')"></canvas><div class="spin-hint" id="wyr-hint">Tap to spin</div></div>
+    <div id="wyr-spin-result" class="spin-result"></div>
+    <button class="start-game-btn" id="wyr-start-btn" onclick="startGamePlay('wyr')" style="display:none">Start game ›</button>
+    <button class="skip-spinner-btn" onclick="startGamePlay('wyr')">Skip</button>
+  </div>
+  <div id="wyr-play" style="display:none">
+    <div class="wyr-mode-bar">
+      <button class="wyr-tab active" id="wyr-wyr-tab" onclick="wyrSetMode('wyr')">Would You Rather</button>
+      <button class="wyr-tab" id="wyr-tot-tab" onclick="wyrSetMode('tot')">This or That</button>
+    </div>
+    <div class="pg-card wyr-card" id="wyr-card" onclick="wyrNext()">
+      <div class="pg-tag" id="wyr-tag">Would You Rather</div>
+      <div class="wyr-option" id="wyr-a"></div>
+      <div class="wyr-vs">or</div>
+      <div class="wyr-option" id="wyr-b"></div>
+    </div>
+    <div class="pg-drink-rule">Everyone picks their answer — <strong>minority</strong> drinks 🍺</div>
+    <div class="pg-nav">
+      <button class="pg-btn sec" onclick="wyrPrev()">&#8592; Back</button>
+      <button class="pg-btn sec" onclick="wyrShuffle()">🔀</button>
+      <div class="pg-progress" id="wyr-progress">1 / 100</div>
+      <button class="pg-btn gold" onclick="wyrNext()">Next &#8594;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 06 UNPOPULAR OPINION ═══ -->
+<div id="uop" class="page">
+  <div class="game-header">
+    <button class="back-btn" onclick="showHome()">&#8592; Games</button>
+    <div class="game-logo" style="color:#e0a060;">Unpopular Opinion</div>
+    <div class="card-counter" id="uop-counter"></div>
+  </div>
+  <div id="uop-spinner">
+    <div class="spinner-intro">
+      <div class="spinner-eyebrow">Before you begin</div>
+      <div class="spinner-title">Who goes first?</div>
+      <div class="spinner-sub">Tap the arrow to spin</div>
+    </div>
+    <div class="spin-area"><canvas id="uop-canvas" onclick="spinGame('uop')"></canvas><div class="spin-hint" id="uop-hint">Tap to spin</div></div>
+    <div id="uop-spin-result" class="spin-result"></div>
+    <button class="start-game-btn" id="uop-start-btn" onclick="startGamePlay('uop')" style="display:none">Start game ›</button>
+    <button class="skip-spinner-btn" onclick="startGamePlay('uop')">Skip</button>
+  </div>
+  <div id="uop-play" style="display:none">
+    <div class="pg-eyebrow">Hot Take 🔥</div>
+    <div class="pg-card" id="uop-card" onclick="uopNext()">
+      <div class="pg-tag">tap to reveal</div>
+      <div class="pg-text" id="uop-text">Tap the card</div>
+    </div>
+    <div class="pg-drink-rule">Everyone who <strong>agrees</strong> raises their hand — <strong>minority</strong> drinks 🍺</div>
+    <div class="pg-nav">
+      <button class="pg-btn sec" onclick="uopPrev()">&#8592; Back</button>
+      <button class="pg-btn sec" onclick="uopShuffle()">🔀</button>
+      <div class="pg-progress" id="uop-progress">1 / 100</div>
+      <button class="pg-btn gold" onclick="uopNext()">Next &#8594;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 07 FRIEND / COUPLE QUIZ ═══ -->
+<div id="quiz" class="page">
+  <div class="game-header">
+    <button class="back-btn" onclick="showHome()">&#8592; Games</button>
+    <div class="game-logo" style="color:#e06060;">Friend Quiz</div>
+    <div class="card-counter" id="quiz-counter"></div>
+  </div>
+  <div id="quiz-spinner">
+    <div class="spinner-intro">
+      <div class="spinner-eyebrow">Before you begin</div>
+      <div class="spinner-title">Who goes first?</div>
+      <div class="spinner-sub">Tap the arrow to spin</div>
+    </div>
+    <div class="spin-area"><canvas id="quiz-canvas" onclick="spinGame('quiz')"></canvas><div class="spin-hint" id="quiz-hint">Tap to spin</div></div>
+    <div id="quiz-spin-result" class="spin-result"></div>
+    <button class="start-game-btn" id="quiz-start-btn" onclick="startGamePlay('quiz')" style="display:none">Start game ›</button>
+    <button class="skip-spinner-btn" onclick="startGamePlay('quiz')">Skip</button>
+  </div>
+  <div id="quiz-play" style="display:none">
+    <div class="pg-eyebrow">About someone in the group…</div>
+    <div class="pg-card" id="quiz-card" onclick="quizNext()">
+      <div class="pg-tag">tap to reveal</div>
+      <div class="pg-text" id="quiz-text">Tap the card</div>
+    </div>
+    <div class="pg-drink-rule">The person it's about answers — <strong>wrong answers</strong> drink 🍺</div>
+    <div class="pg-nav">
+      <button class="pg-btn sec" onclick="quizPrev()">&#8592; Back</button>
+      <button class="pg-btn sec" onclick="quizShuffle()">🔀</button>
+      <div class="pg-progress" id="quiz-progress">1 / 80</div>
+      <button class="pg-btn gold" onclick="quizNext()">Next &#8594;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 08 CATEGORIES ═══ -->
+<div id="cat" class="page">
+  <div class="game-header">
+    <button class="back-btn" onclick="showHome()">&#8592; Games</button>
+    <div class="game-logo" style="color:#80d080;">Categories</div>
+    <div class="card-counter" id="cat-counter"></div>
+  </div>
+  <div id="cat-spinner">
+    <div class="spinner-intro">
+      <div class="spinner-eyebrow">Before you begin</div>
+      <div class="spinner-title">Who goes first?</div>
+      <div class="spinner-sub">Tap the arrow to spin</div>
+    </div>
+    <div class="spin-area"><canvas id="cat-canvas" onclick="spinGame('cat')"></canvas><div class="spin-hint" id="cat-hint">Tap to spin</div></div>
+    <div id="cat-spin-result" class="spin-result"></div>
+    <button class="start-game-btn" id="cat-start-btn" onclick="startGamePlay('cat')" style="display:none">Start game ›</button>
+    <button class="skip-spinner-btn" onclick="startGamePlay('cat')">Skip</button>
+  </div>
+  <div id="cat-play" style="display:none">
+    <div class="pg-eyebrow">Category</div>
+    <div class="pg-card cat-card" id="cat-card" onclick="catNext()">
+      <div class="pg-tag">this round's category</div>
+      <div class="cat-title" id="cat-title">Tap to reveal</div>
+      <div class="cat-example" id="cat-example"></div>
+    </div>
+    <div class="pg-drink-rule">Go round naming things in the category. <strong>Hesitate or repeat</strong> = drink 🍺</div>
+    <div class="pg-nav">
+      <button class="pg-btn sec" onclick="catPrev()">&#8592; Back</button>
+      <button class="pg-btn sec" onclick="catShuffle()">🔀</button>
+      <div class="pg-progress" id="cat-progress">1 / 80</div>
+      <button class="pg-btn gold" onclick="catNext()">Next category &#8594;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 09 DRUNK JENGA ═══ -->
+<div id="jenga" class="page">
+  <div class="game-header">
+    <button class="back-btn" onclick="showHome()">&#8592; Games</button>
+    <div class="game-logo" style="color:#c08060;">Drunk Jenga</div>
+    <div class="card-counter" id="jenga-counter"></div>
+  </div>
+  <div id="jenga-spinner">
+    <div class="spinner-intro">
+      <div class="spinner-eyebrow">Before you begin</div>
+      <div class="spinner-title">Who pulls first?</div>
+      <div class="spinner-sub">Tap the arrow to spin</div>
+    </div>
+    <div class="spin-area"><canvas id="jenga-canvas" onclick="spinGame('jenga')"></canvas><div class="spin-hint" id="jenga-hint">Tap to spin</div></div>
+    <div id="jenga-spin-result" class="spin-result"></div>
+    <button class="start-game-btn" id="jenga-start-btn" onclick="startGamePlay('jenga')" style="display:none">Start game ›</button>
+    <button class="skip-spinner-btn" onclick="startGamePlay('jenga')">Skip</button>
+  </div>
+  <div id="jenga-play" style="display:none">
+    <div class="pg-eyebrow">Pull a block, face a rule</div>
+    <div class="jenga-block" id="jenga-card" onclick="jengaNext()">
+      <div class="jenga-icon">🧱</div>
+      <div class="jenga-rule" id="jenga-rule">Tap to pull a block</div>
+    </div>
+    <div class="pg-drink-rule">Pull a Jenga block — carry out the rule or <strong>drink 2</strong> 🍺</div>
+    <div class="pg-nav">
+      <button class="pg-btn sec" onclick="jengaShuffle()">🔀 Shuffle</button>
+      <button class="pg-btn gold" onclick="jengaNext()">Pull a block &#8594;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 11 TRIVIA SHOTS ═══ -->
+<div id="trivia" class="page">
+  <div class="game-header">
+    <button class="back-btn" onclick="showHome()">&#8592; Games</button>
+    <div class="game-logo" style="color:#60d0d0;">Trivia Shots</div>
+    <div class="card-counter" id="trivia-counter"></div>
+  </div>
+  <div id="trivia-spinner">
+    <div class="spinner-intro">
+      <div class="spinner-eyebrow">Before you begin</div>
+      <div class="spinner-title">Who goes first?</div>
+      <div class="spinner-sub">Tap the arrow to spin</div>
+    </div>
+    <div class="spin-area"><canvas id="trivia-canvas" onclick="spinGame('trivia')"></canvas><div class="spin-hint" id="trivia-hint">Tap to spin</div></div>
+    <div id="trivia-spin-result" class="spin-result"></div>
+    <button class="start-game-btn" id="trivia-start-btn" onclick="startGamePlay('trivia')" style="display:none">Start game ›</button>
+    <button class="skip-spinner-btn" onclick="startGamePlay('trivia')">Skip</button>
+  </div>
+  <div id="trivia-play" style="display:none">
+    <div class="pg-eyebrow" id="trivia-category">General Knowledge</div>
+    <div class="trivia-card" id="trivia-qcard">
+      <div class="trivia-q" id="trivia-q">Tap Start to begin</div>
+      <div class="trivia-options" id="trivia-options"></div>
+    </div>
+    <div id="trivia-feedback" class="trivia-feedback"></div>
+    <div class="pg-nav">
+      <div></div>
+      <button class="pg-btn gold" id="trivia-next-btn" onclick="triviaNext()">Next question &#8594;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 12 DARE ROULETTE ═══ -->
+<div id="dare" class="page">
+  <div class="game-header">
+    <button class="back-btn" onclick="showHome()">&#8592; Games</button>
+    <div class="game-logo" style="color:#e06060;">Dare Roulette</div>
+    <div class="card-counter" id="dare-counter"></div>
+  </div>
+  <div id="dare-spinner">
+    <div class="spinner-intro">
+      <div class="spinner-eyebrow">Before you begin</div>
+      <div class="spinner-title">Who spins first?</div>
+      <div class="spinner-sub">Tap the arrow to spin</div>
+    </div>
+    <div class="spin-area"><canvas id="dare-canvas" onclick="spinGame('dare')"></canvas><div class="spin-hint" id="dare-hint">Tap to spin</div></div>
+    <div id="dare-spin-result" class="spin-result"></div>
+    <button class="start-game-btn" id="dare-start-btn" onclick="startGamePlay('dare')" style="display:none">Start game ›</button>
+    <button class="skip-spinner-btn" onclick="startGamePlay('dare')">Skip</button>
+  </div>
+  <div id="dare-play" style="display:none">
+    <div class="pg-eyebrow">Your dare is…</div>
+    <div class="pg-card dare-glow" id="dare-card" onclick="dareNext()">
+      <div class="pg-tag">tap to spin</div>
+      <div class="pg-text" id="dare-text">Tap to get your dare</div>
+    </div>
+    <div class="pg-drink-rule">Refuse the dare? Take <strong>3 sips</strong> 🍺</div>
+    <div class="pg-nav">
+      <button class="pg-btn sec" onclick="dareShuffle()">🔀 Shuffle</button>
+      <button class="pg-btn gold" onclick="dareNext()">Spin dare &#8594;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 13 HOT SEAT ═══ -->
+<div id="hotseat" class="page">
+  <div class="game-header">
+    <button class="back-btn" onclick="showHome()">&#8592; Games</button>
+    <div class="game-logo" style="color:#e8b84b;">Hot Seat 🔥</div>
+    <div class="card-counter" id="hotseat-counter"></div>
+  </div>
+  <div id="hotseat-spinner">
+    <div class="spinner-intro">
+      <div class="spinner-eyebrow">Before you begin</div>
+      <div class="spinner-title">Who's in the hot seat?</div>
+      <div class="spinner-sub">Tap the arrow to decide</div>
+    </div>
+    <div class="spin-area"><canvas id="hotseat-canvas" onclick="spinGame('hotseat')"></canvas><div class="spin-hint" id="hotseat-hint">Tap to spin</div></div>
+    <div id="hotseat-spin-result" class="spin-result"></div>
+    <button class="start-game-btn" id="hotseat-start-btn" onclick="startGamePlay('hotseat')" style="display:none">Start game ›</button>
+    <button class="skip-spinner-btn" onclick="startGamePlay('hotseat')">Skip</button>
+  </div>
+  <div id="hotseat-play" style="display:none">
+    <div class="hotseat-timer-wrap">
+      <div class="hotseat-timer" id="hotseat-timer">60</div>
+      <div class="hotseat-timer-label">seconds remaining</div>
+    </div>
+    <div class="pg-card" id="hotseat-card" onclick="hotseatNext()">
+      <div class="pg-tag">rapid fire question</div>
+      <div class="pg-text" id="hotseat-q">Tap Start to begin the grilling</div>
+    </div>
+    <div class="pg-drink-rule">Refuse to answer or hesitate? <strong>Drink</strong> 🍺</div>
+    <div class="pg-nav">
+      <button class="pg-btn sec" id="hotseat-start-round" onclick="hotseatStart()">Start round</button>
+      <button class="pg-btn gold" onclick="hotseatNext()">Next &#8594;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 14 TWO TRUTHS & A LIE ═══ -->
+<div id="ttl" class="page">
+  <div class="game-header">
+    <button class="back-btn" onclick="showHome()">&#8592; Games</button>
+    <div class="game-logo" style="color:#a0c060;">Two Truths & a Lie</div>
+    <div class="card-counter" id="ttl-counter"></div>
+  </div>
+  <div id="ttl-spinner">
+    <div class="spinner-intro">
+      <div class="spinner-eyebrow">Before you begin</div>
+      <div class="spinner-title">Who goes first?</div>
+      <div class="spinner-sub">Tap the arrow to spin</div>
+    </div>
+    <div class="spin-area"><canvas id="ttl-canvas" onclick="spinGame('ttl')"></canvas><div class="spin-hint" id="ttl-hint">Tap to spin</div></div>
+    <div id="ttl-spin-result" class="spin-result"></div>
+    <button class="start-game-btn" id="ttl-start-btn" onclick="startGamePlay('ttl')" style="display:none">Start game ›</button>
+    <button class="skip-spinner-btn" onclick="startGamePlay('ttl')">Skip</button>
+  </div>
+  <div id="ttl-play" style="display:none">
+    <div class="pg-eyebrow">Inspiration prompt…</div>
+    <div class="pg-card" id="ttl-card" onclick="ttlNext()">
+      <div class="pg-tag">use this as inspiration</div>
+      <div class="pg-text" id="ttl-text">Tap to get a prompt</div>
+    </div>
+    <div class="ttl-instructions">
+      <div class="ttl-step"><span class="ttl-num">1</span>The current player makes up 2 truths and 1 lie based on the prompt</div>
+      <div class="ttl-step"><span class="ttl-num">2</span>Everyone else votes on which is the lie</div>
+      <div class="ttl-step"><span class="ttl-num">3</span>Wrong guessers drink — if everyone guesses right, the storyteller drinks</div>
+    </div>
+    <div class="pg-nav">
+      <button class="pg-btn sec" onclick="ttlPrev()">&#8592; Back</button>
+      <button class="pg-btn sec" onclick="ttlShuffle()">🔀</button>
+      <div class="pg-progress" id="ttl-progress">1 / 60</div>
+      <button class="pg-btn gold" onclick="ttlNext()">Next &#8594;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 14 HIGHER OR LOWER ═══ -->
+<div id="hol" class="page">
+  <div class="game-header">
+    <button class="back-btn" onclick="showHome()">&#8592; Games</button>
+    <div class="game-logo" style="color:#60d0d0;">Higher or Lower</div>
+    <div class="card-counter" id="hol-counter"></div>
+  </div>
+  <div id="hol-spinner">
+    <div class="spinner-intro">
+      <div class="spinner-eyebrow">Before you begin</div>
+      <div class="spinner-title">Who goes first?</div>
+      <div class="spinner-sub">Tap the arrow to spin</div>
+    </div>
+    <div class="spin-area"><canvas id="hol-canvas" onclick="spinGame('hol')"></canvas><div class="spin-hint" id="hol-hint">Tap to spin</div></div>
+    <div id="hol-spin-result" class="spin-result"></div>
+    <button class="start-game-btn" id="hol-start-btn" onclick="startGamePlay('hol')" style="display:none">Start game ›</button>
+    <button class="skip-spinner-btn" onclick="startGamePlay('hol')">Skip</button>
+  </div>
+  <div id="hol-play" style="display:none">
+    <div class="pg-eyebrow">Current card</div>
+    <div class="hol-card-display" id="hol-current-card"></div>
+    <div class="hol-guess-row">
+      <button class="hol-btn lower" id="hol-lower" onclick="holGuess('lower')">⬇ Lower</button>
+      <button class="hol-btn higher" id="hol-higher" onclick="holGuess('higher')">⬆ Higher</button>
+    </div>
+    <div class="hol-feedback" id="hol-feedback"></div>
+    <div class="pg-drink-rule" id="hol-rule">Guess wrong = drink 🍺 · Same value = drink and flip again</div>
+    <div class="pg-nav">
+      <button class="pg-btn sec" onclick="holShuffle()">🔀 Shuffle</button>
+      <div class="pg-progress" id="hol-progress">0 / 52</div>
+      <button class="pg-btn gold" onclick="holNext()">Next card &#8594;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 15 RIDE THE BUS ═══ -->
+<div id="rtb" class="page">
+  <div class="game-header">
+    <button class="back-btn" onclick="showHome()">&#8592; Games</button>
+    <div class="game-logo" style="color:#e0a060;">Ride the Bus</div>
+    <div class="card-counter" id="rtb-counter"></div>
+  </div>
+  <div id="rtb-spinner">
+    <div class="spinner-intro">
+      <div class="spinner-eyebrow">Before you begin</div>
+      <div class="spinner-title">Who goes first?</div>
+      <div class="spinner-sub">Tap the arrow to spin</div>
+    </div>
+    <div class="spin-area"><canvas id="rtb-canvas" onclick="spinGame('rtb')"></canvas><div class="spin-hint" id="rtb-hint">Tap to spin</div></div>
+    <div id="rtb-spin-result" class="spin-result"></div>
+    <button class="start-game-btn" id="rtb-start-btn" onclick="startGamePlay('rtb')" style="display:none">Start game ›</button>
+    <button class="skip-spinner-btn" onclick="startGamePlay('rtb')">Skip</button>
+  </div>
+  <div id="rtb-play" style="display:none">
+    <div class="rtb-phase-bar">
+      <div class="rtb-phase" id="rtb-p1">1. Red / Black</div>
+      <div class="rtb-phase" id="rtb-p2">2. Higher / Lower</div>
+      <div class="rtb-phase" id="rtb-p3">3. In / Out</div>
+      <div class="rtb-phase" id="rtb-p4">4. Suit</div>
+    </div>
+    <div class="pg-eyebrow" id="rtb-question-label">Round 1</div>
+    <div class="rtb-cards-row" id="rtb-cards-row"></div>
+    <div class="rtb-feedback" id="rtb-feedback"></div>
+    <div class="rtb-btn-row" id="rtb-btn-row"></div>
+    <div class="pg-drink-rule" id="rtb-drink-label">Wrong = 1 sip 🍺</div>
+    <div class="pg-nav">
+      <button class="pg-btn sec" onclick="rtbShuffle()">🔀 Shuffle</button>
+      <div class="pg-progress" id="rtb-progress"></div>
+      <button class="pg-btn gold" id="rtb-next" onclick="rtbNext()" style="display:none">Next &#8594;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 16 NO SCREEN NEEDED ═══ -->
+<div id="noscreen" class="page">
+  <div class="game-header">
+    <button class="back-btn" onclick="showHome()">&#8592; Games</button>
+    <div class="game-logo" style="color:#8080e0;">No Screen Needed 🎲</div>
+    <div></div>
+  </div>
+  <div class="noscreen-list">
+    <div class="ns-card">
+      <div class="ns-label">A — Buzz / FizzBuzz</div>
+      <div class="ns-tag">3+ players · Verbal · Any drink</div>
+      <div class="ns-rule">Count around the circle. Replace multiples of 7 with <strong>"Buzz"</strong>. In FizzBuzz: multiples of 3 = <strong>Fizz</strong>, multiples of 5 = <strong>Buzz</strong>, multiples of 15 = <strong>FizzBuzz</strong>. Say the wrong thing or hesitate? Drink and restart from 1.</div>
+    </div>
+    <div class="ns-card">
+      <div class="ns-label">B — Rhyme Time</div>
+      <div class="ns-tag">3+ players · Verbal · Any drink</div>
+      <div class="ns-rule">One person says a word. Go around the circle — each person must say a word that rhymes. No repeats. Hesitate, fail to rhyme, or repeat = drink and the next person picks a new word.</div>
+    </div>
+    <div class="ns-card">
+      <div class="ns-label">C — 21</div>
+      <div class="ns-tag">3+ players · Verbal · Any drink</div>
+      <div class="ns-rule">Count to 21 around the circle. You can say 1, 2, or 3 numbers per turn. Whoever says 21 must drink AND sets a new rule (e.g. say 7 as "banana", reverse direction at 11). Rules stack every round.</div>
+    </div>
+    <div class="ns-card">
+      <div class="ns-label">D — Snap Drinking</div>
+      <div class="ns-tag">2–6 players · Needs cards · Any drink</div>
+      <div class="ns-rule">Play classic snap with a standard deck. When someone shouts "Snap!" on a matching pair — last person to slap the pile drinks. False snap (wrong cards)? You drink instead.</div>
+    </div>
+    <div class="ns-card">
+      <div class="ns-label">E — Staring Contest</div>
+      <div class="ns-tag">2 players · Physical · Shot recommended</div>
+      <div class="ns-rule">Two players lock eyes. No blinking, no laughing, no looking away. First to break drinks. Everyone else can do anything to make them break — except touch them.</div>
+    </div>
+    <div class="ns-card">
+      <div class="ns-label">F — Speed Round</div>
+      <div class="ns-tag">4+ players · Verbal · Any drink</div>
+      <div class="ns-rule">One person is the host. Rapid-fire questions at the group. First to shout the correct answer gives out a drink. Wrong answer = you drink. Host rotates every 5 questions.</div>
+    </div>
+    <div class="ns-card">
+      <div class="ns-label">G — Liar's Dice (吹牛 Chui Niu)</div>
+      <div class="ns-tag">2–6 players · Needs dice cups · SG favourite</div>
+      <div class="ns-rule">Each player has 5 dice hidden under a cup. Players bid on how many of a certain number exist across ALL cups (e.g. "four 3s"). Next player must bid higher or call the bluff. If you call and the bidder is wrong, they drink. If the bid was correct, you drink. Last player with dice wins.</div>
+    </div>
+    <div class="ns-card">
+      <div class="ns-label">H — Gong Show / Pass the Flower</div>
+      <div class="ns-tag">4+ players · Needs music · Party classic</div>
+      <div class="ns-rule">One person controls the music (eyes closed, back turned). Pass any object around the circle while the music plays. When the music stops, whoever is holding the object drinks. The music controller rotates each round.</div>
+    </div>
+    <div class="ns-card">
+      <div class="ns-label">I — 5-10 (五十 / 打手指) 🇸🇬</div>
+      <div class="ns-tag">2 players · Physical · SG classic · Best of 5</div>
+      <div class="ns-rule">
+        Two players face each other. On "1-2-3-go!" both simultaneously reveal <strong>0, 5, or 10 fingers</strong> with one hand while shouting the combined total they predict.<br><br>
+        <strong>Winning:</strong> If only one player shouts the correct combined total, that player wins the round. The loser drinks. First to win <strong>5 rounds</strong> wins the game.<br><br>
+        <strong>Double call (both correct):</strong> If both players shout the correct total at the same time, the round is a draw — no drink, go again. This counts as a <strong>reprieve</strong>, not a win for either side.<br><br>
+        <strong>Both wrong:</strong> Both guessed wrong — no drink, replay the round immediately.<br><br>
+        <strong>Double call win rule:</strong> If a player wins via double call <strong>twice in a row</strong>, they are awarded a bonus round win. The opponent must also take an extra sip as a penalty for "letting it happen twice."
+      </div>
+    </div>
+    <div class="ns-card">
+      <div class="ns-label">K — Finger Guessing (猜手指)</div>
+      <div class="ns-tag">2 players · Physical · SG classic</div>
+      <div class="ns-rule">Both players simultaneously show 0–5 fingers with one hand while shouting a number 0–10. The player who correctly guesses the combined total of both hands wins. Loser drinks. If both guess correctly or both are wrong, replay. Play to 3 wins.</div>
     </div>
   </div>
 </div>
@@ -990,13 +1786,6 @@
   function showHome() {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('home').classList.add('active');
-  }
-  function showGame(id) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    if (id === 'nhie') nhieInit();
-    if (id === 'mlt')  mltInit();
-    if (id === 'tod')  todInit();
   }
   function toggleQR() {
     const btn = document.getElementById('qrToggle');
@@ -1335,7 +2124,26 @@
     "bailed on plans because my pet needed me","regretted a haircut the moment I got it",
     "had a crush on a teacher or boss","drunk-called someone at 3am","eaten dessert before the main course",
     "paid someone to do my homework or assignment","been in a car that got pulled over",
-    "snuck food into a cinema","cried listening to a song alone in my room"
+    "snuck food into a cinema","cried listening to a song alone in my room",
+    "pretended to enjoy a gift I actually hated","lied about my relationship status",
+    "eaten something I found in the fridge that wasn't mine","slept with my phone under my pillow",
+    "stayed up past 4am doing absolutely nothing productive","subtweeted or vaguepasted about someone",
+    "read someone's diary or journal without permission","worn dirty clothes because I was too lazy to do laundry",
+    "panic-cleaned my room when someone said they were coming over","eaten instant noodles as a full meal more than 5 times in one week",
+    "cried in the shower so no one could hear me","lied about where I was to my parents",
+    "accidentally replied to the wrong group chat","downloaded Tinder just to see who was on it",
+    "judged someone's playlist and said nothing","dropped my phone on my face while lying down",
+    "ordered way too much food delivery and ate it all alone","pretended to be asleep to avoid a conversation",
+    "said 'on my way' when I hadn't left yet","had a full argument with someone in my head",
+    "liked someone's photo from 3 years ago while stalking them","kept a secret that I really should have told someone",
+    "used 'I'm busy' as an excuse when I was just watching Netflix","panic-bought something at a checkout queue",
+    "memorised someone's schedule without them knowing","sent a risky text on purpose to see what would happen",
+    "been the last to find out about gossip about myself","bought a gym membership and never used it",
+    "eaten cold leftovers straight from the container at midnight","drunkenly made a promise I had no intention of keeping",
+    "muted someone's stories but kept following them","screenshot a conversation to show someone else",
+    "let someone think I was angrier than I was to win an argument","charged my neighbour's electricity using my extension cord",
+    "pretended not to speak the language to avoid a conversation","bought ingredients for a recipe I never made",
+    "agreed with someone just so they would stop talking","lied about my age to get into somewhere"
   ];
   let nhieIdx = 0, nhieOrder = [];
 
@@ -1412,7 +2220,19 @@
     "quote a movie incorrectly and stand by it","be the most likely to adopt a wild animal",
     "have the longest shower in the group","be the most likely to start a business and fail",
     "fall asleep first tonight","be the most likely to become a teacher",
-    "have the most screen time today","make a dramatic exit from a bad date"
+    "have the most screen time today","make a dramatic exit from a bad date",
+    "still be talking about an ex they claim to be over","be the first to cry happy tears at a wedding",
+    "secretly enjoy doing household chores","be found eating alone in their car",
+    "have an entire conversation in their head before texting","be the one who orders food for the table without asking",
+    "accidentally reveal a surprise party","spend the most on bubble tea every month",
+    "pretend to be busy to avoid replying","know every word to a song they claim to hate",
+    "still have screenshots from 3 years ago","be most likely to trip on a flat surface tonight",
+    "refuse to accept they are wrong even when proven otherwise","have a playlist for every mood",
+    "be the first to apologise even when they're not wrong","overthink a one-word reply",
+    "have the most apps on their phone that they've never opened","forget a PIN or password in the next week",
+    "accidentally like a post while showing someone their phone","be most likely to get a pet named after food",
+    "still have the same ringtone from 5 years ago","be caught rewatching the same show for the fifth time",
+    "leave their charger at home on an important day","be most likely to become a food blogger"
   ];
   let mltIdx = 0, mltOrder = [];
 
@@ -1545,7 +2365,8 @@
     "Have you ever pretended to have watched or read something you haven't?",
     "What's something about your life that's different from how you present it online?",
     "Have you ever walked in on something you really wish you hadn't?",
-    "What's the biggest regret of your last year?"
+    "What's the biggest regret of your last year?",
+    "Have you ever pretended to agree with someone's life choice just to avoid conflict?"
   ];
   const TOD_DARE = [
     "Text your most recent contact 'I have a confession…' and wait for the reply",
@@ -1645,7 +2466,9 @@
     "Sit in complete silence and don't react no matter what the group does for 60 seconds",
     "Let the person to your right type and send one message to anyone in your contacts",
     "Recite the alphabet backwards — you have two attempts",
-    "Let the group draw a moustache on your face and keep it for 3 more rounds"
+    "Let the group draw a moustache on your face and keep it for 3 more rounds",
+    "Do your best newsreader impression and deliver tonight's events as breaking news for 60 seconds",
+    "Let the group pick any contact in your phone and you must send them a voice note saying you've been thinking about them"
   ];
 
   let todMode = 'truth', todTruthIdx = 0, todDareIdx = 0, todTruthOrder = [], todDareOrder = [];
@@ -1683,6 +2506,1218 @@
       document.getElementById('tod-text').textContent = TOD_DARE[todDareOrder[todDareIdx % TOD_DARE.length]];
       todDareIdx++;
     }
+  }
+
+  // ══════════════════════════════════════════
+  // 05 — WOULD YOU RATHER / THIS OR THAT
+  // ══════════════════════════════════════════
+  const WYR_DATA = [
+    // Would You Rather
+    {t:'wyr',a:"Have to sing everything you say",b:"Have to dance everywhere you walk"},
+    {t:'wyr',a:"Drink a cup of hot sauce",b:"Eat a raw onion"},
+    {t:'wyr',a:"Never use your phone again",b:"Never drink alcohol again"},
+    {t:'wyr',a:"Text your ex right now",b:"Call your parents and confess something embarrassing"},
+    {t:'wyr',a:"Be famous but hated",b:"Be unknown but deeply loved"},
+    {t:'wyr',a:"Lose all your money",b:"Lose all your memories"},
+    {t:'wyr',a:"Always be 10 minutes late",b:"Always be 20 minutes early"},
+    {t:'wyr',a:"Have no friends but find true love",b:"Have amazing friends but never find love"},
+    {t:'wyr',a:"Only eat your least favourite food forever",b:"Never eat your favourite food again"},
+    {t:'wyr',a:"Know how you'll die",b:"Know when you'll die"},
+    {t:'wyr',a:"Be able to fly but only 1 metre off the ground",b:"Be able to run at 200km/h"},
+    {t:'wyr',a:"Have everyone know your salary",b:"Have everyone know your body weight"},
+    {t:'wyr',a:"Go to jail for 1 year",b:"Lose 5 years of your life"},
+    {t:'wyr',a:"Only be able to whisper",b:"Only be able to shout"},
+    {t:'wyr',a:"Never use social media again",b:"Never watch TV or streaming again"},
+    {t:'wyr',a:"Have a rewind button for your life",b:"Have a pause button for your life"},
+    {t:'wyr',a:"Be invisible but only in public places",b:"Be able to read minds but only hear negative thoughts"},
+    {t:'wyr',a:"Live with no internet for a year",b:"Live with no human contact for 3 months"},
+    {t:'wyr',a:"Always speak your mind no matter what",b:"Never be able to speak again"},
+    {t:'wyr',a:"Have free food everywhere for life",b:"Have free travel everywhere for life"},
+    {t:'wyr',a:"Be 10 years older than you are",b:"Be 10 years younger with no memories of now"},
+    {t:'wyr',a:"Have everyone laugh at your jokes even when they're not funny",b:"Have no one laugh at your jokes even when they're hilarious"},
+    {t:'wyr',a:"Lose the ability to lie",b:"Lose the ability to keep a secret"},
+    {t:'wyr',a:"Know every language in the world",b:"Be able to play every musical instrument"},
+    {t:'wyr',a:"Have hiccups for the rest of your life",b:"Always feel like you need to sneeze but can't"},
+    {t:'wyr',a:"Be 3 metres tall",b:"Be 50cm tall"},
+    {t:'wyr',a:"Only eat savoury food forever",b:"Only eat sweet food forever"},
+    {t:'wyr',a:"Get 1 million dollars but can never leave Singapore",b:"Travel anywhere for free but never have more than $100"},
+    {t:'wyr',a:"Have perfect memory",b:"Be able to forget anything you choose"},
+    {t:'wyr',a:"Always know when someone is lying to you",b:"Be the most convincing liar in the room"},
+    {t:'wyr',a:"Be stranded on a desert island alone",b:"Be stranded with someone you deeply dislike"},
+    {t:'wyr',a:"Smell like durian forever",b:"Have to eat durian at every meal"},
+    {t:'wyr',a:"Never celebrate birthdays again",b:"Never celebrate holidays again"},
+    {t:'wyr',a:"Have your Google search history made public",b:"Have your camera roll made public"},
+    {t:'wyr',a:"Speak every thought out loud",b:"Physically act out every dream you have"},
+    {t:'wyr',a:"Age only in your face",b:"Age only in your body"},
+    {t:'wyr',a:"Be feared by everyone",b:"Be pitied by everyone"},
+    {t:'wyr',a:"Have 10 close friends",b:"Have 1 perfect best friend"},
+    {t:'wyr',a:"Never feel pain again",b:"Never feel sadness again"},
+    {t:'wyr',a:"Work for yourself but earn less",b:"Work for a boss but earn triple"},
+    // This or That
+    {t:'tot',a:"Coffee",b:"Tea"},
+    {t:'tot',a:"Beach holiday",b:"City break"},
+    {t:'tot',a:"Dogs",b:"Cats"},
+    {t:'tot',a:"Night out",b:"Night in"},
+    {t:'tot',a:"Hawker centre",b:"Restaurant"},
+    {t:'tot',a:"Early bird",b:"Night owl"},
+    {t:'tot',a:"Texting",b:"Calling"},
+    {t:'tot',a:"Action movie",b:"Rom-com"},
+    {t:'tot',a:"Beer",b:"Spirits"},
+    {t:'tot',a:"Summer",b:"Rainy season"},
+    {t:'tot',a:"Lots of small meals",b:"One big feast"},
+    {t:'tot',a:"Solo travel",b:"Group travel"},
+    {t:'tot',a:"Rich and unhappy",b:"Average and content"},
+    {t:'tot',a:"Logic",b:"Instinct"},
+    {t:'tot',a:"Introvert",b:"Extrovert"},
+    {t:'tot',a:"Plan everything",b:"Wing it"},
+    {t:'tot',a:"Speak your mind always",b:"Keep the peace"},
+    {t:'tot',a:"Work hard",b:"Work smart"},
+    {t:'tot',a:"Quality",b:"Quantity"},
+    {t:'tot',a:"Fast food",b:"Home cooked"},
+    {t:'tot',a:"Nasi lemak",b:"Chicken rice"},
+    {t:'tot',a:"Mee goreng",b:"Char kway teow"},
+    {t:'tot',a:"Grab",b:"MRT"},
+    {t:'tot',a:"iOS",b:"Android"},
+    {t:'tot',a:"Movies",b:"TV series"},
+    {t:'tot',a:"City life",b:"Suburban life"},
+    {t:'tot',a:"Old friends",b:"New friends"},
+    {t:'tot',a:"Giving advice",b:"Receiving advice"},
+    {t:'tot',a:"Dance floor",b:"Chill corner"},
+    {t:'tot',a:"Spicy",b:"Mild"},
+    {t:'tot',a:"Sweet",b:"Savoury"},
+    {t:'tot',a:"Morning shower",b:"Night shower"},
+    {t:'tot',a:"Save money",b:"Spend on experiences"},
+    {t:'tot',a:"Honest but blunt",b:"Kind but vague"},
+    {t:'tot',a:"Book",b:"Podcast"},
+    {t:'tot',a:"Gym",b:"Sports"},
+    {t:'tot',a:"Lead",b:"Follow"},
+    {t:'tot',a:"Window seat",b:"Aisle seat"},
+    {t:'tot',a:"Loud music",b:"Silence"},
+    {t:'tot',a:"Big party",b:"Small gathering"},
+  ];
+  let wyrMode='wyr', wyrIdx=0, wyrOrder=[];
+  function wyrInit() {
+    wyrOrder=[...Array(WYR_DATA.length).keys()].sort(()=>Math.random()-0.5);
+    wyrIdx=0;
+    document.getElementById('wyr-spinner').style.display='flex';
+    document.getElementById('wyr-play').style.display='none';
+    document.getElementById('wyr-spin-result').classList.remove('show');
+    document.getElementById('wyr-start-btn').style.display='none';
+    document.getElementById('wyr-hint').textContent='Tap to spin';
+    document.getElementById('wyr-hint').style.opacity='1';
+    wyrSetMode('wyr');
+    requestAnimationFrame(()=>initGameSpinner('wyr'));
+  }
+  function wyrSetMode(m) {
+    wyrMode=m;
+    document.getElementById('wyr-wyr-tab').className='wyr-tab'+(m==='wyr'?' active':'');
+    document.getElementById('wyr-tot-tab').className='wyr-tab'+(m==='tot'?' active':'');
+    document.getElementById('wyr-tag').textContent=m==='wyr'?'Would You Rather…':'This or That?';
+    document.getElementById('wyr-a').textContent='';
+    document.getElementById('wyr-b').textContent='';
+  }
+  function wyrNext() {
+    const pool=WYR_DATA.filter(d=>d.t===wyrMode);
+    if(!pool.length)return;
+    const item=pool[Math.floor(Math.random()*pool.length)];
+    const card=document.getElementById('wyr-card');
+    card.classList.remove('flash');void card.offsetWidth;card.classList.add('flash');
+    document.getElementById('wyr-a').textContent=item.a;
+    document.getElementById('wyr-b').textContent=item.b;
+    wyrIdx++;
+    document.getElementById('wyr-progress').textContent=`${wyrIdx} drawn`;
+  }
+  function wyrPrev(){wyrNext();}
+
+  // ══════════════════════════════════════════
+  // 06 — UNPOPULAR OPINION
+  // ══════════════════════════════════════════
+  const UOP=[
+    "Durian is overrated","Pineapple belongs on pizza","Air-con should be banned in public spaces — it's too cold",
+    "WhatsApp voice notes are annoying","Cats are better pets than dogs","Chilli crab is not worth the price",
+    "Hawker food is better than restaurant food every single time","MRT should run 24 hours","Coffee is better than bubble tea",
+    "Singaporeans are too afraid to speak up","The best meal of the day is breakfast","Social media has made friendships less real",
+    "Remote work is more productive than office work","Music was better 20 years ago","Reality TV is genuinely good entertainment",
+    "People who ghost others deserve to be ghosted back","Sleeping in is a waste of a day","Introverts are better friends than extroverts",
+    "Being early is overrated — on time is enough","Marriage is an outdated concept","Children should not be on social media",
+    "Fast fashion is acceptable if you're on a budget","Being fluent in a second language is overrated in Singapore","Tipping culture should be introduced in Singapore",
+    "Work-life balance doesn't exist — you have to pick one","The most overrated tourist spot in Singapore is Gardens by the Bay",
+    "Group projects should be abolished","Most people are not as busy as they say they are","Online relationships can be just as real as physical ones",
+    "People care too much about what others think","Singapore's education system does more harm than good","Loyalty cards and rewards points are a waste of time",
+    "Eating alone at a restaurant is completely fine and enjoyable","Most motivational quotes are meaningless","Public displays of affection are uncomfortable for everyone else",
+    "People who don't read books are missing out","National Service has more cons than pros","Spending a lot on a wedding is a waste of money",
+    "Most people don't actually enjoy hiking — they do it for Instagram","Singaporeans complain too much about the weather",
+    "Being direct is always better than being polite","The best Singaporean food isn't local — it's the kopitiam mixes",
+    "Teh tarik is better than kopi","Friday nights are overrated — Saturday mornings are better",
+    "Crying in public should be normalised","People who are always on their phones at dinner are rude",
+    "Singapore is one of the most boring cities in Asia for locals","Adults can and should have imaginary friends","Zodiac signs do predict personality",
+    "Having a work best friend is more important than having a good boss","Being single in your 30s is a completely valid life choice",
+    "The person who texts first has more feelings — always","Most apologies are really just self-defence","Playing it safe is the biggest risk you can take",
+    "Latecomers should be charged an entry fee","The school system teaches nothing useful about real life",
+    "Horror movies are not actually scary","Owning a car in Singapore is completely unnecessary","Walking slower is better for your mental health",
+    "Cold showers are superior to hot showers","People who say they have no regrets are lying",
+    "Saying 'no' is a complete sentence — no explanation needed","Most people choose their partners based on convenience, not love",
+    "Social media followers mean nothing if you have no real friends","Mondays are not actually bad — people just decided they are",
+    "Dessert should be eaten before the main course","Silent people at parties are the most interesting ones in the room",
+    "The most dangerous thing in Singapore is the comment section","Being too nice is a character flaw","Singaporeans don't know how to queue — they know how to cut",
+    "Living with your parents past 30 is perfectly fine","Queue culture in Singapore is a myth","Too many people here are afraid of failure",
+    "The best conversations happen after midnight","Ambition without contentment is just suffering","Feedback without solutions is just complaining",
+    "Staying in a bad relationship because of history is never worth it","Rest is productive — hustle culture is toxic",
+    "People are more authentic online than in person","Overthinking is just caring too much about everything",
+    "You don't have to like your family members to love them","Most people are fundamentally selfish and that's okay",
+    "The pressure to be happy all the time is more harmful than sadness","Being average at many things beats being exceptional at one",
+    "You can tell everything you need to know about a person by how they treat service staff",
+    "Silence in a friendship is healthier than forced conversation","Saying sorry too often devalues every apology",
+    "The way someone drives reflects exactly how they live their life","Most people's problems come from comparing themselves to others",
+    "Doing nothing is a skill most people will never master","Comfort zones exist because they work — stop telling people to leave them",
+    "Being blunt saves everyone time","The older you get, the fewer friends you need","The best version of yourself doesn't need an audience",
+    "Not everyone deserves a second chance","Change is overrated — consistency is more impressive",
+    "Adulting would be easier if schools taught taxes instead of trigonometry",
+    "The most valuable currency in Singapore is time, not money","You cannot truly know someone until you've lived with them",
+    "People who always need background noise are afraid of their own thoughts"
+  ];
+  let uopIdx=0,uopOrder=[];
+  function uopInit(){
+    uopOrder=[...Array(UOP.length).keys()].sort(()=>Math.random()-0.5);
+    uopIdx=0;
+    document.getElementById('uop-spinner').style.display='flex';
+    document.getElementById('uop-play').style.display='none';
+    document.getElementById('uop-spin-result').classList.remove('show');
+    document.getElementById('uop-start-btn').style.display='none';
+    document.getElementById('uop-hint').textContent='Tap to spin';
+    document.getElementById('uop-hint').style.opacity='1';
+    document.getElementById('uop-text').textContent='Tap the card';
+    document.getElementById('uop-progress').textContent=`1 / ${UOP.length}`;
+    requestAnimationFrame(()=>initGameSpinner('uop'));
+  }
+  function uopNext(){
+    if(uopIdx>=UOP.length)return;
+    const card=document.getElementById('uop-card');
+    card.classList.remove('flash');void card.offsetWidth;card.classList.add('flash');
+    document.getElementById('uop-text').textContent=UOP[uopOrder[uopIdx]];
+    uopIdx++;
+    document.getElementById('uop-progress').textContent=`${uopIdx} / ${UOP.length}`;
+  }
+  function uopPrev(){if(uopIdx<=1)return;uopIdx-=2;uopNext();}
+
+  // ══════════════════════════════════════════
+  // 07 — FRIEND / COUPLE QUIZ
+  // ══════════════════════════════════════════
+  const QUIZ=[
+    "Who in this group is most likely to be late to their own wedding?",
+    "Who here has the most chaotic text message history?",
+    "Who would survive the longest in a zombie apocalypse?",
+    "Who in this group spends the most money on food?",
+    "Who here is secretly the most competitive?",
+    "Who would be the worst person to be stuck in an elevator with?",
+    "Who in this group has the most outrageous dating history?",
+    "Who is the biggest pushover in this room?",
+    "Who here would sell out a friend for $50?",
+    "Who in this group has changed the most in the last year?",
+    "Who is most likely to accidentally start a rumour?",
+    "Who here has the worst sleeping schedule?",
+    "Who in this group would most likely go viral for the wrong reasons?",
+    "Who is the group's unofficial therapist?",
+    "Who would ghost someone and feel no guilt?",
+    "Who here has the most embarrassing Google search history?",
+    "Who in this group gives the best and who gives the worst advice?",
+    "Who is most likely to end up on a reality TV show?",
+    "Who here cries most easily?",
+    "Who in this group is most afraid of commitment?",
+    "Who is the biggest hypocrite in this room?",
+    "Who here has the worst sense of direction?",
+    "Who in this group is secretly the most judgemental?",
+    "Who would be the first to crack under interrogation?",
+    "Who here is most likely to get married next?",
+    "Who in this group has the strongest personality online vs offline?",
+    "Who is most likely to become a millionaire?",
+    "Who here has the hardest time saying no to people?",
+    "Who in this group is the biggest overthinker?",
+    "Who would be the best and worst travel companion?",
+    "Who here has the most toxic trait?",
+    "Who in this group talks the most but says the least?",
+    "Who is most likely to still be awake at 4am right now if this wasn't happening?",
+    "Who here has the biggest ego but would never admit it?",
+    "Who in this group is most likely to move overseas?",
+    "Who has the most unread messages in their phone right now?",
+    "Who here would be the most useless in a survival situation?",
+    "Who in this group is most likely to start a business?",
+    "Who has changed the least since you all first met?",
+    "Who here is the best at keeping secrets?",
+    "Who in this group is most likely to adopt a pet impulsively?",
+    "Who here needs the most reassurance in a relationship?",
+    "Who in this group has the best and worst fashion sense?",
+    "Who would most likely have a scandalous story about tonight in 5 years?",
+    "Who here is most likely to accidentally insult someone they just met?",
+    "Who in this group is the glue that holds everyone together?",
+    "Who here would be the most dramatic in a break-up?",
+    "Who in this group do you think has the biggest hidden talent?",
+    "Who is most likely to end up on the news?",
+    "Who here do you think has the most secrets from this group?",
+    "Who in this group has the strongest moral compass?",
+    "Who here would be first to suggest karaoke?",
+    "Who in this group do you think has changed the most since school?",
+    "Who here is the worst at receiving criticism?",
+    "Who in this group do you most go to when you need honest advice?",
+    "Who here would be the most famous if fame was random?",
+    "Who in this group is the most financially responsible?",
+    "Who here has the most complicated relationship with their family?",
+    "Who in this group has the highest standards in a partner?",
+    "Who here is most likely to make an impulsive life decision this year?",
+    "Who in this group is secretly the most romantic?",
+    "Who here has the thinnest skin but pretends otherwise?",
+    "Who in this group do you think worries the most?",
+    "Who here would survive the longest without social media?",
+    "Who in this group is the most likely to cry at a commercial?",
+    "Who here gives the best hugs?",
+    "Who in this group is most likely to be the last to know about gossip?",
+    "Who here is secretly the funniest person in this room?",
+    "Who in this group is most likely to have a midlife crisis early?",
+    "Who here is the best at handling conflict?",
+    "Who in this group is the most stubborn?",
+    "Who here do you think will be the most successful in 10 years?",
+    "Who in this group do you think has the most energy at any given time?",
+    "Who here is most likely to double-text?",
+    "Who in this group takes the longest to get ready?",
+    "Who here has the most unrealistic expectations of others?",
+    "Who in this group is the most adventurous?",
+    "Who here would be the first to move in with a partner?",
+    "Who in this group asks for the bill the fastest?",
+    "Who here is most likely to be someone's maid of honour or best man?",
+    "Who in this group is most likely to cry happy tears tonight?",
+    "Who here has the most unanswered texts right now?",
+    "Who in this group is most likely to start a podcast that actually gets popular?",
+    "Who here has the best and worst taste in music?",
+    "Who in this group is most likely to move back in with their parents?",
+    "Who here gives the longest hugs?",
+    "Who in this group is most likely to become a life coach?",
+    "Who here is most likely to have a signature dish they make for everyone?",
+    "Who in this group would be the most loyal employee?",
+    "Who here is most likely to get a dog within the next year?",
+    "Who in this group has the most unpredictable mood?",
+    "Who here is most likely to cry at a graduation speech?",
+    "Who in this group would be the best person to call in a genuine emergency?",
+    "Who here is most likely to accidentally become someone's mentor?",
+    "Who in this group has changed the most since you first became friends?",
+    "Who here is most likely to keep a journal but never reread it?",
+    "Who in this group is the most likely to disappear and then reappear like nothing happened?",
+    "Who here would be most likely to become a politician?",
+    "Who in this group has the best poker face?"
+  ];
+  let quizIdx=0,quizOrder=[];
+  function quizInit(){
+    quizOrder=[...Array(QUIZ.length).keys()].sort(()=>Math.random()-0.5);
+    quizIdx=0;
+    document.getElementById('quiz-spinner').style.display='flex';
+    document.getElementById('quiz-play').style.display='none';
+    document.getElementById('quiz-spin-result').classList.remove('show');
+    document.getElementById('quiz-start-btn').style.display='none';
+    document.getElementById('quiz-hint').textContent='Tap to spin';
+    document.getElementById('quiz-hint').style.opacity='1';
+    document.getElementById('quiz-text').textContent='Tap the card';
+    document.getElementById('quiz-progress').textContent=`1 / ${QUIZ.length}`;
+    requestAnimationFrame(()=>initGameSpinner('quiz'));
+  }
+  function quizNext(){
+    if(quizIdx>=QUIZ.length)return;
+    const card=document.getElementById('quiz-card');
+    card.classList.remove('flash');void card.offsetWidth;card.classList.add('flash');
+    document.getElementById('quiz-text').textContent=QUIZ[quizOrder[quizIdx]];
+    quizIdx++;
+    document.getElementById('quiz-progress').textContent=`${quizIdx} / ${QUIZ.length}`;
+  }
+  function quizPrev(){if(quizIdx<=1)return;quizIdx-=2;quizNext();}
+
+  // ══════════════════════════════════════════
+  // 08 — CATEGORIES
+  // ══════════════════════════════════════════
+  const CAT=[
+    {c:"Singapore hawker dishes",e:"e.g. char kway teow, laksa..."},
+    {c:"Alcoholic drinks",e:"e.g. vodka, tiger beer..."},
+    {c:"Reasons to call in sick",e:"e.g. food poisoning, migraine..."},
+    {c:"Things you find in a handbag",e:"e.g. lip balm, receipts..."},
+    {c:"Famous Singaporeans",e:"e.g. JJ Lin, Stefanie Sun..."},
+    {c:"Things people lie about on dates",e:"e.g. height, salary..."},
+    {c:"MRT stations",e:"e.g. Orchard, Tampines..."},
+    {c:"Things found in a mamak or kopitiam",e:"e.g. kaya toast, condensed milk..."},
+    {c:"Excuses for being late",e:"e.g. traffic jam, alarm didn't go off..."},
+    {c:"Reality TV shows",e:"e.g. Survivor, Love Island..."},
+    {c:"Things you do at 3am",e:"e.g. doom scroll, order McDelivery..."},
+    {c:"Types of drunk people",e:"e.g. sleepy drunk, philosophical drunk..."},
+    {c:"Embarrassing things that happen on public transport",e:"e.g. falling asleep on someone..."},
+    {c:"Things Singaporeans say",e:"e.g. lah, can or not, aiyah..."},
+    {c:"Fast food chains in Singapore",e:"e.g. McDonald's, KFC..."},
+    {c:"Reasons a relationship ends",e:"e.g. cheating, grew apart..."},
+    {c:"Things you Google in secret",e:"e.g. symptoms of rare diseases, stalking exes..."},
+    {c:"Famous duos",e:"e.g. Phua Chu Kang & Rosie, Mickey & Minnie..."},
+    {c:"Cocktails",e:"e.g. mojito, gin and tonic..."},
+    {c:"Things couples fight about",e:"e.g. who texts first, how to load the dishwasher..."},
+    {c:"Things you'd find in someone's fridge at 2am",e:"e.g. leftover kopi, mystery container..."},
+    {c:"Reasons to avoid someone's call",e:"e.g. it's your boss, you owe them money..."},
+    {c:"Things that are better drunk",e:"e.g. karaoke, dancing, confessions..."},
+    {c:"Singaporean slang words",e:"e.g. kiasu, sian, jialat..."},
+    {c:"Games you play while drinking",e:"e.g. Jenga, beer pong..."},
+    {c:"Worst gifts to receive",e:"e.g. socks, a framed photo of the giver..."},
+    {c:"Theme park rides",e:"e.g. roller coaster, log flume..."},
+    {c:"Things that are illegal but nobody cares",e:"e.g. jaywalking, connecting to someone else's WiFi..."},
+    {c:"Things hoarders keep",e:"e.g. expired coupons, bubble wrap..."},
+    {c:"Jobs that didn't exist 20 years ago",e:"e.g. influencer, UX designer..."},
+    {c:"Flavours of bubble tea",e:"e.g. taro, brown sugar, lychee..."},
+    {c:"Things people post on Instagram that nobody asked for",e:"e.g. gym selfies, sunset photos..."},
+    {c:"Overused conversation starters",e:"e.g. 'What do you do?', 'So how was your day?'..."},
+    {c:"Things that belong in a horror movie",e:"e.g. clowns, flickering lights..."},
+    {c:"Tourist traps in Singapore",e:"e.g. Merlion at full price, overpriced Orchard restaurants..."},
+    {c:"First date red flags",e:"e.g. talks only about themselves, checks phone constantly..."},
+    {c:"Things found in a void deck",e:"e.g. wedding chairs, pingpong table, makeshift funeral..."},
+    {c:"Fonts everyone recognises",e:"e.g. Comic Sans, Times New Roman..."},
+    {c:"Things you'd take to a desert island",e:"e.g. sunscreen, Wi-Fi router, emotional support..."},
+    {c:"Types of noodles",e:"e.g. ramen, mee pok, laksa bee hoon..."},
+    {c:"Things people name their pets",e:"e.g. Mochi, Kopi, Butter..."},
+    {c:"Classic Singaporean complaints",e:"e.g. weather too hot, ang mo kio bus always late..."},
+    {c:"Things your parents always say",e:"e.g. 'Study harder', 'Don't waste food'..."},
+    {c:"Things you shouldn't do while drunk",e:"e.g. text an ex, make big life decisions..."},
+    {c:"Reasons to stay in a bad relationship",e:"e.g. don't want to be alone, too much history..."},
+    {c:"Things gym people say",e:"e.g. gains, macro, PR, cheat day..."},
+    {c:"Animals you definitely shouldn't keep as pets",e:"e.g. lion, cassowary, platypus..."},
+    {c:"Traits of a perfect best friend",e:"e.g. always picks up the phone, doesn't judge your choices..."},
+    {c:"Things that are now considered cringe",e:"e.g. Facebook check-ins, selfie sticks..."},
+    {c:"Words that sound rude but aren't",e:"e.g. kumquat, cockatoo, Uranus..."},
+    {c:"Old Singaporean TV shows",e:"e.g. Growing Up, Under One Roof..."},
+    {c:"Reasons someone avoids replying to messages",e:"e.g. anxious, busy, genuinely forgot..."},
+    {c:"Vegetables most people dislike as kids",e:"e.g. bitter gourd, spinach, broccoli..."},
+    {c:"Songs everyone knows the chorus of but not the verses",e:"e.g. Wonderwall, Sweet Caroline..."},
+    {c:"Brands every Singaporean recognises",e:"e.g. NTUC, SingTel, BreadTalk..."},
+    {c:"Things you'd find in a Singaporean grandparent's house",e:"e.g. Tiger Balm, old Milo tin, floor fan..."},
+    {c:"Reasons you'd leave a party early",e:"e.g. introvert crash, bad food, no one to talk to..."},
+    {c:"Things people say at job interviews",e:"e.g. my weakness is I work too hard, I'm a team player..."},
+    {c:"Types of headaches",e:"e.g. dehydration, your boss, Monday morning..."},
+    {c:"Most annoying sounds",e:"e.g. alarm at 6am, chewing loudly, someone cracking knuckles..."},
+    {c:"Local celebrity gossip topics",e:"e.g. breakups, NDC controversies, hawker stall drama..."},
+    {c:"Names of Singaporean hawker centre classics",e:"e.g. Maxwell Road, Chomp Chomp, Lau Pa Sat..."},
+    {c:"Things people keep in their car even though they shouldn't",e:"e.g. expired parking coupons, gym bag from 2 months ago..."},
+    {c:"Things you find on a hawker centre table",e:"e.g. tissue packet, plastic stool, chilli in cup..."},
+    {c:"Words borrowed from other languages that Singaporeans use daily",e:"e.g. paiseh, shiok, makan..."},
+    {c:"Things you'd need to survive a Singapore blackout",e:"e.g. battery fan, phone torch, instant noodles..."},
+    {c:"Uniquely Singaporean things to explain to a foreigner",e:"e.g. tissue packet reservation, COE, HDB upgrading..."},
+    {c:"Things every Singaporean has done on a bus or MRT",e:"e.g. pretended to sleep to avoid giving up seat..."},
+    {c:"Local brands that have been around forever",e:"e.g. Bengawan Solo, Polar Puffs, Old Chang Kee..."},
+    {c:"Things that only seem normal in Singapore",e:"e.g. sweating the moment you step outside, queuing 45 mins for food..."},
+    {c:"Flavours every Singaporean kid grew up with",e:"e.g. kaya, bandung, ribena, milo dinosaur..."},
+    {c:"Things Singaporeans are kiasu about",e:"e.g. queuing for free things, getting a good unit number, grabbing tissue first..."},
+    {c:"Singaporean superstitions",e:"e.g. don't tap someone's shoulder at night, seventh month rules..."},
+    {c:"Things you only buy from the pasar malam",e:"e.g. ramly burger, deep-fried oreo, sugar cane juice..."},
+    {c:"Things every Singaporean has in their phone contacts",e:"e.g. 'Mum', 'Grab driver #3', some number with no name..."},
+    {c:"Phrases that mean the same thing in Singlish",e:"e.g. can = yes = okay = sure = lah"},
+    {c:"Things that make Singaporeans proud",e:"e.g. Changi Airport, Hawker Culture UNESCO listing, Singapore Sling..."},
+    {c:"Things you do while waiting for food at a hawker centre",e:"e.g. scroll phone, reserve seat with tissue, fan yourself..."},
+    {c:"Types of weather Singapore actually has",e:"e.g. hot, hazy, sudden downpour, hot AND raining..."},
+    {c:"Singaporean snacks from the provision shop",e:"e.g. Mamee, White Rabbit candy, Haw Flakes..."},
+    {c:"Things aunties and uncles say",e:"e.g. 'eat already?', 'so fat already', 'got boyfriend anot'..."},
+    {c:"Reasons Singaporeans complain about the government",e:"e.g. ERP, CPF, GST increase..."},
+    {c:"Things people queue for in Singapore",e:"e.g. Shake Shack opening, Hello Kitty at McDonald's, ballot for HDB flat..."},
+    {c:"Things you find only at a void deck",e:"e.g. wedding chairs, pingpong table, funeral tent, longkang..."},
+    {c:"Singaporean children's TV shows",e:"e.g. Oki and Friends, Zodiac, The Little Nyonya..."},
+    {c:"Things in a Singaporean school bag",e:"e.g. correction tape, extra pen, tuck shop money, parent permission slip..."},
+    {c:"Animals you might spot in Singapore",e:"e.g. monitor lizard, hornbill, otters at Bishan Park..."},
+    {c:"Types of HDB flats",e:"e.g. 3-room, 4-room, executive maisonette, DBSS..."},
+    {c:"Things Singaporeans love about Johor Bahru",e:"e.g. cheap food, petrol, LEGOLAND, massage..."},
+  ];
+  let catIdx=0,catOrder=[];
+  function catInit(){
+    catOrder=[...Array(CAT.length).keys()].sort(()=>Math.random()-0.5);
+    catIdx=0;
+    document.getElementById('cat-spinner').style.display='flex';
+    document.getElementById('cat-play').style.display='none';
+    document.getElementById('cat-spin-result').classList.remove('show');
+    document.getElementById('cat-start-btn').style.display='none';
+    document.getElementById('cat-hint').textContent='Tap to spin';
+    document.getElementById('cat-hint').style.opacity='1';
+    document.getElementById('cat-title').textContent='Tap to reveal';
+    document.getElementById('cat-example').textContent='';
+    document.getElementById('cat-progress').textContent=`1 / ${CAT.length}`;
+    requestAnimationFrame(()=>initGameSpinner('cat'));
+  }
+  function catNext(){
+    if(catIdx>=CAT.length)return;
+    const card=document.getElementById('cat-card');
+    card.classList.remove('flash');void card.offsetWidth;card.classList.add('flash');
+    const item=CAT[catOrder[catIdx]];
+    document.getElementById('cat-title').textContent=item.c;
+    document.getElementById('cat-example').textContent=item.e;
+    catIdx++;
+    document.getElementById('cat-progress').textContent=`${catIdx} / ${CAT.length}`;
+  }
+  function catPrev(){if(catIdx<=1)return;catIdx-=2;catNext();}
+
+  // ══════════════════════════════════════════
+  // 09 — 5-10 REFLEX
+  // ══════════════════════════════════════════
+  let p1fingers=null,p2fingers=null,p1wins=0,p2wins=0;
+  function reflexShow(player,fingers){
+    if(player===1){p1fingers=fingers;}else{p2fingers=fingers;}
+    document.querySelectorAll(`.reflex-player:nth-child(${player===1?1:3}) .reflex-btn`).forEach((b,i)=>{
+      b.classList.toggle('selected',([0,5,10][i])===fingers);
+    });
+    if(p1fingers!==null&&p2fingers!==null){
+      const total=p1fingers+p2fingers;
+      document.getElementById('reflex-total').textContent=total;
+      document.getElementById('reflex-status').textContent='Shout the total! Tap to confirm your guess.';
+      const guessArea=document.getElementById('reflex-guess-area');
+      guessArea.style.display='block';
+      const btns=document.getElementById('reflex-guess-btns');
+      const options=[...new Set([total, total+5, Math.max(0,total-5), 0,5,10,15,20])].sort((a,b)=>a-b).filter(v=>v>=0&&v<=20);
+      btns.innerHTML=options.map(v=>`<button class="reflex-guess-btn" onclick="reflexGuess(${v},${total})">${v}</button>`).join('');
+    }
+  }
+  function reflexGuess(guess,total){
+    document.querySelectorAll('.reflex-guess-btn').forEach(b=>{
+      const v=parseInt(b.textContent);
+      if(v===total)b.classList.add('correct');
+      else if(v===guess&&v!==total)b.classList.add('wrong');
+      b.onclick=null;
+    });
+    const correct=guess===total;
+    document.getElementById('reflex-status').textContent=correct?'✓ Correct! Opponent drinks!':'✗ Wrong! You drink!';
+    if(correct){if(p1fingers!==null&&p2fingers!==null){
+      // who guessed first is tracked by who tapped — give a win to whoever guessed
+      p1wins++;
+      document.getElementById('p1-score').textContent=p1wins;
+    }}
+  }
+  function reflexReset(){
+    p1fingers=null;p2fingers=null;
+    document.querySelectorAll('.reflex-btn').forEach(b=>b.classList.remove('selected'));
+    document.getElementById('reflex-guess-area').style.display='none';
+    document.getElementById('reflex-status').textContent='Choose your fingers, then shout!';
+    document.getElementById('reflex-total').textContent='';
+    document.querySelectorAll('.reflex-guess-btn').forEach(b=>{b.classList.remove('correct','wrong');});
+  }
+
+  // ══════════════════════════════════════════
+  // 10 — DRUNK JENGA
+  // ══════════════════════════════════════════
+  const JENGA_RULES=[
+    "Social — everyone drinks","Make a rule that lasts until the tower falls",
+    "Point at someone — they drink 2","Waterfall — everyone drinks until you stop",
+    "Swap seats with someone","No first names for the rest of the game",
+    "The person to your left drinks 2","The person to your right drinks 2",
+    "Truth or drink — answer a question or take 2 sips","No pointing with fingers — use your elbow only",
+    "Add a rule: no swearing. Break it = drink","Thumb master — put your thumb on the table anytime, last person drinks",
+    "Accent round — speak in an accent until next pull","Pour 2 fingers into the centre cup",
+    "Categories — name 3 things in a category or drink","Rhyme — say a word, go round rhyming, first to fail drinks",
+    "Never Have I Ever — one statement, everyone who has done it drinks","You can only drink with your non-dominant hand",
+    "No one can say the word 'drink' — say it = drink","Reverse the direction of play",
+    "Question master — if anyone answers your question, they drink","The tallest person in the room drinks",
+    "Everyone wearing socks drinks","The last person to take a sip drinks again",
+    "Best dancer does a 10-second routine or drinks","Phone check — most notifications drinks",
+    "Everyone swaps drinks with the person to their left","High five — you must high-five someone before every sip",
+    "Silent round — no talking until next pull, speak = drink","The most recently single person drinks",
+    "3-second rule — you have 3 seconds to answer any question asked or drink","Pour 3 fingers into the centre cup",
+    "Everyone takes a sip","Compliment the person to your left or take 2 sips",
+    "Two truths and a lie — group guesses, wrong guessers drink","Pick a partner — you drink together for the next 3 rounds",
+    "Everyone must say 'cheers' before drinking for the rest of the game","The youngest person here drinks",
+    "The oldest person here drinks","No crossing your arms — caught = drink",
+    "Confess something or drink 3","The person with the longest hair drinks",
+    "Everyone laughs — last to laugh drinks","Stand up and say something nice about the person across from you or drink",
+    "The person who last checked their phone drinks","Finish your drink or give it to someone",
+    "Everyone adds a rule to the next block they pull","Speed round — first to name 5 things in a category drinks if they can't",
+    "You can only speak when spoken to — violate = drink","Take 2 sips if you've ever lied to someone in this room",
+    "Everyone who's been to Bali drinks","Eyes closed for the next 2 minutes — mistake = drink",
+    "The most recently heartbroken person drinks","Everyone wearing black drinks",
+    "No using the word 'no' for the next 3 rounds — say it = drink","Give 3 sips to the person you trust the most",
+    "Whoever has the most apps on their phone drinks","The person who woke up latest today drinks",
+    "Everyone must use an Australian accent until the next pull","No eye contact allowed for 2 rounds — make eye contact = drink",
+    "The person who last cried drinks","Point at someone — they reveal their last Google search or drink",
+    "Everyone who is single drinks","The shortest person drinks",
+    "No sitting allowed for the next 3 rounds","Do a 10-second impression of the person to your left or drink",
+    "Everyone who has lied today drinks","The person with the most social media followers drinks",
+    "Take 1 sip for every year of your age, shared with anyone you choose","No using first names for 3 rounds — get it wrong = drink",
+    "Whoever answers the next question with 'yes' drinks","Everyone must whisper for the next 2 rounds — normal voice = drink",
+    "The person who spent the most money this week drinks","Reveal your last text or take 3 sips",
+    "Everyone must say 'with respect' before every statement for 3 rounds","The person who last travelled drinks",
+    "Add a permanent hand gesture to your vocabulary — anyone who forgets drinks","The person who has known everyone here the longest drinks",
+    "Everyone stands — sit down when you admit to something embarrassing","The person on your right picks your next drink",
+    "Two truths one lie — group guesses, wrong guessers drink","No phones for the next 10 minutes — check it = drink",
+    "Everyone who has been in more than 3 relationships drinks","Sing one line of any song or take 2 sips",
+    "Whoever laughs first in the next minute drinks","The messiest person in the room (everyone votes) drinks",
+    "Everyone must refer to themselves in third person for 2 rounds","The person who is usually last to arrive drinks",
+    "Take 2 sips and give 2 sips — split them however you like","No filler words ('like', 'um', 'uh') for 3 rounds — say one = drink",
+    "The person whose birthday is coming up soonest drinks","Everyone must high-five before drinking for the next 5 rounds",
+    "Whoever brought the most snacks tonight drinks","The person who talks the most gives out 2 sips",
+    "Group decides: does the person to the left drink, or do they give it out?","Start a sentence — everyone must add a word in turn to continue it",
+    "The person to your right gives out 3 sips however they choose",
+    "Everyone must say a fun fact about themselves before their next sip or drink","No pointing at people — gesture only for 3 rounds or drink",
+    "The person who has travelled furthest to be here tonight drinks"
+  ];
+  let jengaIdx=0,jengaOrder=[];
+  function jengaInit(){
+    jengaOrder=[...Array(JENGA_RULES.length).keys()].sort(()=>Math.random()-0.5);
+    jengaIdx=0;
+    document.getElementById('jenga-spinner').style.display='flex';
+    document.getElementById('jenga-play').style.display='none';
+    document.getElementById('jenga-spin-result').classList.remove('show');
+    document.getElementById('jenga-start-btn').style.display='none';
+    document.getElementById('jenga-hint').textContent='Tap to spin';
+    document.getElementById('jenga-hint').style.opacity='1';
+    document.getElementById('jenga-rule').textContent='Tap to pull a block';
+    document.getElementById('jenga-counter').textContent='';
+    requestAnimationFrame(()=>initGameSpinner('jenga'));
+  }
+  function jengaNext(){
+    const card=document.getElementById('jenga-card');
+    card.classList.remove('flash');void card.offsetWidth;card.classList.add('flash');
+    document.getElementById('jenga-rule').textContent=JENGA_RULES[jengaOrder[jengaIdx%JENGA_RULES.length]];
+    jengaIdx++;
+    document.getElementById('jenga-counter').textContent=`Block ${jengaIdx}`;
+  }
+
+  // ══════════════════════════════════════════
+  // 11 — TRIVIA SHOTS
+  // ══════════════════════════════════════════
+  const TRIVIA=[
+    {q:"What is the capital of Australia?",o:["Sydney","Melbourne","Canberra","Perth"],a:2,c:"Geography"},
+    {q:"How many players are on a standard soccer team?",o:["9","10","11","12"],a:2,c:"Sports"},
+    {q:"What year did Singapore gain independence?",o:["1959","1963","1965","1967"],a:2,c:"Singapore"},
+    {q:"Which planet is closest to the sun?",o:["Venus","Mars","Earth","Mercury"],a:3,c:"Science"},
+    {q:"What is the world's longest river?",o:["Amazon","Yangtze","Mississippi","Nile"],a:3,c:"Geography"},
+    {q:"How many sides does a hexagon have?",o:["5","6","7","8"],a:1,c:"Maths"},
+    {q:"Who painted the Mona Lisa?",o:["Michelangelo","Raphael","Leonardo da Vinci","Donatello"],a:2,c:"Art"},
+    {q:"What is the chemical symbol for gold?",o:["Go","Gd","Au","Ag"],a:2,c:"Science"},
+    {q:"What is the name of Singapore's national airline?",o:["AirAsia","Singapore Airlines","Jetstar","Scoot"],a:1,c:"Singapore"},
+    {q:"In which country was the iPhone invented?",o:["Japan","South Korea","China","USA"],a:3,c:"Technology"},
+    {q:"What is the largest ocean on Earth?",o:["Atlantic","Indian","Arctic","Pacific"],a:3,c:"Geography"},
+    {q:"How many strings does a standard guitar have?",o:["4","5","6","7"],a:2,c:"Music"},
+    {q:"What country has the most natural lakes?",o:["Russia","USA","Brazil","Canada"],a:3,c:"Geography"},
+    {q:"What is the fastest land animal?",o:["Lion","Cheetah","Greyhound","Springbok"],a:1,c:"Animals"},
+    {q:"How many bones are in the adult human body?",o:["196","206","216","226"],a:1,c:"Science"},
+    {q:"Which Singapore hawker dish consists of coconut rice, fried chicken, and sambal?",o:["Hainanese chicken rice","Mee rebus","Nasi lemak","Lontong"],a:2,c:"Singapore"},
+    {q:"What is the hardest natural substance on Earth?",o:["Gold","Iron","Diamond","Quartz"],a:2,c:"Science"},
+    {q:"How many keys does a standard piano have?",o:["76","82","88","92"],a:2,c:"Music"},
+    {q:"Which country invented pizza?",o:["France","Greece","USA","Italy"],a:3,c:"Food"},
+    {q:"What is the name of the tallest building in Singapore?",o:["One Raffles Place","The Sail","Marina Bay Sands","Tanjong Pagar Centre"],a:3,c:"Singapore"},
+    {q:"What is the square root of 144?",o:["11","12","13","14"],a:1,c:"Maths"},
+    {q:"Who wrote Romeo and Juliet?",o:["Charles Dickens","Jane Austen","William Shakespeare","Oscar Wilde"],a:2,c:"Literature"},
+    {q:"What is the most spoken language in the world?",o:["English","Spanish","Hindi","Mandarin"],a:3,c:"Language"},
+    {q:"How many continents are there?",o:["5","6","7","8"],a:2,c:"Geography"},
+    {q:"Which animal is known as the King of the Jungle?",o:["Tiger","Elephant","Lion","Gorilla"],a:2,c:"Animals"},
+    {q:"What currency does Japan use?",o:["Won","Ringgit","Yuan","Yen"],a:3,c:"Geography"},
+    {q:"Which MRT line in Singapore is red?",o:["East-West Line","North-South Line","Circle Line","North-East Line"],a:1,c:"Singapore"},
+    {q:"What is 15% of 200?",o:["25","30","35","40"],a:1,c:"Maths"},
+    {q:"How many rings are on the Olympic flag?",o:["4","5","6","7"],a:1,c:"Sports"},
+    {q:"What is the smallest country in the world?",o:["Monaco","San Marino","Liechtenstein","Vatican City"],a:3,c:"Geography"},
+    {q:"Which planet has the most moons?",o:["Jupiter","Saturn","Uranus","Neptune"],a:1,c:"Science"},
+    {q:"What is Singapore's national language?",o:["English","Mandarin","Tamil","Malay"],a:3,c:"Singapore"},
+    {q:"What year was the first iPhone released?",o:["2005","2006","2007","2008"],a:2,c:"Technology"},
+    {q:"How many players are in a basketball team on the court?",o:["4","5","6","7"],a:1,c:"Sports"},
+    {q:"What is the capital of France?",o:["Lyon","Marseille","Nice","Paris"],a:3,c:"Geography"},
+    {q:"Which element has the atomic number 1?",o:["Helium","Oxygen","Carbon","Hydrogen"],a:3,c:"Science"},
+    {q:"What is the national flower of Singapore?",o:["Jasmine","Orchid","Rose","Lotus"],a:1,c:"Singapore"},
+    {q:"How long is a standard marathon in kilometres?",o:["40km","42.195km","44km","45km"],a:1,c:"Sports"},
+    {q:"Who is the founder of Microsoft?",o:["Steve Jobs","Elon Musk","Bill Gates","Jeff Bezos"],a:2,c:"Technology"},
+    {q:"What is the longest bone in the human body?",o:["Spine","Humerus","Femur","Tibia"],a:2,c:"Science"},
+    {q:"Singapore is known as the Lion City. What does 'Singapura' mean?",o:["Golden City","Sea Town","Lion City","Island Port"],a:2,c:"Singapore"},
+    {q:"How many hours are in a week?",o:["160","168","172","180"],a:1,c:"Maths"},
+    {q:"What colour is a flamingo born?",o:["Pink","Orange","White/Grey","Red"],a:2,c:"Animals"},
+    {q:"Which country is famous for inventing sushi?",o:["China","Korea","Japan","Vietnam"],a:2,c:"Food"},
+    {q:"What does CPU stand for?",o:["Central Processing Unit","Computer Power Unit","Central Power Unit","Core Processing Unit"],a:0,c:"Technology"},
+    {q:"What is the largest desert in the world?",o:["Gobi","Sahara","Arabian","Antarctic"],a:3,c:"Geography"},
+    {q:"How many teeth does an adult human have?",o:["28","30","32","34"],a:2,c:"Science"},
+    {q:"What sport is played at Wimbledon?",o:["Cricket","Badminton","Squash","Tennis"],a:3,c:"Sports"},
+    {q:"What is the national dish of Singapore often said to be?",o:["Laksa","Char kway teow","Chilli crab","Chicken rice"],a:3,c:"Singapore"},
+    {q:"Which country does the brand IKEA come from?",o:["Denmark","Norway","Finland","Sweden"],a:3,c:"General"},
+    {q:"How many zeros are in one million?",o:["4","5","6","7"],a:2,c:"Maths"},
+    {q:"What is the capital of Japan?",o:["Osaka","Kyoto","Tokyo","Hiroshima"],a:2,c:"Geography"},
+    {q:"How many players are on a standard volleyball team on the court?",o:["5","6","7","8"],a:1,c:"Sports"},
+    {q:"What gas do plants absorb from the atmosphere?",o:["Oxygen","Nitrogen","Carbon dioxide","Hydrogen"],a:2,c:"Science"},
+    {q:"Which country is the Great Barrier Reef located in?",o:["New Zealand","South Africa","USA","Australia"],a:3,c:"Geography"},
+    {q:"What is the official language of Brazil?",o:["Spanish","English","French","Portuguese"],a:3,c:"Language"},
+    {q:"How many sides does an octagon have?",o:["6","7","8","9"],a:2,c:"Maths"},
+    {q:"Which planet is known as the Red Planet?",o:["Venus","Jupiter","Mars","Saturn"],a:2,c:"Science"},
+    {q:"What is the largest organ in the human body?",o:["Liver","Lungs","Heart","Skin"],a:3,c:"Science"},
+    {q:"Who invented the telephone?",o:["Thomas Edison","Nikola Tesla","Alexander Graham Bell","Guglielmo Marconi"],a:2,c:"Technology"},
+    {q:"What is the currency of South Korea?",o:["Yuan","Yen","Won","Baht"],a:2,c:"Geography"},
+    {q:"What year did World War II end?",o:["1943","1944","1945","1946"],a:2,c:"History"},
+    {q:"How many teeth do adult humans have including wisdom teeth?",o:["28","30","32","34"],a:2,c:"Science"},
+    {q:"What is the smallest planet in our solar system?",o:["Mercury","Mars","Venus","Pluto"],a:0,c:"Science"},
+    {q:"Which Singapore district is famous for electronics shopping?",o:["Bugis","Sim Lim Square","Far East Plaza","Takashimaya"],a:1,c:"Singapore"},
+    {q:"How many colors are in a rainbow?",o:["5","6","7","8"],a:2,c:"Science"},
+    {q:"What animal is on the Singapore coat of arms?",o:["Tiger and eagle","Merlion and dragon","Lion and tiger","Seahorse and merlion"],a:2,c:"Singapore"},
+    {q:"What is the boiling point of water in Celsius?",o:["90°C","95°C","100°C","105°C"],a:2,c:"Science"},
+    {q:"How many continents does the equator pass through?",o:["2","3","4","5"],a:1,c:"Geography"},
+    {q:"What is the world's most spoken language?",o:["English","Spanish","Mandarin","Hindi"],a:2,c:"Language"},
+    {q:"Which country invented bubble tea?",o:["Singapore","Japan","Taiwan","South Korea"],a:2,c:"Food"},
+    {q:"What does RAM stand for?",o:["Read Access Memory","Random Access Memory","Rapid Application Memory","Remote Access Module"],a:1,c:"Technology"},
+    {q:"How many players are in a standard baseball team?",o:["7","8","9","10"],a:2,c:"Sports"},
+    {q:"What is the national sport of Canada?",o:["Ice Hockey","Lacrosse","Both are official","Basketball"],a:2,c:"Sports"},
+    {q:"What year was the first Star Wars film released?",o:["1975","1976","1977","1978"],a:2,c:"General"},
+    {q:"Which element makes up most of Earth's atmosphere?",o:["Oxygen","Argon","Carbon dioxide","Nitrogen"],a:3,c:"Science"},
+    {q:"How many players are on each side in a game of rugby union?",o:["13","14","15","16"],a:2,c:"Sports"},
+    {q:"What is the name of the strait separating Singapore from Malaysia?",o:["Strait of Malacca","Johor Strait","Singapore Strait","Riau Strait"],a:1,c:"Singapore"},
+    {q:"Which country has the most UNESCO World Heritage Sites?",o:["China","Italy","Spain","France"],a:1,c:"Geography"},
+    {q:"How many keys does a standard piano have?",o:["76","82","88","92"],a:2,c:"General"},
+    {q:"What is the largest mammal in the world?",o:["Elephant","Blue Whale","Giraffe","Whale Shark"],a:1,c:"Animals"},
+    {q:"What is the chemical formula for water?",o:["HO2","H2O2","H2O","HO"],a:2,c:"Science"},
+    {q:"In which year were the first modern Olympic Games held?",o:["1892","1896","1900","1904"],a:1,c:"Sports"},
+    {q:"What is Singapore's country code for international phone calls?",o:["+62","+60","+65","+63"],a:2,c:"Singapore"},
+    {q:"How many cards are in a standard deck (excluding jokers)?",o:["48","50","52","54"],a:2,c:"General"},
+    {q:"What does 'www' stand for in a website address?",o:["World Wide Web","Wide World Web","Web World Wide","World Web Wide"],a:0,c:"Technology"},
+    {q:"Which gas makes up about 21% of Earth's atmosphere?",o:["Nitrogen","Carbon dioxide","Oxygen","Argon"],a:2,c:"Science"},
+    {q:"What is the longest mountain range in the world?",o:["Himalayas","Rocky Mountains","Alps","Andes"],a:3,c:"Geography"},
+    {q:"How many dots are on a standard six-sided die in total?",o:["18","20","21","22"],a:2,c:"Maths"},
+    {q:"What is the national animal of Australia?",o:["Koala","Wombat","Kangaroo","Platypus"],a:2,c:"Animals"},
+    {q:"Which country is home to the ancient Machu Picchu ruins?",o:["Bolivia","Chile","Ecuador","Peru"],a:3,c:"Geography"},
+    {q:"How many meters are in a kilometer?",o:["10","100","1000","10000"],a:2,c:"Maths"},
+    {q:"What is Singapore's national pledge delivered at?",o:["NDP","Schools daily","Parliament","All public events"],a:1,c:"Singapore"},
+    {q:"Who wrote the play Hamlet?",o:["Charles Dickens","Geoffrey Chaucer","William Shakespeare","John Keats"],a:2,c:"Literature"}
+  ];
+  let triviaIdx=0,triviaOrder=[],triviaAnswered=false;
+  function triviaInit(){
+    triviaOrder=[...Array(TRIVIA.length).keys()].sort(()=>Math.random()-0.5);
+    triviaIdx=0;triviaAnswered=false;
+    document.getElementById('trivia-spinner').style.display='flex';
+    document.getElementById('trivia-play').style.display='none';
+    document.getElementById('trivia-spin-result').classList.remove('show');
+    document.getElementById('trivia-start-btn').style.display='none';
+    document.getElementById('trivia-hint').textContent='Tap to spin';
+    document.getElementById('trivia-hint').style.opacity='1';
+    document.getElementById('trivia-q').textContent='Tap Start to begin';
+    document.getElementById('trivia-options').innerHTML='';
+    document.getElementById('trivia-feedback').textContent='';
+    document.getElementById('trivia-counter').textContent=`1 / ${TRIVIA.length}`;
+    requestAnimationFrame(()=>initGameSpinner('trivia'));
+  }
+  function triviaNext(){
+    if(triviaIdx>=TRIVIA.length){triviaIdx=0;triviaOrder=[...Array(TRIVIA.length).keys()].sort(()=>Math.random()-0.5);}
+    const item=TRIVIA[triviaOrder[triviaIdx]];
+    triviaIdx++;triviaAnswered=false;
+    document.getElementById('trivia-category').textContent=item.c;
+    document.getElementById('trivia-q').textContent=item.q;
+    document.getElementById('trivia-feedback').textContent='';
+    document.getElementById('trivia-feedback').className='trivia-feedback';
+    document.getElementById('trivia-counter').textContent=`${triviaIdx} / ${TRIVIA.length}`;
+    const optsEl=document.getElementById('trivia-options');
+    optsEl.innerHTML=item.o.map((o,i)=>`<button class="trivia-opt" onclick="triviaAnswer(${i},${item.a})">${String.fromCharCode(65+i)}. ${o}</button>`).join('');
+  }
+  function triviaAnswer(chosen,correct){
+    if(triviaAnswered)return;triviaAnswered=true;
+    document.querySelectorAll('.trivia-opt').forEach((b,i)=>{
+      b.onclick=null;
+      if(i===correct)b.classList.add('correct');
+      else if(i===chosen&&chosen!==correct)b.classList.add('wrong');
+    });
+    const fb=document.getElementById('trivia-feedback');
+    if(chosen===correct){fb.textContent='✓ Correct! Give out 2 sips!';fb.className='trivia-feedback correct';}
+    else{fb.textContent='✗ Wrong! Take 2 sips!';fb.className='trivia-feedback wrong';}
+  }
+
+  // ══════════════════════════════════════════
+  // 12 — DARE ROULETTE
+  // ══════════════════════════════════════════
+  const DARE_ONLY=TOD_DARE; // reuse the 100 dares from Truth or Dare
+  let dareIdx=0,dareOrder=[];
+  function dareInit(){
+    dareOrder=[...Array(DARE_ONLY.length).keys()].sort(()=>Math.random()-0.5);
+    dareIdx=0;
+    document.getElementById('dare-spinner').style.display='flex';
+    document.getElementById('dare-play').style.display='none';
+    document.getElementById('dare-spin-result').classList.remove('show');
+    document.getElementById('dare-start-btn').style.display='none';
+    document.getElementById('dare-hint').textContent='Tap to spin';
+    document.getElementById('dare-hint').style.opacity='1';
+    document.getElementById('dare-text').textContent='Tap to get your dare';
+    document.getElementById('dare-counter').textContent='';
+    requestAnimationFrame(()=>initGameSpinner('dare'));
+  }
+  function dareNext(){
+    const card=document.getElementById('dare-card');
+    card.classList.remove('flash');void card.offsetWidth;card.classList.add('flash');
+    document.getElementById('dare-text').textContent=DARE_ONLY[dareOrder[dareIdx%DARE_ONLY.length]];
+    dareIdx++;
+    document.getElementById('dare-counter').textContent=`Dare ${dareIdx}`;
+  }
+
+  // ══════════════════════════════════════════
+  // 13 — HOT SEAT
+  // ══════════════════════════════════════════
+  const HOTSEAT_Q=[
+    "What's the most embarrassing thing you've done this year?",
+    "Who in this room do you trust the least?","Name your top 3 red flags in a partner",
+    "What's the last lie you told?","Describe your love life in 3 words",
+    "What's a secret talent no one here knows about?","What's the most expensive thing you've ever bought impulsively?",
+    "Who was your most recent crush?","What's something you're currently avoiding dealing with?",
+    "What's the worst advice you've ever followed?","If you had to date someone in this room, who?",
+    "What's one thing you'd change about yourself?","What's your most embarrassing fashion phase?",
+    "What's the rudest thing you've done to someone you liked?","What's your most controversial food opinion?",
+    "If you could read one person's mind here, whose?","What's the biggest mistake you've made this year?",
+    "What's something you do when you think no one's watching?","What's the most childish thing you still enjoy?",
+    "What's your biggest insecurity?","Describe your current situation in 5 words",
+    "What's the pettiest thing you've ever done?","Who in this room would you call at 3am?",
+    "What's a habit you're embarrassed about?","What's the biggest thing you've lied about to a family member?",
+    "What's something you've always wanted to say to someone in this room?","What's the most dramatic thing you've done after a breakup?",
+    "What's your most toxic trait?","If someone wrote a book about your life, what would the title be?",
+    "What's one thing you want but won't admit you want?","What's the most amount of money you've spent on one night out?",
+    "What's something you regret NOT doing?","What's a compliment you've received that you didn't believe?",
+    "What's the weirdest place you've cried?","What's the most jealous you've ever been?",
+    "What's the last thing you searched on Google?","What's your most replayed memory from this year?",
+    "What's something you judge people for that you're also guilty of?","Who was the last person you unfollowed and why?",
+    "What's the most honest thing you can say about yourself right now?",
+    "What's the nicest thing someone has ever done for you?","What's your worst habit in a relationship?",
+    "Who here knows the most about your private life?","What's the most awkward date you've ever been on?",
+    "What's something you're secretly proud of but would never post about?","What's the last thing you lied about on social media?",
+    "What's one personality trait you inherited from your parents that you wish you hadn't?",
+    "What's something you believed until embarrassingly recently?","What's the most irrational thing you've done out of spite?",
+    "What's the fastest you've ever fallen for someone?","What's one boundary you've let people cross too easily?",
+    "What's the most immature reason you've ever ended something?","What's the most money you've wasted on something that didn't work?",
+    "What's a friendship you let die that you still think about?","What's the most uncomfortable truth about yourself you've had to accept?",
+    "What's the last time you genuinely scared yourself?","Name one thing this group would be shocked to know about you",
+    "What's the most passive-aggressive thing you've ever done?","What's something about yourself you hope changes in the next year?",
+    "What's one opinion you hold that no one in this room knows about?","What's the thing you most want to be remembered for?",
+    "What's something kind you did that no one noticed?","What's the longest grudge you've ever held?",
+    "What's the most unfair advantage you've ever taken?","Who in your life do you most need to forgive?",
+    "What's the last time you were genuinely happy with yourself?","What's your worst quality when you're stressed?",
+    "What's one thing you'd do differently about how you treated someone?","What's something that keeps you awake at night?",
+    "What's the most selfish decision you've ever made?","What's one thing you've never told a partner?",
+    "What's the most embarrassing thing you've done to get someone's attention?",
+    "What's the kindest thing someone in this room has ever done for you?",
+    "What's the most you've ever cried watching something alone?","What's your biggest source of stress right now in one sentence?",
+    "What's a lie you keep telling yourself?","What's one thing you're not ready to forgive yourself for?",
+    "What's something you've outgrown but are afraid to let go?","What's the thing you're most afraid people will find out about you?",
+    "What's one thing you'd go back and tell your 16-year-old self?",
+    "What's something you want from your friendships that you've never asked for?",
+    "What's the most scared you've ever felt in a relationship?","What's your love language and do you actually practise it?",
+    "What's one fear that has genuinely held you back?","What's the last thing you did purely for yourself with no guilt?",
+    "What's one thing in your life that looks fine from the outside but isn't?",
+    "What's the hardest thing you've had to accept about yourself in the last 2 years?",
+    "What's one thing about growing up you genuinely miss?","What's the most you've ever changed for someone?",
+    "What's one version of yourself you've abandoned that you sometimes miss?",
+    "What's the last thing that genuinely made you feel hopeful?",
+    "What's one thing you've never admitted to wanting out of life?",
+    "What's the most you've ever sacrificed for a friendship?",
+    "What's one lie you've told yourself so many times it started to feel true?",
+    "What's the most scared you've ever been of losing someone?",
+    "What's one rule you live by that no one knows about?",
+    "What's something about your past that still shapes how you behave now?",
+    "What's one thing you genuinely envy about someone in this room?",
+  ];
+  let hotseatIdx=0,hotseatOrder=[],hotseatTimerRef=null,hotseatRunning=false;
+  function hotseatInit(){
+    hotseatOrder=[...Array(HOTSEAT_Q.length).keys()].sort(()=>Math.random()-0.5);
+    hotseatIdx=0;hotseatRunning=false;
+    clearInterval(hotseatTimerRef);
+    document.getElementById('hotseat-spinner').style.display='flex';
+    document.getElementById('hotseat-play').style.display='none';
+    document.getElementById('hotseat-spin-result').classList.remove('show');
+    document.getElementById('hotseat-start-btn').style.display='none';
+    document.getElementById('hotseat-hint').textContent='Tap to spin';
+    document.getElementById('hotseat-hint').style.opacity='1';
+    document.getElementById('hotseat-q').textContent='Tap Start to begin the grilling';
+    document.getElementById('hotseat-timer').textContent='60';
+    document.getElementById('hotseat-timer').className='hotseat-timer';
+    document.getElementById('hotseat-counter').textContent='';
+    requestAnimationFrame(()=>initGameSpinner('hotseat'));
+  }
+  function hotseatStart(){
+    hotseatRunning=true;
+    clearInterval(hotseatTimerRef);
+    let t=60;
+    document.getElementById('hotseat-timer').textContent=t;
+    document.getElementById('hotseat-timer').className='hotseat-timer';
+    document.getElementById('hotseat-start-round').textContent='Restart round';
+    hotseatNext();
+    hotseatTimerRef=setInterval(()=>{
+      t--;
+      document.getElementById('hotseat-timer').textContent=t;
+      if(t<=10)document.getElementById('hotseat-timer').className='hotseat-timer urgent';
+      if(t<=0){clearInterval(hotseatTimerRef);hotseatRunning=false;document.getElementById('hotseat-q').textContent="⏱ Time's up! Round over.";}
+    },1000);
+  }
+  function hotseatNext(){
+    if(!hotseatRunning)return;
+    const card=document.getElementById('hotseat-card');
+    card.classList.remove('flash');void card.offsetWidth;card.classList.add('flash');
+    document.getElementById('hotseat-q').textContent=HOTSEAT_Q[hotseatOrder[hotseatIdx%HOTSEAT_Q.length]];
+    hotseatIdx++;
+    document.getElementById('hotseat-counter').textContent=`Q${hotseatIdx}`;
+  }
+
+  // ══════════════════════════════════════════
+  // 14 — TWO TRUTHS & A LIE
+  // ══════════════════════════════════════════
+  const TTL=[
+    "Something to do with your childhood","A travel story","A food adventure",
+    "Something involving your family","A relationship or crush","A school or work story",
+    "Something you did on a dare","A habit you had as a kid","An embarrassing moment",
+    "Something you've never told your parents","A weird coincidence","Something involving a stranger",
+    "A time you broke a rule","Something about your personality","A fear you have",
+    "A talent or skill","Something you've lied about","A time you got caught",
+    "A dream or ambition","Something about your childhood home","A concert or event",
+    "A time you were lost","Something involving money","A first experience",
+    "A time you were wrong about someone","Something about your friendships","A regret",
+    "A proud moment","A weird obsession","Something involving animals",
+    "A time you surprised yourself","A cultural experience","Something about your routine",
+    "A time you cried in public","A birthday memory","Something about your style",
+    "A time you changed your mind completely","A rivalry or competition","Something involving food and culture",
+    "A time you got into trouble","Something you believed as a child","A coincidence that changed something",
+    "A spontaneous decision","Something that made you laugh uncontrollably","A time you were totally wrong",
+    "Something involving your phone or social media","A time you felt genuinely scared","A guilty pleasure",
+    "Something involving a celebrity or famous person","A time you had to make a big choice",
+    "Something about the city or neighbourhood you grew up in","A time you misjudged someone",
+    "Something involving a significant number","A superstition you hold","A time technology failed you",
+    "Something involving a tradition or custom","A time you were completely lost in a city",
+    "Something about a pet","A health scare (minor)","A time you were genuinely starstruck",
+    "Something about a teacher or mentor","A time someone misunderstood you completely",
+    "Something you did to impress someone","A time you were pleasantly surprised",
+    "Something about a sibling or close relative","A moment you wish you could redo",
+    "Something involving public transport","A time you were unfairly blamed",
+    "Something about your worst job or internship","A time you stood up for yourself",
+    "Something involving a neighbourhood or place you love","A time you made someone else laugh really hard",
+    "A holiday disaster","Something about a childhood friendship",
+    "A time you were completely out of your comfort zone","Something about your eating habits",
+    "A time you embarrassed yourself in front of someone you liked","A moment that changed how you see the world",
+    "Something involving a dare you wish you hadn't taken","A skill you secretly practise alone",
+    "Something about your relationship with money","A time you said something and immediately regretted it",
+    "Something involving a queue or waiting room","A time you were the last to know something",
+    "Something about your morning or bedtime routine","A time you were genuinely generous",
+    "Something about an irrational phobia","A moment where luck completely saved you",
+    "A time you surprised even yourself with your bravery","Something about a random stranger who affected your life",
+    "A time you completely misjudged a situation","Something about your relationship with technology",
+    "A time someone believed in you more than you believed in yourself","Something you did purely out of curiosity",
+    "A time you made a decision that changed everything","Something about a place that feels like home",
+    "A time you were genuinely proud of a friend","Something about a mistake that turned out to be a blessing",
+    "A time you had to start completely over","Something you've kept doing even though people told you to stop",
+    "A time you felt completely out of place","Something you want to do before you turn 40",
+    "A time you said yes when you should have said no","A moment where you realised you had grown up",
+    "Something about your relationship with failure","A time someone changed how you see yourself",
+    "Something about a habit you built from scratch","A memory tied to a specific smell or sound",
+  ];
+  let ttlIdx=0,ttlOrder=[];
+  function ttlInit(){
+    ttlOrder=[...Array(TTL.length).keys()].sort(()=>Math.random()-0.5);
+    ttlIdx=0;
+    document.getElementById('ttl-spinner').style.display='flex';
+    document.getElementById('ttl-play').style.display='none';
+    document.getElementById('ttl-spin-result').classList.remove('show');
+    document.getElementById('ttl-start-btn').style.display='none';
+    document.getElementById('ttl-hint').textContent='Tap to spin';
+    document.getElementById('ttl-hint').style.opacity='1';
+    document.getElementById('ttl-text').textContent='Tap to get a prompt';
+    document.getElementById('ttl-progress').textContent=`1 / ${TTL.length}`;
+    requestAnimationFrame(()=>initGameSpinner('ttl'));
+  }
+  function ttlNext(){
+    if(ttlIdx>=TTL.length)return;
+    const card=document.getElementById('ttl-card');
+    card.classList.remove('flash');void card.offsetWidth;card.classList.add('flash');
+    document.getElementById('ttl-text').textContent=TTL[ttlOrder[ttlIdx]];
+    ttlIdx++;
+    document.getElementById('ttl-progress').textContent=`${ttlIdx} / ${TTL.length}`;
+  }
+  function ttlPrev(){if(ttlIdx<=1)return;ttlIdx-=2;ttlNext();}
+
+  // ══════════════════════════════════════════
+  // SHARED DECK UTILITIES
+  // ══════════════════════════════════════════
+  const SUITS_ALL = ['♠','♣','♥','♦'];
+  const VALS_ALL  = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+  const VAL_NUM   = {'A':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'J':11,'Q':12,'K':13};
+
+  function freshDeck() {
+    const d = [];
+    for (const s of SUITS_ALL) for (const v of VALS_ALL) d.push({v,s});
+    return d.sort(() => Math.random() - 0.5);
+  }
+
+  function cardSVG(v, s) {
+    return buildCardHTML(v, s);
+  }
+
+  // ══════════════════════════════════════════
+  // SHARED SHUFFLE BUTTON for flashcard games
+  // ══════════════════════════════════════════
+  function shuffleFlashcards(orderArr, dataLen, progressId, totalLabel) {
+    for (let i = dataLen - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [orderArr[i], orderArr[j]] = [orderArr[j], orderArr[i]];
+    }
+    const prog = document.getElementById(progressId);
+    if (prog) prog.textContent = `1 / ${totalLabel || dataLen}`;
+    return 0; // reset index
+  }
+
+  // ══════════════════════════════════════════
+  // 14 — HIGHER OR LOWER
+  // ══════════════════════════════════════════
+  let holDeck = [], holIndex = 0, holCurrent = null, holWaiting = false;
+
+  function holInit() {
+    holDeck = freshDeck();
+    holIndex = 0; holCurrent = null; holWaiting = false;
+    document.getElementById('hol-spinner').style.display = 'flex';
+    document.getElementById('hol-play').style.display = 'none';
+    document.getElementById('hol-spin-result').classList.remove('show');
+    document.getElementById('hol-start-btn').style.display = 'none';
+    document.getElementById('hol-hint').textContent = 'Tap to spin';
+    document.getElementById('hol-hint').style.opacity = '1';
+    document.getElementById('hol-counter').textContent = '';
+    requestAnimationFrame(() => initGameSpinner('hol'));
+  }
+
+  function holDeal() {
+    if (holIndex >= holDeck.length) {
+      document.getElementById('hol-feedback').textContent = '🎉 Deck finished! Shuffle to play again.';
+      document.getElementById('hol-feedback').className = 'hol-feedback same';
+      holDisableGuess();
+      return;
+    }
+    const card = holDeck[holIndex++];
+    holCurrent = card;
+    holWaiting = true;
+    document.getElementById('hol-current-card').innerHTML = cardSVG(card.v, card.s);
+    document.getElementById('hol-feedback').textContent = '';
+    document.getElementById('hol-feedback').className = 'hol-feedback';
+    document.getElementById('hol-progress').textContent = `${holIndex} / ${holDeck.length}`;
+    document.getElementById('hol-lower').disabled = false;
+    document.getElementById('hol-higher').disabled = false;
+    document.getElementById('hol-next').style.display = 'none';
+  }
+
+  function holNext() {
+    document.getElementById('hol-next').style.display = 'none';
+    holDeal();
+  }
+
+  function holGuess(guess) {
+    if (!holWaiting || holIndex >= holDeck.length) return;
+    const next = holDeck[holIndex];
+    const curVal = VAL_NUM[holCurrent.v];
+    const nxtVal = VAL_NUM[next.v];
+    holDisableGuess();
+
+    // Show next card
+    const row = document.getElementById('hol-current-card');
+    row.innerHTML = `<div style="display:flex;gap:10px;justify-content:center;align-items:center">
+      ${cardSVG(holCurrent.v, holCurrent.s)}
+      <span style="color:var(--text-muted);font-size:20px;">→</span>
+      ${cardSVG(next.v, next.s)}
+    </div>`;
+
+    const fb = document.getElementById('hol-feedback');
+    if (nxtVal === curVal) {
+      fb.textContent = 'Same value! Drink and flip again 🍺';
+      fb.className = 'hol-feedback same';
+    } else {
+      const correct = (guess === 'higher' && nxtVal > curVal) || (guess === 'lower' && nxtVal < curVal);
+      fb.textContent = correct ? '✓ Correct! Pass the deck.' : '✗ Wrong! Drink 🍺';
+      fb.className = `hol-feedback ${correct ? 'correct' : 'wrong'}`;
+    }
+    holCurrent = next;
+    holIndex++;
+    holWaiting = false;
+    document.getElementById('hol-progress').textContent = `${holIndex} / ${holDeck.length}`;
+    document.getElementById('hol-next').style.display = 'block';
+  }
+
+  function holDisableGuess() {
+    document.getElementById('hol-lower').disabled = true;
+    document.getElementById('hol-higher').disabled = true;
+  }
+
+  function holShuffle() {
+    holDeck = freshDeck();
+    holIndex = 0; holCurrent = null; holWaiting = false;
+    document.getElementById('hol-current-card').innerHTML = '<div style="text-align:center;color:var(--text-muted);font-size:14px;padding:2rem">Deck shuffled! Tap Next to start.</div>';
+    document.getElementById('hol-feedback').textContent = '';
+    document.getElementById('hol-progress').textContent = `0 / ${holDeck.length}`;
+    document.getElementById('hol-lower').disabled = true;
+    document.getElementById('hol-higher').disabled = true;
+    document.getElementById('hol-next').style.display = 'block';
+    document.getElementById('hol-next').textContent = 'Flip first card ›';
+  }
+
+  // ══════════════════════════════════════════
+  // 15 — RIDE THE BUS
+  // ══════════════════════════════════════════
+  let rtbDeck = [], rtbPlayerCards = [], rtbPhase = 0, rtbAnswered = false;
+  const RTB_PHASES = ['Red / Black','Higher / Lower','Inside / Outside','Guess the Suit'];
+  const RTB_SIPS   = [1, 2, 3, 4];
+
+  function rtbInit() {
+    rtbDeck = freshDeck();
+    rtbPlayerCards = []; rtbPhase = 0; rtbAnswered = false;
+    document.getElementById('rtb-spinner').style.display = 'flex';
+    document.getElementById('rtb-play').style.display = 'none';
+    document.getElementById('rtb-spin-result').classList.remove('show');
+    document.getElementById('rtb-start-btn').style.display = 'none';
+    document.getElementById('rtb-hint').textContent = 'Tap to spin';
+    document.getElementById('rtb-hint').style.opacity = '1';
+    requestAnimationFrame(() => initGameSpinner('rtb'));
+  }
+
+  function rtbUpdatePhaseBar() {
+    RTB_PHASES.forEach((_, i) => {
+      const el = document.getElementById(`rtb-p${i+1}`);
+      if (i < rtbPhase) el.className = 'rtb-phase done';
+      else if (i === rtbPhase) el.className = 'rtb-phase active';
+      else el.className = 'rtb-phase';
+    });
+  }
+
+  function rtbRenderCards() {
+    const row = document.getElementById('rtb-cards-row');
+    row.innerHTML = rtbPlayerCards.map(c => cardSVG(c.v, c.s)).join('');
+  }
+
+  function rtbNext() {
+    if (rtbPhase >= 4) { rtbNewPlayer(); return; }
+    document.getElementById('rtb-next').style.display = 'none';
+    document.getElementById('rtb-feedback').textContent = '';
+    document.getElementById('rtb-feedback').className = 'rtb-feedback';
+    rtbAnswered = false;
+    rtbUpdatePhaseBar();
+    rtbShowPhaseQuestion();
+  }
+
+  function rtbShowPhaseQuestion() {
+    const btnRow = document.getElementById('rtb-btn-row');
+    const label = document.getElementById('rtb-question-label');
+    const drinkLabel = document.getElementById('rtb-drink-label');
+    drinkLabel.textContent = `Wrong = ${RTB_SIPS[rtbPhase]} sip${RTB_SIPS[rtbPhase]>1?'s':''} 🍺`;
+    btnRow.innerHTML = '';
+
+    if (rtbPhase === 0) {
+      label.textContent = 'Red or Black?';
+      ['Red 🔴','Black ⚫'].forEach((txt, i) => {
+        const b = document.createElement('button');
+        b.className = 'rtb-choice-btn'; b.textContent = txt;
+        b.onclick = () => rtbAnswer(i === 0 ? 'red' : 'black');
+        btnRow.appendChild(b);
+      });
+    } else if (rtbPhase === 1) {
+      label.textContent = 'Higher or Lower than your first card?';
+      ['⬆ Higher','⬇ Lower'].forEach((txt, i) => {
+        const b = document.createElement('button');
+        b.className = 'rtb-choice-btn'; b.textContent = txt;
+        b.onclick = () => rtbAnswer(i === 0 ? 'higher' : 'lower');
+        btnRow.appendChild(b);
+      });
+    } else if (rtbPhase === 2) {
+      label.textContent = 'Inside or Outside your two cards?';
+      ['Inside','Outside'].forEach((txt) => {
+        const b = document.createElement('button');
+        b.className = 'rtb-choice-btn'; b.textContent = txt;
+        b.onclick = () => rtbAnswer(txt.toLowerCase());
+        btnRow.appendChild(b);
+      });
+    } else if (rtbPhase === 3) {
+      label.textContent = 'Guess the suit of the next card';
+      SUITS_ALL.forEach(s => {
+        const b = document.createElement('button');
+        b.className = 'rtb-choice-btn'; b.textContent = s;
+        b.style.fontSize = '22px'; b.style.color = ['♥','♦'].includes(s) ? '#cc2200' : 'var(--text)';
+        b.onclick = () => rtbAnswer(s);
+        btnRow.appendChild(b);
+      });
+    }
+  }
+
+  function rtbAnswer(choice) {
+    if (rtbAnswered) return;
+    rtbAnswered = true;
+    document.querySelectorAll('.rtb-choice-btn').forEach(b => b.onclick = null);
+
+    const card = rtbDeck[Math.floor(Math.random() * rtbDeck.length)];
+    // Remove card from deck to avoid repeats
+    rtbDeck = rtbDeck.filter(c => !(c.v === card.v && c.s === card.s));
+    if (!rtbDeck.length) rtbDeck = freshDeck();
+    rtbPlayerCards.push(card);
+    rtbRenderCards();
+
+    let correct = false;
+    if (rtbPhase === 0) {
+      correct = (choice === 'red') === (['♥','♦'].includes(card.s));
+    } else if (rtbPhase === 1) {
+      const prev = VAL_NUM[rtbPlayerCards[0].v];
+      const cur  = VAL_NUM[card.v];
+      correct = (choice === 'higher' && cur > prev) || (choice === 'lower' && cur < prev);
+    } else if (rtbPhase === 2) {
+      const v0 = VAL_NUM[rtbPlayerCards[0].v], v1 = VAL_NUM[rtbPlayerCards[1].v];
+      const lo = Math.min(v0,v1), hi = Math.max(v0,v1), cur = VAL_NUM[card.v];
+      correct = choice === 'inside' ? cur > lo && cur < hi : cur < lo || cur > hi;
+    } else if (rtbPhase === 3) {
+      correct = choice === card.s;
+    }
+
+    const fb = document.getElementById('rtb-feedback');
+    fb.textContent = correct ? `✓ Correct! Give out ${RTB_SIPS[rtbPhase]} sip${RTB_SIPS[rtbPhase]>1?'s':''}!` : `✗ Wrong! Drink ${RTB_SIPS[rtbPhase]} sip${RTB_SIPS[rtbPhase]>1?'s':''} 🍺`;
+    fb.className = `rtb-feedback ${correct ? 'correct' : 'wrong'}`;
+
+    // Highlight correct answer button
+    document.querySelectorAll('.rtb-choice-btn').forEach(b => {
+      const t = b.textContent.trim();
+      const isCorrect = rtbPhase===0 ? (['♥','♦'].includes(card.s)?t.includes('Red'):t.includes('Black'))
+        : rtbPhase===3 ? t===card.s : false;
+      if (isCorrect) b.classList.add('reveal');
+    });
+
+    rtbPhase++;
+    const nextBtn = document.getElementById('rtb-next');
+    nextBtn.style.display = 'block';
+    nextBtn.textContent = rtbPhase >= 4 ? 'New player ›' : 'Next round ›';
+    document.getElementById('rtb-progress').textContent = `Round ${rtbPhase} / 4`;
+  }
+
+  function rtbNewPlayer() {
+    rtbPlayerCards = []; rtbPhase = 0; rtbAnswered = false;
+    document.getElementById('rtb-cards-row').innerHTML = '';
+    document.getElementById('rtb-feedback').textContent = '';
+    document.getElementById('rtb-btn-row').innerHTML = '';
+    document.getElementById('rtb-next').style.display = 'none';
+    document.getElementById('rtb-question-label').textContent = 'Next player! Pass the phone.';
+    document.getElementById('rtb-progress').textContent = 'Round 1 / 4';
+    rtbUpdatePhaseBar();
+    setTimeout(() => rtbNext(), 800);
+  }
+
+  function rtbShuffle() {
+    rtbDeck = freshDeck();
+    rtbPlayerCards = []; rtbPhase = 0; rtbAnswered = false;
+    document.getElementById('rtb-cards-row').innerHTML = '';
+    document.getElementById('rtb-feedback').textContent = '';
+    document.getElementById('rtb-btn-row').innerHTML = '';
+    document.getElementById('rtb-progress').textContent = 'Round 1 / 4';
+    rtbUpdatePhaseBar();
+    document.getElementById('rtb-question-label').textContent = 'Deck shuffled! Tap Next to start.';
+    document.getElementById('rtb-next').style.display = 'block';
+    document.getElementById('rtb-next').textContent = 'Start ›';
+  }
+
+  // ══════════════════════════════════════════
+  // SHUFFLE BUTTONS for all flashcard games
+  // ══════════════════════════════════════════
+  function nhieShuffle() { nhieIdx = shuffleFlashcards(nhieOrder, NHIE.length, 'nhie-progress', NHIE.length); document.getElementById('nhie-text').textContent='Shuffled! Tap to draw.'; }
+  function mltShuffle()  { mltIdx  = shuffleFlashcards(mltOrder,  MLT.length,  'mlt-progress',  MLT.length);  document.getElementById('mlt-text').textContent='Shuffled! Tap to draw.'; }
+  function todShuffle()  { todTruthOrder=[...Array(TOD_TRUTH.length).keys()].sort(()=>Math.random()-0.5); todDareOrder=[...Array(TOD_DARE.length).keys()].sort(()=>Math.random()-0.5); todTruthIdx=0; todDareIdx=0; document.getElementById('tod-text').textContent='Shuffled! Tap to draw.'; }
+  function wyrShuffle()  { wyrIdx=0; document.getElementById('wyr-a').textContent=''; document.getElementById('wyr-b').textContent=''; document.getElementById('wyr-tag').textContent=wyrMode==='wyr'?'Would You Rather…':'This or That?'; }
+  function uopShuffle()  { uopIdx  = shuffleFlashcards(uopOrder,  UOP.length,  'uop-progress',  UOP.length);  document.getElementById('uop-text').textContent='Shuffled! Tap to draw.'; }
+  function quizShuffle() { quizIdx = shuffleFlashcards(quizOrder, QUIZ.length, 'quiz-progress', QUIZ.length); document.getElementById('quiz-text').textContent='Shuffled! Tap to draw.'; }
+  function catShuffle()  { catIdx  = shuffleFlashcards(catOrder,  CAT.length,  'cat-progress',  CAT.length);  document.getElementById('cat-title').textContent='Shuffled!'; document.getElementById('cat-example').textContent='Tap Next category to draw.'; }
+  function jengaShuffle(){ jengaIdx=0; jengaOrder=[...Array(JENGA_RULES.length).keys()].sort(()=>Math.random()-0.5); document.getElementById('jenga-rule').textContent='Shuffled! Tap to pull a block.'; }
+  function dareShuffle() { dareIdx=0; dareOrder=[...Array(DARE_ONLY.length).keys()].sort(()=>Math.random()-0.5); document.getElementById('dare-text').textContent='Shuffled! Tap to get a dare.'; }
+  function ttlShuffle()  { ttlIdx  = shuffleFlashcards(ttlOrder,  TTL.length,  'ttl-progress',  TTL.length);  document.getElementById('ttl-text').textContent='Shuffled! Tap to draw.'; }
+
+  // ══════════════════════════════════════════
+  // REGISTER ALL GAMES
+  // ══════════════════════════════════════════
+  function showGame(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    const inits = {
+      nhie:nhieInit, mlt:mltInit, tod:todInit, wyr:wyrInit, uop:uopInit,
+      quiz:quizInit, cat:catInit, jenga:jengaInit, trivia:triviaInit,
+      dare:dareInit, hotseat:hotseatInit, ttl:ttlInit,
+      hol:holInit, rtb:rtbInit, noscreen:()=>{}
+    };
+    if (inits[id]) inits[id]();
   }
 </script>
 </body>
