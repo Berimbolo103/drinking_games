@@ -154,6 +154,7 @@
   .badge-play { background: var(--gold); color: #1a1200; }
   .badge-soon { background: rgba(255,255,255,0.07); color: var(--text-muted); }
   .badge-ref  { background: rgba(96,168,224,0.2); color: #60a8e0; }
+  .badge-creator { background: linear-gradient(135deg,#e060a0,#a060e0); color: #fff; }
   .game-arrow {
     font-size: 16px; color: var(--gold); opacity: 0.7;
     transition: opacity 0.2s, transform 0.2s;
@@ -174,12 +175,15 @@
     padding: 1.25rem 1.25rem 0;
   }
   .back-btn {
-    font-size: 13px; color: var(--text-muted); cursor: pointer;
-    display: flex; align-items: center; gap: 6px;
-    background: none; border: none; font-family: 'Outfit', sans-serif;
-    transition: color 0.2s;
+    font-size: 15px; color: var(--text); cursor: pointer;
+    display: flex; align-items: center; gap: 8px;
+    background: var(--dark3); border: 0.5px solid rgba(255,255,255,0.12);
+    border-radius: 20px; padding: 8px 14px;
+    font-family: 'Outfit', sans-serif; font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap; flex-shrink: 0;
   }
-  .back-btn:hover { color: var(--gold); }
+  .back-btn:hover { background: var(--dark4); color: var(--gold); }
   .rof-logo {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 36px; color: var(--gold); letter-spacing: 0.06em;
@@ -381,10 +385,18 @@
   }
   .spin-area {
     position: relative;
-    width: min(80vw, 80vh, 380px);
-    height: min(80vw, 80vh, 380px);
+    width: min(80vw, 80vh, 340px);
+    height: min(80vw, 80vh, 340px);
     flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
+  }
+  .spin-area canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    cursor: pointer;
+    touch-action: manipulation;
+    position: absolute; inset: 0;
   }
   #spinCanvas {
     display: block;
@@ -559,9 +571,60 @@
     font-size: clamp(22px, 6vw, 32px); font-family: 'Bebas Neue', sans-serif;
     color: var(--text); letter-spacing: 0.04em; text-align: center;
   }
-  .cat-example {
-    font-size: 13px; color: var(--text-muted); font-style: italic;
+  .cat-example { font-size: 13px; color: var(--text-muted); font-style: italic; }
+  /* Custom category input */
+  /* Creator's Pick */
+  .creator-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    background: linear-gradient(135deg,#e060a0,#a060e0);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; font-size: clamp(16px,4.5vw,24px); letter-spacing:0.05em;
   }
+  .creator-filters {
+    display: flex; flex-wrap: wrap; gap: 6px; padding: 0.75rem 1.25rem 0;
+  }
+  .creator-filter-btn {
+    padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.15);
+    background: none; color: var(--text-muted); font-size: 12px; font-weight: 500;
+    cursor: pointer; font-family: 'Outfit', sans-serif; transition: all 0.15s; white-space: nowrap;
+  }
+  .creator-filter-btn.active { background: linear-gradient(135deg,#e060a0,#a060e0); border-color: transparent; color: #fff; }
+  .pg-btn.creator-next-btn { background: linear-gradient(135deg,#e060a0,#a060e0); border: none; color: #fff; font-weight: 700; }
+  .pg-btn.creator-next-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  .cat-custom-area {
+    padding: 0.75rem 1.25rem 1.5rem;
+    border-top: 0.5px solid rgba(255,255,255,0.07); margin-top: 0.25rem;
+  }
+  .cat-custom-label { font-size: 12px; color: var(--text-muted); letter-spacing: 0.08em; margin-bottom: 0.6rem; font-weight: 500; }
+  .cat-custom-row { display: flex; gap: 8px; align-items: stretch; }
+  .cat-custom-input {
+    flex: 1; padding: 10px 14px; border-radius: 12px;
+    background: var(--dark3); border: 1px solid rgba(255,255,255,0.12);
+    color: var(--text); font-size: 14px; font-family: 'Outfit', sans-serif;
+    outline: none; transition: border-color 0.2s;
+  }
+  .cat-custom-input:focus { border-color: rgba(255,255,255,0.3); }
+  .cat-custom-input::placeholder { color: var(--text-muted); }
+  .cat-custom-add-btn {
+    padding: 10px 18px; border-radius: 12px;
+    background: var(--gold); border: none; color: #1a1200;
+    font-size: 14px; font-weight: 700; cursor: pointer;
+    font-family: 'Outfit', sans-serif; transition: opacity 0.15s; flex-shrink: 0;
+  }
+  .cat-custom-add-btn:hover { opacity: 0.85; }
+  .cat-custom-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.6rem; }
+  .cat-custom-tag {
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(128,208,128,0.15); border: 1px solid rgba(128,208,128,0.3);
+    border-radius: 20px; padding: 4px 10px 4px 12px;
+    font-size: 12px; color: #80d080;
+  }
+  .cat-custom-tag button {
+    background: none; border: none; color: rgba(128,208,128,0.6);
+    cursor: pointer; font-size: 14px; line-height: 1; padding: 0; display: flex; align-items: center;
+  }
+  .cat-custom-tag button:hover { color: #80d080; }
 
   /* Reflex */
   .reflex-arena {
@@ -937,6 +1000,16 @@
         <span class="game-arrow">›</span>
       </div>
 
+      <div class="game-card featured" onclick="showGame('creator')">
+        <div class="game-number">17</div>
+        <div class="game-info">
+          <div class="game-name">Creator's Pick 🎯</div>
+          <div class="game-tag">MLBB · Gym · Sports · BJJ · Handpicked</div>
+        </div>
+        <span class="game-badge badge-creator">Creator</span>
+        <span class="game-arrow">›</span>
+      </div>
+
     </div>
   </div>
 
@@ -1301,7 +1374,15 @@
       <button class="pg-btn sec" onclick="catPrev()">&#8592; Back</button>
       <button class="pg-btn sec" onclick="catShuffle()">🔀</button>
       <div class="pg-progress" id="cat-progress">1 / 80</div>
-      <button class="pg-btn gold" onclick="catNext()">Next category &#8594;</button>
+      <button class="pg-btn gold" onclick="catNext()">Next &#8594;</button>
+    </div>
+    <div class="cat-custom-area">
+      <div class="cat-custom-label">➕ Add your own category</div>
+      <div class="cat-custom-row">
+        <input id="cat-custom-input" class="cat-custom-input" type="text" placeholder="e.g. Things you find in a gym bag" maxlength="80" onkeydown="if(event.key==='Enter')catAddCustom()">
+        <button class="cat-custom-add-btn" onclick="catAddCustom()">Add</button>
+      </div>
+      <div id="cat-custom-tags" class="cat-custom-tags"></div>
     </div>
   </div>
 </div>
@@ -1357,15 +1438,16 @@
     <button class="skip-spinner-btn" onclick="startGamePlay('trivia')">Skip</button>
   </div>
   <div id="trivia-play" style="display:none">
-    <div class="pg-eyebrow" id="trivia-category">General Knowledge</div>
-    <div class="trivia-card" id="trivia-qcard">
-      <div class="trivia-q" id="trivia-q">Tap Start to begin</div>
+    <div class="pg-eyebrow" id="trivia-category">Tap the card to begin</div>
+    <div class="trivia-card" id="trivia-qcard" style="cursor:pointer" onclick="triviaCardTap()">
+      <div class="trivia-q" id="trivia-q">Tap here to start</div>
       <div class="trivia-options" id="trivia-options"></div>
     </div>
     <div id="trivia-feedback" class="trivia-feedback"></div>
     <div class="pg-nav">
-      <div></div>
-      <button class="pg-btn gold" id="trivia-next-btn" onclick="triviaNext()">Next question &#8594;</button>
+      <button class="pg-btn sec" onclick="triviaShuffle()">🔀 Shuffle</button>
+      <div class="pg-progress" id="trivia-progress">1 / 100</div>
+      <button class="pg-btn gold" id="trivia-next-btn" onclick="triviaNext()">Next &#8594;</button>
     </div>
   </div>
 </div>
@@ -1494,18 +1576,20 @@
     <button class="skip-spinner-btn" onclick="startGamePlay('hol')">Skip</button>
   </div>
   <div id="hol-play" style="display:none">
-    <div class="pg-eyebrow">Current card</div>
-    <div class="hol-card-display" id="hol-current-card"></div>
+    <div class="pg-eyebrow" id="hol-eyebrow">Flip the first card to begin</div>
+    <div class="hol-card-display" id="hol-current-card">
+      <div style="display:flex;align-items:center;justify-content:center;height:180px;color:var(--text-muted);font-size:14px;">Tap "Flip Card" to start</div>
+    </div>
     <div class="hol-guess-row">
-      <button class="hol-btn lower" id="hol-lower" onclick="holGuess('lower')">⬇ Lower</button>
-      <button class="hol-btn higher" id="hol-higher" onclick="holGuess('higher')">⬆ Higher</button>
+      <button class="hol-btn lower" id="hol-lower" onclick="holGuess('lower')" disabled>⬇ Lower</button>
+      <button class="hol-btn higher" id="hol-higher" onclick="holGuess('higher')" disabled>⬆ Higher</button>
     </div>
     <div class="hol-feedback" id="hol-feedback"></div>
-    <div class="pg-drink-rule" id="hol-rule">Guess wrong = drink 🍺 · Same value = drink and flip again</div>
+    <div class="pg-drink-rule">Guess wrong = drink 🍺 · Same value = drink and flip again</div>
     <div class="pg-nav">
       <button class="pg-btn sec" onclick="holShuffle()">🔀 Shuffle</button>
       <div class="pg-progress" id="hol-progress">0 / 52</div>
-      <button class="pg-btn gold" onclick="holNext()">Next card &#8594;</button>
+      <button class="pg-btn gold" id="hol-next" onclick="holNext()">Flip card ›</button>
     </div>
   </div>
 </div>
@@ -1598,19 +1682,55 @@
     </div>
     <div class="ns-card">
       <div class="ns-label">I — 5-10 (五十 / 打手指) 🇸🇬</div>
-      <div class="ns-tag">2 players · Physical · SG classic · Best of 5</div>
+      <div class="ns-tag">2 players · Physical · SG classic · First to win 2 in a row</div>
       <div class="ns-rule">
-        Two players face each other. On "1-2-3-go!" both simultaneously reveal <strong>0, 5, or 10 fingers</strong> with one hand while shouting the combined total they predict.<br><br>
-        <strong>Winning:</strong> If only one player shouts the correct combined total, that player wins the round. The loser drinks. First to win <strong>5 rounds</strong> wins the game.<br><br>
-        <strong>Double call (both correct):</strong> If both players shout the correct total at the same time, the round is a draw — no drink, go again. This counts as a <strong>reprieve</strong>, not a win for either side.<br><br>
-        <strong>Both wrong:</strong> Both guessed wrong — no drink, replay the round immediately.<br><br>
-        <strong>Double call win rule:</strong> If a player wins via double call <strong>twice in a row</strong>, they are awarded a bonus round win. The opponent must also take an extra sip as a penalty for "letting it happen twice."
+        <strong>Setup:</strong> Do Scissors Paper Stone to decide who shouts first each round.<br><br>
+        <strong>How to play:</strong> Both players simultaneously show <strong>0, 5, or 10 fingers</strong>. The shouter calls out a number — <strong>0, 5, 10, 15, or 20</strong> — predicting the combined total of both hands. Then the other player shouts their prediction. Only one call per player per round.<br><br>
+        <strong>Winning a round:</strong> The player whose call matches the actual combined total wins that round. Loser drinks. If neither or both match, no drink — replay.<br><br>
+        <strong>Hand rule:</strong> You <strong>cannot</strong> show the same number twice in a row. If you showed 0 (both fists) last round, you must change your hand next round. Caught repeating = automatic loss of that round.<br><br>
+        <strong>Winning the game:</strong> You must win <strong>2 rounds in a row</strong> to win. One win resets if your opponent wins the next round. The first player to string back-to-back wins makes the other person drink a full penalty shot or nominated amount.
       </div>
     </div>
     <div class="ns-card">
       <div class="ns-label">K — Finger Guessing (猜手指)</div>
       <div class="ns-tag">2 players · Physical · SG classic</div>
       <div class="ns-rule">Both players simultaneously show 0–5 fingers with one hand while shouting a number 0–10. The player who correctly guesses the combined total of both hands wins. Loser drinks. If both guess correctly or both are wrong, replay. Play to 3 wins.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 17 CREATOR'S PICK ═══ -->
+<div id="creator" class="page">
+  <div class="game-header">
+    <button class="back-btn" onclick="showHome()">&#8592; Games</button>
+    <div class="game-logo creator-logo">Creator's Pick 🎯</div>
+    <div class="card-counter" id="creator-counter"></div>
+  </div>
+  <div id="creator-spinner">
+    <div class="spinner-intro">
+      <div class="spinner-eyebrow">Before you begin</div>
+      <div class="spinner-title">Who goes first?</div>
+      <div class="spinner-sub">Tap the arrow to spin</div>
+    </div>
+    <div class="spin-area"><canvas id="creator-canvas" onclick="spinGame('creator')"></canvas><div class="spin-hint" id="creator-hint">Tap to spin</div></div>
+    <div id="creator-spin-result" class="spin-result"></div>
+    <button class="start-game-btn" id="creator-start-btn" onclick="startGamePlay('creator')" style="display:none">Start game ›</button>
+    <button class="skip-spinner-btn" onclick="startGamePlay('creator')">Skip</button>
+  </div>
+  <div id="creator-play" style="display:none">
+    <!-- Filter tabs -->
+    <div class="creator-filters" id="creator-filters"></div>
+    <div class="pg-card cat-card" id="creator-card" onclick="creatorNext()">
+      <div class="pg-tag" id="creator-deck-label">All categories</div>
+      <div class="cat-title" id="creator-title">Tap to reveal</div>
+      <div class="cat-example" id="creator-example"></div>
+    </div>
+    <div class="pg-drink-rule">Go round naming things in the category. <strong>Hesitate or repeat</strong> = drink 🍺</div>
+    <div class="pg-nav">
+      <button class="pg-btn sec" onclick="creatorPrev()">&#8592; Back</button>
+      <button class="pg-btn sec" onclick="creatorShuffle()">🔀</button>
+      <div class="pg-progress" id="creator-progress">1 / —</div>
+      <button class="pg-btn creator-next-btn" onclick="creatorNext()">Next &#8594;</button>
     </div>
   </div>
 </div>
@@ -2081,6 +2201,7 @@
   function startGamePlay(id) {
     document.getElementById(id + '-spinner').style.display = 'none';
     document.getElementById(id + '-play').style.display = 'block';
+    if (id === 'hol') holStartPlay();
   }
 
   // ══════════════════════════════════════════
@@ -2921,10 +3042,32 @@
     {c:"Animals you might spot in Singapore",e:"e.g. monitor lizard, hornbill, otters at Bishan Park..."},
     {c:"Types of HDB flats",e:"e.g. 3-room, 4-room, executive maisonette, DBSS..."},
     {c:"Things Singaporeans love about Johor Bahru",e:"e.g. cheap food, petrol, LEGOLAND, massage..."},
+    {c:"MLBB heroes",e:"e.g. Layla, Tigreal, Alucard, Kagura..."},
+    {c:"MLBB marksman heroes",e:"e.g. Layla, Clint, Bruno, Irithel, Beatrix..."},
+    {c:"MLBB mage heroes",e:"e.g. Kagura, Lunox, Lylia, Cecilion, Odette..."},
+    {c:"MLBB tank heroes",e:"e.g. Tigreal, Franco, Akai, Johnson, Gatotkaca..."},
+    {c:"MLBB assassin heroes",e:"e.g. Lancelot, Helcurt, Hayabusa, Natalia, Ling..."},
+    {c:"MLBB fighter heroes",e:"e.g. Alucard, Zilong, Roger, Chou, Paquito..."},
+    {c:"MLBB support heroes",e:"e.g. Estes, Angela, Floryn, Rafaela, Mathilda..."},
+    {c:"MLBB battle spells",e:"e.g. Flicker, Retribution, Inspire, Vengeance..."},
+    {c:"MLBB emblem types",e:"e.g. Assassin, Mage, Tank, Marksman, Fighter..."},
+    {c:"Things that get you flamed in MLBB",e:"e.g. feeding, no rotation, spamming surrender, AFK..."},
+    {c:"MLBB map objectives",e:"e.g. Lord, Turtle, Towers, Base, Lithowanderer..."},
+    {c:"MLBB ranked tiers",e:"e.g. Warrior, Elite, Master, Grandmaster, Epic, Legend, Mythic..."},
+    {c:"Things you hear in MLBB voice chat",e:"e.g. 'push mid', 'gather', 'need backup', 'GG'..."},
+    {c:"MLBB heroes with the most annoying ultimates",e:"e.g. Chou, Tigreal, Franco, Atlas, Kaja..."},
   ];
-  let catIdx=0,catOrder=[];
+
+  let catCustom = [];
+  let catIdx=0, catOrder=[];
+
+  function catAllCards() {
+    return [...CAT, ...catCustom];
+  }
+
   function catInit(){
-    catOrder=[...Array(CAT.length).keys()].sort(()=>Math.random()-0.5);
+    const all = catAllCards();
+    catOrder=[...Array(all.length).keys()].sort(()=>Math.random()-0.5);
     catIdx=0;
     document.getElementById('cat-spinner').style.display='flex';
     document.getElementById('cat-play').style.display='none';
@@ -2934,20 +3077,46 @@
     document.getElementById('cat-hint').style.opacity='1';
     document.getElementById('cat-title').textContent='Tap to reveal';
     document.getElementById('cat-example').textContent='';
-    document.getElementById('cat-progress').textContent=`1 / ${CAT.length}`;
+    document.getElementById('cat-progress').textContent=`1 / ${all.length}`;
     requestAnimationFrame(()=>initGameSpinner('cat'));
   }
   function catNext(){
-    if(catIdx>=CAT.length)return;
+    const all = catAllCards();
+    if(catIdx>=all.length)return;
     const card=document.getElementById('cat-card');
     card.classList.remove('flash');void card.offsetWidth;card.classList.add('flash');
-    const item=CAT[catOrder[catIdx]];
+    const item=all[catOrder[catIdx]];
     document.getElementById('cat-title').textContent=item.c;
     document.getElementById('cat-example').textContent=item.e;
     catIdx++;
-    document.getElementById('cat-progress').textContent=`${catIdx} / ${CAT.length}`;
+    document.getElementById('cat-progress').textContent=`${catIdx} / ${all.length}`;
   }
   function catPrev(){if(catIdx<=1)return;catIdx-=2;catNext();}
+  function catShuffle(){
+    const all = catAllCards();
+    catOrder=[...Array(all.length).keys()].sort(()=>Math.random()-0.5);
+    catIdx=0;
+    document.getElementById('cat-title').textContent='Shuffled!';
+    document.getElementById('cat-example').textContent='Tap Next category to draw.';
+    document.getElementById('cat-progress').textContent=`1 / ${all.length}`;
+  }
+  function catAddCustom(){
+    const inp = document.getElementById('cat-custom-input');
+    const val = inp.value.trim();
+    if(!val) return;
+    catCustom.push({c: val, e: 'Custom category'});
+    inp.value='';
+    const tag=document.createElement('div');
+    tag.className='cat-custom-tag';
+    tag.innerHTML=`<span>${val}</span><button onclick="catRemoveCustom(this,'${val.replace(/'/g,"\\'")}')">×</button>`;
+    document.getElementById('cat-custom-tags').appendChild(tag);
+    document.getElementById('cat-progress').textContent=`${catIdx} / ${catAllCards().length}`;
+  }
+  function catRemoveCustom(btn, val){
+    catCustom = catCustom.filter(c=>c.c!==val);
+    btn.parentElement.remove();
+    document.getElementById('cat-progress').textContent=`${catIdx} / ${catAllCards().length}`;
+  }
 
   // ══════════════════════════════════════════
   // 09 — 5-10 REFLEX
@@ -3170,33 +3339,51 @@
     {q:"What is Singapore's national pledge delivered at?",o:["NDP","Schools daily","Parliament","All public events"],a:1,c:"Singapore"},
     {q:"Who wrote the play Hamlet?",o:["Charles Dickens","Geoffrey Chaucer","William Shakespeare","John Keats"],a:2,c:"Literature"}
   ];
-  let triviaIdx=0,triviaOrder=[],triviaAnswered=false;
+  let triviaIdx=0,triviaOrder=[],triviaAnswered=false,triviaStarted=false;
   function triviaInit(){
     triviaOrder=[...Array(TRIVIA.length).keys()].sort(()=>Math.random()-0.5);
-    triviaIdx=0;triviaAnswered=false;
+    triviaIdx=0;triviaAnswered=false;triviaStarted=false;
     document.getElementById('trivia-spinner').style.display='flex';
     document.getElementById('trivia-play').style.display='none';
     document.getElementById('trivia-spin-result').classList.remove('show');
     document.getElementById('trivia-start-btn').style.display='none';
     document.getElementById('trivia-hint').textContent='Tap to spin';
     document.getElementById('trivia-hint').style.opacity='1';
-    document.getElementById('trivia-q').textContent='Tap Start to begin';
+    document.getElementById('trivia-q').textContent='Tap here to start';
     document.getElementById('trivia-options').innerHTML='';
     document.getElementById('trivia-feedback').textContent='';
-    document.getElementById('trivia-counter').textContent=`1 / ${TRIVIA.length}`;
+    document.getElementById('trivia-category').textContent='Tap the card to begin';
+    if(document.getElementById('trivia-progress'))
+      document.getElementById('trivia-progress').textContent=`1 / ${TRIVIA.length}`;
     requestAnimationFrame(()=>initGameSpinner('trivia'));
+  }
+  function triviaCardTap(){
+    if(!triviaStarted){ triviaStarted=true; triviaNext(); }
+  }
+  function triviaShuffle(){
+    triviaOrder=[...Array(TRIVIA.length).keys()].sort(()=>Math.random()-0.5);
+    triviaIdx=0;triviaAnswered=false;triviaStarted=false;
+    document.getElementById('trivia-q').textContent='Shuffled! Tap the card to begin.';
+    document.getElementById('trivia-options').innerHTML='';
+    document.getElementById('trivia-feedback').textContent='';
+    document.getElementById('trivia-category').textContent='Deck shuffled 🔀';
+    if(document.getElementById('trivia-progress'))
+      document.getElementById('trivia-progress').textContent=`1 / ${TRIVIA.length}`;
   }
   function triviaNext(){
     if(triviaIdx>=TRIVIA.length){triviaIdx=0;triviaOrder=[...Array(TRIVIA.length).keys()].sort(()=>Math.random()-0.5);}
     const item=TRIVIA[triviaOrder[triviaIdx]];
-    triviaIdx++;triviaAnswered=false;
+    triviaIdx++;triviaAnswered=false;triviaStarted=true;
     document.getElementById('trivia-category').textContent=item.c;
     document.getElementById('trivia-q').textContent=item.q;
     document.getElementById('trivia-feedback').textContent='';
     document.getElementById('trivia-feedback').className='trivia-feedback';
-    document.getElementById('trivia-counter').textContent=`${triviaIdx} / ${TRIVIA.length}`;
+    if(document.getElementById('trivia-progress'))
+      document.getElementById('trivia-progress').textContent=`${triviaIdx} / ${TRIVIA.length}`;
     const optsEl=document.getElementById('trivia-options');
     optsEl.innerHTML=item.o.map((o,i)=>`<button class="trivia-opt" onclick="triviaAnswer(${i},${item.a})">${String.fromCharCode(65+i)}. ${o}</button>`).join('');
+    // make card non-clickable once started
+    document.getElementById('trivia-qcard').onclick=null;
   }
   function triviaAnswer(chosen,correct){
     if(triviaAnswered)return;triviaAnswered=true;
@@ -3462,11 +3649,28 @@
     requestAnimationFrame(() => initGameSpinner('hol'));
   }
 
+  function holStartPlay() {
+    holDeck = freshDeck();
+    holIndex = 0; holCurrent = null; holWaiting = false;
+    document.getElementById('hol-current-card').innerHTML =
+      '<div style="display:flex;align-items:center;justify-content:center;height:180px;color:var(--text-muted);font-size:14px;">Tap "Flip card" to start</div>';
+    document.getElementById('hol-feedback').textContent = '';
+    document.getElementById('hol-feedback').className = 'hol-feedback';
+    document.getElementById('hol-progress').textContent = `0 / ${holDeck.length}`;
+    document.getElementById('hol-lower').disabled = true;
+    document.getElementById('hol-higher').disabled = true;
+    document.getElementById('hol-next').textContent = 'Flip card ›';
+    document.getElementById('hol-next').style.display = 'block';
+    document.getElementById('hol-eyebrow').textContent = 'Flip the first card to begin';
+  }
+
   function holDeal() {
     if (holIndex >= holDeck.length) {
       document.getElementById('hol-feedback').textContent = '🎉 Deck finished! Shuffle to play again.';
       document.getElementById('hol-feedback').className = 'hol-feedback same';
-      holDisableGuess();
+      document.getElementById('hol-lower').disabled = true;
+      document.getElementById('hol-higher').disabled = true;
+      document.getElementById('hol-next').style.display = 'none';
       return;
     }
     const card = holDeck[holIndex++];
@@ -3479,10 +3683,10 @@
     document.getElementById('hol-lower').disabled = false;
     document.getElementById('hol-higher').disabled = false;
     document.getElementById('hol-next').style.display = 'none';
+    document.getElementById('hol-eyebrow').textContent = 'Higher or Lower?';
   }
 
   function holNext() {
-    document.getElementById('hol-next').style.display = 'none';
     holDeal();
   }
 
@@ -3491,15 +3695,16 @@
     const next = holDeck[holIndex];
     const curVal = VAL_NUM[holCurrent.v];
     const nxtVal = VAL_NUM[next.v];
-    holDisableGuess();
+    document.getElementById('hol-lower').disabled = true;
+    document.getElementById('hol-higher').disabled = true;
 
-    // Show next card
-    const row = document.getElementById('hol-current-card');
-    row.innerHTML = `<div style="display:flex;gap:10px;justify-content:center;align-items:center">
-      ${cardSVG(holCurrent.v, holCurrent.s)}
-      <span style="color:var(--text-muted);font-size:20px;">→</span>
-      ${cardSVG(next.v, next.s)}
-    </div>`;
+    // Show both cards side by side
+    document.getElementById('hol-current-card').innerHTML =
+      `<div style="display:flex;gap:10px;justify-content:center;align-items:flex-start;flex-wrap:wrap">
+        <div style="flex:1;max-width:min(40vw,160px)">${cardSVG(holCurrent.v, holCurrent.s)}</div>
+        <div style="display:flex;align-items:center;padding-top:40px;color:var(--text-muted);font-size:22px;">→</div>
+        <div style="flex:1;max-width:min(40vw,160px)">${cardSVG(next.v, next.s)}</div>
+      </div>`;
 
     const fb = document.getElementById('hol-feedback');
     if (nxtVal === curVal) {
@@ -3514,24 +3719,24 @@
     holIndex++;
     holWaiting = false;
     document.getElementById('hol-progress').textContent = `${holIndex} / ${holDeck.length}`;
+    document.getElementById('hol-next').textContent = 'Next card ›';
     document.getElementById('hol-next').style.display = 'block';
-  }
-
-  function holDisableGuess() {
-    document.getElementById('hol-lower').disabled = true;
-    document.getElementById('hol-higher').disabled = true;
+    document.getElementById('hol-eyebrow').textContent = 'Result';
   }
 
   function holShuffle() {
     holDeck = freshDeck();
     holIndex = 0; holCurrent = null; holWaiting = false;
-    document.getElementById('hol-current-card').innerHTML = '<div style="text-align:center;color:var(--text-muted);font-size:14px;padding:2rem">Deck shuffled! Tap Next to start.</div>';
+    document.getElementById('hol-current-card').innerHTML =
+      '<div style="display:flex;align-items:center;justify-content:center;height:180px;color:var(--text-muted);font-size:14px;">🔀 Deck shuffled! Tap "Flip card" to start.</div>';
     document.getElementById('hol-feedback').textContent = '';
+    document.getElementById('hol-feedback').className = 'hol-feedback';
     document.getElementById('hol-progress').textContent = `0 / ${holDeck.length}`;
     document.getElementById('hol-lower').disabled = true;
     document.getElementById('hol-higher').disabled = true;
+    document.getElementById('hol-next').textContent = 'Flip card ›';
     document.getElementById('hol-next').style.display = 'block';
-    document.getElementById('hol-next').textContent = 'Flip first card ›';
+    document.getElementById('hol-eyebrow').textContent = 'Deck shuffled — flip to start';
   }
 
   // ══════════════════════════════════════════
@@ -3715,9 +3920,254 @@
       nhie:nhieInit, mlt:mltInit, tod:todInit, wyr:wyrInit, uop:uopInit,
       quiz:quizInit, cat:catInit, jenga:jengaInit, trivia:triviaInit,
       dare:dareInit, hotseat:hotseatInit, ttl:ttlInit,
-      hol:holInit, rtb:rtbInit, noscreen:()=>{}
+      hol:holInit, rtb:rtbInit, noscreen:()=>{}, creator:creatorInit
     };
     if (inits[id]) inits[id]();
+  }
+
+  // ══════════════════════════════════════════
+  // 17 — CREATOR'S PICK
+  // ══════════════════════════════════════════
+  const CREATOR_CATS = [
+
+    // ── MLBB: HEROES BY ROLE ──────────────────
+    {deck:"MLBB",c:"MLBB marksman heroes",e:"e.g. Layla, Clint, Bruno, Irithel, Beatrix, Hanabi..."},
+    {deck:"MLBB",c:"MLBB mage heroes",e:"e.g. Kagura, Lunox, Lylia, Cecilion, Odette, Vale..."},
+    {deck:"MLBB",c:"MLBB assassin heroes",e:"e.g. Lancelot, Helcurt, Hayabusa, Natalia, Ling, Gusion..."},
+    {deck:"MLBB",c:"MLBB fighter heroes",e:"e.g. Alucard, Zilong, Chou, Paquito, Terizla, X.Borg..."},
+    {deck:"MLBB",c:"MLBB tank heroes",e:"e.g. Tigreal, Franco, Akai, Gatotkaca, Atlas, Grock..."},
+    {deck:"MLBB",c:"MLBB support heroes",e:"e.g. Estes, Angela, Floryn, Rafaela, Mathilda, Diggie..."},
+    {deck:"MLBB",c:"MLBB marksmen with a dash or blink skill",e:"e.g. Beatrix, Brody, Yi Sun-shin, Granger..."},
+    {deck:"MLBB",c:"MLBB heroes with a hook or pull skill",e:"e.g. Franco, Kufra, Barats, Jawhead..."},
+    {deck:"MLBB",c:"MLBB heroes who can go invisible",e:"e.g. Natalia, Helcurt, Lancelot (ult), Saber..."},
+    {deck:"MLBB",c:"MLBB heroes with a global ultimate",e:"e.g. Kimmy, Layla, Yi Sun-shin, Granger..."},
+    {deck:"MLBB",c:"MLBB heroes named after real mythology",e:"e.g. Atlas, Uranus, Gatotkaca, Hylos, Vexana..."},
+    {deck:"MLBB",c:"MLBB heroes added in the last 2 years",e:"e.g. Ixia, Cici, Chip, Suyou, Lukas..."},
+    {deck:"MLBB",c:"MLBB heroes with a revive mechanic",e:"e.g. Argus, Alice (passive), Uranus (regen)..."},
+    {deck:"MLBB",c:"MLBB heroes that can steal or copy skills",e:"e.g. Wanwan, Harith, Benedetta, Kadita..."},
+    {deck:"MLBB",c:"MLBB heroes with a crowd control ultimate",e:"e.g. Tigreal, Aurora, Odette, Vexana, Atlas..."},
+
+    // ── MLBB: SKILLS & ULTIMATES ─────────────
+    {deck:"MLBB",c:"MLBB ultimates that deal burst AoE damage",e:"e.g. Pharsa ult, Aurora ult, Lunox ult, Vale ult..."},
+    {deck:"MLBB",c:"MLBB skills that shield yourself or an ally",e:"e.g. Angela ult, Lolita shield, Esmeralda ult..."},
+    {deck:"MLBB",c:"MLBB ultimates that transform the hero",e:"e.g. Roger, Grock, Barats, Ruby, Alpha..."},
+    {deck:"MLBB",c:"MLBB skills that summon minions or clones",e:"e.g. Nana, Zhask, Hanabi, Sun, Cyclops..."},
+    {deck:"MLBB",c:"MLBB skills that charge up before releasing",e:"e.g. Lesley, Claude, Beatrix, Brody, Granger..."},
+
+    // ── MLBB: GAME MECHANICS ─────────────────
+    {deck:"MLBB",c:"MLBB battle spells",e:"e.g. Flicker, Retribution, Inspire, Vengeance, Aegis..."},
+    {deck:"MLBB",c:"MLBB emblem types",e:"e.g. Common, Assassin, Mage, Fighter, Tank, Marksman, Support..."},
+    {deck:"MLBB",c:"MLBB ranked tiers in order",e:"e.g. Warrior → Elite → Master → Grandmaster → Epic → Legend → Mythic"},
+    {deck:"MLBB",c:"MLBB map objectives",e:"e.g. Turtle, Lord, Towers, Base, Lithowanderer, Serpent Turtle..."},
+    {deck:"MLBB",c:"MLBB items for tanking",e:"e.g. Dominance Ice, Queen's Wings, Immortality, Antique Cuirass..."},
+    {deck:"MLBB",c:"MLBB items for burst mages",e:"e.g. Lightning Truncheon, Holy Crystal, Blood Wings, Genius Wand..."},
+    {deck:"MLBB",c:"MLBB items for physical damage dealers",e:"e.g. Blade of Despair, Malefic Roar, Hunter Strike, Endless Battle..."},
+    {deck:"MLBB",c:"MLBB jungle monsters",e:"e.g. Crab, Lizard, Turtle, Lord, Lithowanderer, Blue Buff..."},
+    {deck:"MLBB",c:"MLBB things that give you an advantage in early game",e:"e.g. first blood, turtle, roam priority, blue buff, invade..."},
+    {deck:"MLBB",c:"Reasons your MLBB team loses",e:"e.g. feeding jungler, no backup, AFK, no vision, wrong draft..."},
+    {deck:"MLBB",c:"Things tilted MLBB players say in chat",e:"e.g. 'gg noob', 'report', 'stupid tank', 'no ult', 'surrender'..."},
+    {deck:"MLBB",c:"MLBB hero skins with special effects",e:"e.g. Legend skins, Collector skins, Epic skins, Squad skins..."},
+    {deck:"MLBB",c:"MLBB assassins who can one-shot a marksman",e:"e.g. Lancelot, Helcurt, Gusion, Benedetta, Ling..."},
+    {deck:"MLBB",c:"MLBB heroes good for solo carrying",e:"e.g. Ling, Fanny, Gusion, Harith, Claude, Layla (lategame)..."},
+
+    // ── GYMS IN SINGAPORE ────────────────────
+    {deck:"Gyms SG",c:"Gyms in Singapore",e:"e.g. Anytime Fitness, Pure Fitness, Fitness First, ActiveSG..."},
+    {deck:"Gyms SG",c:"Budget gyms in Singapore under $50/month",e:"e.g. ActiveSG gym, Gym Pod, Anytime Fitness (promo)..."},
+    {deck:"Gyms SG",c:"Premium gyms in Singapore",e:"e.g. Pure Fitness, Fitness First Platinum, Virgin Active..."},
+    {deck:"Gyms SG",c:"24-hour gyms in Singapore",e:"e.g. Anytime Fitness, Gym Pod, FlexFit, Planet Fitness..."},
+    {deck:"Gyms SG",c:"BJJ gyms / martial arts gyms in Singapore",e:"e.g. Evolve MMA, Monarchy MMA, Juggernaut Fight Club..."},
+    {deck:"Gyms SG",c:"CrossFit boxes in Singapore",e:"e.g. CrossFit Bukit Timah, CrossFit Tanjong Pagar, CrossFit 8..."},
+    {deck:"Gyms SG",c:"ActiveSG gym locations in Singapore",e:"e.g. Bishan CC, Tampines Hub, Kallang Wave, Heartbeat@Bedok..."},
+    {deck:"Gyms SG",c:"Things you hate about your gym",e:"e.g. no squat rack, smells bad, always crowded, hogging equipment..."},
+    {deck:"Gyms SG",c:"Gym equipment you always see people use wrong",e:"e.g. lat pulldown behind neck, back hyperextension, cable crossover..."},
+    {deck:"Gyms SG",c:"Gym archetypes you meet in Singapore gyms",e:"e.g. phone bro, grunt guy, mirror selfie person, unsolicited advice uncle..."},
+
+    // ── WORKOUTS: CHEST ──────────────────────
+    {deck:"Workouts",c:"Chest exercises",e:"e.g. bench press, incline dumbbell, cable fly, push-up, dips..."},
+    {deck:"Workouts",c:"Upper chest exercises",e:"e.g. incline bench press, incline dumbbell fly, cable low to high fly..."},
+    {deck:"Workouts",c:"Lower chest exercises",e:"e.g. decline bench press, cable high to low fly, dips..."},
+    {deck:"Workouts",c:"Chest exercises with no equipment",e:"e.g. push-up, diamond push-up, wide push-up, pike push-up..."},
+
+    // ── WORKOUTS: BACK ───────────────────────
+    {deck:"Workouts",c:"Back exercises (lats)",e:"e.g. pull-up, lat pulldown, seated cable row, single-arm row..."},
+    {deck:"Workouts",c:"Upper back exercises",e:"e.g. face pull, rear delt fly, bent-over row, T-bar row, shrugs..."},
+    {deck:"Workouts",c:"Lower back exercises",e:"e.g. deadlift, Romanian deadlift, hyperextension, good morning..."},
+    {deck:"Workouts",c:"Pulling exercises",e:"e.g. pull-up, chin-up, lat pulldown, bent-over row, inverted row..."},
+
+    // ── WORKOUTS: SHOULDERS ──────────────────
+    {deck:"Workouts",c:"Shoulder exercises",e:"e.g. overhead press, lateral raise, front raise, rear delt fly, upright row..."},
+    {deck:"Workouts",c:"Rear delt exercises",e:"e.g. face pull, rear delt fly, bent-over lateral raise, reverse pec deck..."},
+    {deck:"Workouts",c:"Shoulder pressing variations",e:"e.g. military press, dumbbell shoulder press, Arnold press, push press..."},
+
+    // ── WORKOUTS: ARMS ───────────────────────
+    {deck:"Workouts",c:"Bicep exercises",e:"e.g. barbell curl, hammer curl, preacher curl, cable curl, concentration curl..."},
+    {deck:"Workouts",c:"Tricep exercises",e:"e.g. skull crusher, tricep pushdown, overhead extension, close-grip bench, dips..."},
+    {deck:"Workouts",c:"Forearm exercises",e:"e.g. wrist curl, reverse curl, farmer's carry, dead hang, plate pinch..."},
+
+    // ── WORKOUTS: LEGS ───────────────────────
+    {deck:"Workouts",c:"Leg exercises",e:"e.g. squat, leg press, Romanian deadlift, walking lunge, leg curl..."},
+    {deck:"Workouts",c:"Quad exercises",e:"e.g. squat, leg press, leg extension, hack squat, Bulgarian split squat..."},
+    {deck:"Workouts",c:"Hamstring exercises",e:"e.g. Romanian deadlift, leg curl, Nordic curl, stiff-leg deadlift, good morning..."},
+    {deck:"Workouts",c:"Glute exercises",e:"e.g. hip thrust, glute bridge, sumo squat, cable kickback, Romanian deadlift..."},
+    {deck:"Workouts",c:"Calf exercises",e:"e.g. standing calf raise, seated calf raise, donkey calf raise, jump rope..."},
+    {deck:"Workouts",c:"Squat variations",e:"e.g. back squat, front squat, goblet squat, Bulgarian split squat, hack squat..."},
+    {deck:"Workouts",c:"Deadlift variations",e:"e.g. conventional, Romanian, sumo, trap bar, single-leg, stiff-leg..."},
+
+    // ── WORKOUTS: CORE ───────────────────────
+    {deck:"Workouts",c:"Abs exercises",e:"e.g. crunch, leg raise, plank, hollow body, ab wheel rollout..."},
+    {deck:"Workouts",c:"Core stability exercises",e:"e.g. plank, dead bug, bird dog, pallof press, McGill curl-up..."},
+    {deck:"Workouts",c:"Six pack exercises",e:"e.g. hanging leg raise, cable crunch, reverse crunch, dragon flag..."},
+
+    // ── WORKOUTS: CARDIO ─────────────────────
+    {deck:"Workouts",c:"Cardio exercises",e:"e.g. running, cycling, rowing, jump rope, elliptical, swimming..."},
+    {deck:"Workouts",c:"HIIT exercises",e:"e.g. burpee, mountain climber, jump squat, box jump, battle rope..."},
+    {deck:"Workouts",c:"Low-impact cardio options",e:"e.g. swimming, cycling, elliptical, walking, rowing machine..."},
+    {deck:"Workouts",c:"Full body compound exercises",e:"e.g. deadlift, squat, bench press, overhead press, pull-up, clean..."},
+    {deck:"Workouts",c:"Plyometric exercises",e:"e.g. box jump, broad jump, depth jump, clap push-up, jump lunge..."},
+    {deck:"Workouts",c:"Olympic weightlifting movements",e:"e.g. clean and jerk, snatch, hang clean, power clean, push jerk..."},
+    {deck:"Workouts",c:"Functional training exercises",e:"e.g. farmer's carry, sled push, tire flip, battle rope, kettlebell swing..."},
+    {deck:"Workouts",c:"Things beginners get wrong at the gym",e:"e.g. skipping warm-up, no progressive overload, ego lifting, no sleep..."},
+    {deck:"Workouts",c:"Gym bro myths",e:"e.g. 'don't eat carbs', 'more sets = more gains', 'spot reduction works'..."},
+    {deck:"Workouts",c:"Things you need for a good workout",e:"e.g. sleep, protein, progressive overload, water, rest days..."},
+
+    // ── SPORTS ──────────────────────────────
+    {deck:"Sports",c:"Types of sports",e:"e.g. football, basketball, tennis, swimming, badminton..."},
+    {deck:"Sports",c:"Combat sports",e:"e.g. boxing, wrestling, judo, BJJ, Muay Thai, MMA, sambo..."},
+    {deck:"Sports",c:"Racket sports",e:"e.g. badminton, tennis, squash, table tennis, pickleball, padel..."},
+    {deck:"Sports",c:"Water sports",e:"e.g. swimming, surfing, kayaking, water polo, diving, rowing..."},
+    {deck:"Sports",c:"Team ball sports",e:"e.g. football, basketball, volleyball, rugby, handball, water polo..."},
+    {deck:"Sports",c:"Individual sports",e:"e.g. swimming, gymnastics, golf, tennis, cycling, athletics..."},
+    {deck:"Sports",c:"Sports popular in Singapore",e:"e.g. badminton, swimming, football, basketball, bowling, table tennis..."},
+    {deck:"Sports",c:"Extreme or adventure sports",e:"e.g. rock climbing, BASE jumping, skydiving, motocross, big wave surfing..."},
+    {deck:"Sports",c:"Sports at the Olympics",e:"e.g. gymnastics, athletics, swimming, judo, fencing, weightlifting..."},
+    {deck:"Sports",c:"Sports with a belt or ranking system",e:"e.g. BJJ, judo, karate, taekwondo, wrestling..."},
+    {deck:"Sports",c:"Sports that double as self-defence",e:"e.g. BJJ, Muay Thai, boxing, judo, Krav Maga, wrestling..."},
+    {deck:"Sports",c:"Sports you can do alone",e:"e.g. running, swimming, golf, gymnastics, cycling, rock climbing..."},
+    {deck:"Sports",c:"Sports where the shortest person wins",e:"e.g. gymnastics, weightlifting (relative strength), wrestling (small div)..."},
+    {deck:"Sports",c:"Sports Singaporeans are passionate about",e:"e.g. football, badminton, bowling, esports (MLBB!), swimming..."},
+
+    // ── BJJ: SUBMISSIONS ─────────────────────
+    {deck:"BJJ",c:"BJJ submissions (chokes)",e:"e.g. rear naked choke, guillotine, triangle, bow and arrow, D'arce..."},
+    {deck:"BJJ",c:"BJJ submissions (joint locks)",e:"e.g. armbar, kimura, Americana, omoplata, straight ankle lock..."},
+    {deck:"BJJ",c:"BJJ leg lock submissions",e:"e.g. heel hook, ankle lock, kneebar, calf slicer, toe hold..."},
+    {deck:"BJJ",c:"BJJ choke variations",e:"e.g. rear naked choke, loop choke, cross collar choke, baseball bat choke..."},
+    {deck:"BJJ",c:"BJJ shoulder lock submissions",e:"e.g. Americana, kimura, omoplata, mir lock, paintbrush..."},
+    {deck:"BJJ",c:"BJJ wrist lock submissions",e:"e.g. wristlock from guard, kimura grip wrist, Z-lock..."},
+    {deck:"BJJ",c:"BJJ submissions from mount",e:"e.g. armbar, Americana, kimura, arm triangle, cross collar choke..."},
+    {deck:"BJJ",c:"BJJ submissions from the back",e:"e.g. rear naked choke, bow and arrow, armbar, body triangle..."},
+    {deck:"BJJ",c:"BJJ submissions from guard",e:"e.g. triangle choke, armbar, kimura, omoplata, guillotine, gogoplata..."},
+    {deck:"BJJ",c:"BJJ submissions from side control",e:"e.g. Americana, kimura, arm triangle, north-south choke, paper cutter..."},
+
+    // ── BJJ: POSITIONS & CONCEPTS ────────────
+    {deck:"BJJ",c:"BJJ dominant positions",e:"e.g. mount, back mount, side control, knee on belly, north-south..."},
+    {deck:"BJJ",c:"BJJ guard types",e:"e.g. closed guard, open guard, spider guard, De La Riva, butterfly..."},
+    {deck:"BJJ",c:"BJJ sweeps from closed guard",e:"e.g. hip bump sweep, scissor sweep, flower sweep, pendulum sweep..."},
+    {deck:"BJJ",c:"BJJ takedowns",e:"e.g. double leg, single leg, hip throw, ankle pick, fireman carry..."},
+    {deck:"BJJ",c:"BJJ escapes",e:"e.g. bridge and roll, elbow-knee escape, granby roll, limp arm..."},
+    {deck:"BJJ",c:"BJJ concepts",e:"e.g. framing, base, posture, grips, pressure, timing, weight distribution..."},
+    {deck:"BJJ",c:"BJJ belt ranks in order",e:"e.g. White → Blue → Purple → Brown → Black → Red/Black → Red/White → Red"},
+    {deck:"BJJ",c:"Things your BJJ coach always says",e:"e.g. 'breathe', 'hip out', 'stay tight', 'don't muscle it', 'tap early'..."},
+    {deck:"BJJ",c:"Things that happen in your first BJJ class",e:"e.g. tapped 10 times, learned to fall, survived, forgot everything..."},
+    {deck:"BJJ",c:"BJJ tournament formats",e:"e.g. IBJJF, ADCC, Polaris, ONE FC sub-only, EBI, Quintet..."},
+
+    // ── BJJ: GI BRANDS ──────────────────────
+    {deck:"BJJ",c:"BJJ Gi brands",e:"e.g. Shoyoroll, Scramble, Tatami, Fuji, Kingz, Origin, Gameness..."},
+    {deck:"BJJ",c:"Premium / collector BJJ Gi brands",e:"e.g. Shoyoroll, Albino & Preto (A&P),93 Brand, Vulkan..."},
+    {deck:"BJJ",c:"Budget-friendly BJJ Gi brands",e:"e.g. Fuji, Hayabusa, Sanabul, Venum, Piranha, Atama (entry)..."},
+    {deck:"BJJ",c:"No-Gi BJJ brands",e:"e.g. Scramble, Tatami, Fuji, Hyperfly, Grips Athletics, Inverted Gear..."},
+    {deck:"BJJ",c:"BJJ brands that also make MMA gear",e:"e.g. Hayabusa, Venum, Bad Boy, RDX, Fairtex..."},
+    {deck:"BJJ",c:"BJJ gear you need to start training",e:"e.g. gi, belt, mouthguard, rash guard, ear guards (optional)..."},
+    {deck:"BJJ",c:"Things that make a Gi expensive",e:"e.g. ripstop weave, embroidery, limited drop, lightweight material..."},
+    {deck:"BJJ",c:"BJJ Gi weave types",e:"e.g. single weave, double weave, gold weave, pearl weave, ripstop..."},
+  ];
+
+  const CREATOR_DECKS = ['All', 'MLBB', 'Gyms SG', 'Workouts', 'Sports', 'BJJ'];
+  let creatorActiveDecks = new Set(['All']);
+  let creatorIdx = 0, creatorOrder = [], creatorFiltered = [];
+
+  function creatorFilteredCards() {
+    if (creatorActiveDecks.has('All')) return CREATOR_CATS;
+    return CREATOR_CATS.filter(c => creatorActiveDecks.has(c.deck));
+  }
+
+  function creatorBuildFilters() {
+    const wrap = document.getElementById('creator-filters');
+    wrap.innerHTML = CREATOR_DECKS.map(d =>
+      `<button class="creator-filter-btn${creatorActiveDecks.has(d) ? ' active' : ''}"
+        onclick="creatorToggleDeck('${d}')">${d}${d==='All'?'':` (${CREATOR_CATS.filter(c=>c.deck===d).length})`}</button>`
+    ).join('');
+  }
+
+  function creatorToggleDeck(deck) {
+    if (deck === 'All') {
+      creatorActiveDecks = new Set(['All']);
+    } else {
+      creatorActiveDecks.delete('All');
+      if (creatorActiveDecks.has(deck)) {
+        creatorActiveDecks.delete(deck);
+        if (creatorActiveDecks.size === 0) creatorActiveDecks.add('All');
+      } else {
+        creatorActiveDecks.add(deck);
+      }
+    }
+    creatorBuildFilters();
+    creatorRebuildOrder();
+    document.getElementById('creator-title').textContent = 'Tap to reveal';
+    document.getElementById('creator-example').textContent = '';
+    const active = creatorActiveDecks.has('All') ? 'All categories' :
+      [...creatorActiveDecks].join(' · ');
+    document.getElementById('creator-deck-label').textContent = active;
+  }
+
+  function creatorRebuildOrder() {
+    creatorFiltered = creatorFilteredCards();
+    creatorOrder = [...Array(creatorFiltered.length).keys()].sort(() => Math.random() - 0.5);
+    creatorIdx = 0;
+    document.getElementById('creator-progress').textContent = `1 / ${creatorFiltered.length}`;
+  }
+
+  function creatorInit() {
+    creatorActiveDecks = new Set(['All']);
+    creatorFiltered = CREATOR_CATS;
+    creatorOrder = [...Array(creatorFiltered.length).keys()].sort(() => Math.random() - 0.5);
+    creatorIdx = 0;
+    document.getElementById('creator-spinner').style.display = 'flex';
+    document.getElementById('creator-play').style.display = 'none';
+    document.getElementById('creator-spin-result').classList.remove('show');
+    document.getElementById('creator-start-btn').style.display = 'none';
+    document.getElementById('creator-hint').textContent = 'Tap to spin';
+    document.getElementById('creator-hint').style.opacity = '1';
+    document.getElementById('creator-title').textContent = 'Tap to reveal';
+    document.getElementById('creator-example').textContent = '';
+    document.getElementById('creator-progress').textContent = `1 / ${creatorFiltered.length}`;
+    document.getElementById('creator-deck-label').textContent = 'All categories';
+    creatorBuildFilters();
+    requestAnimationFrame(() => initGameSpinner('creator'));
+  }
+
+  function creatorNext() {
+    if (creatorIdx >= creatorFiltered.length) return;
+    const card = document.getElementById('creator-card');
+    card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');
+    const item = creatorFiltered[creatorOrder[creatorIdx]];
+    document.getElementById('creator-title').textContent = item.c;
+    document.getElementById('creator-example').textContent = item.e;
+    document.getElementById('creator-deck-label').textContent = item.deck;
+    creatorIdx++;
+    document.getElementById('creator-progress').textContent = `${creatorIdx} / ${creatorFiltered.length}`;
+  }
+
+  function creatorPrev() {
+    if (creatorIdx <= 1) return;
+    creatorIdx -= 2; creatorNext();
+  }
+
+  function creatorShuffle() {
+    creatorOrder = [...Array(creatorFiltered.length).keys()].sort(() => Math.random() - 0.5);
+    creatorIdx = 0;
+    document.getElementById('creator-title').textContent = 'Shuffled!';
+    document.getElementById('creator-example').textContent = 'Tap Next to draw.';
+    document.getElementById('creator-progress').textContent = `1 / ${creatorFiltered.length}`;
   }
 </script>
 </body>
